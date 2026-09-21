@@ -225,6 +225,18 @@ html:not(.js) .btn-menu{display:none}
 .cta-buttons .btn-primary,.cta-buttons .btn-ghost{padding:14px 28px}
 .cta-note{font-size:14px;color:var(--muted);line-height:1.5;max-width:460px}
 
+/* ===== Página de texto (privacidade) ===== */
+.back-link{padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;color:var(--ink);border:1px solid var(--line)}
+.back-link:hover{color:var(--muted)}
+.doc{max-width:720px;padding:96px 24px 120px}
+.doc-title{font-family:var(--display);font-weight:600;font-size:clamp(32px,5vw,48px);line-height:1.1;letter-spacing:-.03em;margin-top:16px}
+.doc-updated{font-size:13px;color:var(--muted);margin-top:12px}
+.doc h2{font-family:var(--display);font-weight:500;font-size:22px;margin-top:48px}
+.doc p,.doc li{font-size:15px;line-height:1.7;margin-top:12px}
+.doc ul{list-style:disc;padding-left:22px;margin-top:4px}
+.doc li{margin-top:8px}
+.doc a{text-underline-offset:3px}
+
 /* ===== Responsivo (corpo) ===== */
 @media (max-width: 767px){
   .stage{aspect-ratio:4/5}

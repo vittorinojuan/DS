@@ -94,5 +94,41 @@ document.documentElement.classList.add('js');
     statsObserver.observe(stats);
   }
 
+  /* ----- Como funciona: etapa ativa (o texto das 5 já está no HTML) ----- */
+  var steps = Array.prototype.slice.call(document.querySelectorAll('[data-step-idx]'));
+  var details = Array.prototype.slice.call(document.querySelectorAll('[data-step-detail]'));
+  if (steps.length) {
+    var setStep = function (i) {
+      steps.forEach(function (s, n) { s.classList.toggle('is-active', n === i); });
+      details.forEach(function (d, n) { d.classList.toggle('is-active', n === i); });
+    };
+    steps.forEach(function (s, n) { s.addEventListener('click', function () { setStep(n); }); });
+    if ('IntersectionObserver' in window) {
+      var stepObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) setStep(parseInt(e.target.getAttribute('data-step-idx'), 10));
+        });
+      }, { threshold: 0.6 });
+      steps.forEach(function (s) { stepObserver.observe(s); });
+    }
+  }
+
+  /* ----- Linha do tempo mensal ----- */
+  var timeline = document.querySelector('[data-timeline]');
+  if (timeline) {
+    var fill = timeline.querySelector('.timeline-fill');
+    if ('IntersectionObserver' in window) {
+      var tlObserver = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) {
+          fill.classList.add('is-full');
+          tlObserver.disconnect();
+        }
+      }, { threshold: 0.4 });
+      tlObserver.observe(timeline);
+    } else {
+      fill.classList.add('is-full');
+    }
+  }
+
   /* @@JS-END@@ */
 })();

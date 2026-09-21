@@ -126,15 +126,16 @@ document.documentElement.classList.add('js');
     }
   }
 
-  /* ----- Medição: um evento por botão de WhatsApp (data-cta) ----- */
+  /* ----- Medição: um evento por botão de WhatsApp (data-cta), no GA4 e no Meta Pixel ----- */
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-cta]');
-    if (!a || typeof gtag !== 'function') return;
+    if (!a) return;
     var sec = a.closest('section');
-    gtag('event', 'clique_whatsapp', {
-      cta: a.getAttribute('data-cta'),
-      local: sec && sec.id ? sec.id : 'global'
-    });
+    var cta = a.getAttribute('data-cta');
+    if (typeof gtag === 'function') {
+      gtag('event', 'clique_whatsapp', { cta: cta, local: sec && sec.id ? sec.id : 'global' });
+    }
+    if (typeof fbq === 'function') fbq('track', 'Contact', { cta: cta });
   });
 
 })();

@@ -47,10 +47,6 @@ document.documentElement.classList.add('js');
     reveals.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* ----- Título do hero sobe ao carregar ----- */
-  var heroLine = document.querySelector('.hero-line');
-  if (heroLine) setTimeout(function () { heroLine.classList.add('is-in'); }, 300);
-
   /* ----- Cross-fade dos mockups do hero ----- */
   var stage = document.querySelector('[data-hero-stage]');
   if (stage) {

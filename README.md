@@ -1,6 +1,6 @@
 # Site da Ágora
 
-Site estático de uma página (HTML, CSS e JS puros, sem build) para a Ágora, marketing digital para microempresas em Campina Grande.
+Site estático de uma página (HTML, CSS e JS puros, sem build) para a Ágora, marketing digital para microempresas.
 
 ```
 site/     ← o site publicável (index.html, privacidade.html, styles.css, main.js, assets/)

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+html{scroll-behavior:smooth}
+::selection{background:#0B0B0B;color:#fff}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="font-family:Inter,sans-serif;overflow-x:hidden;position:relative">
+<div style="background:#FFFFFF;color:#0B0B0B;filter:{{ themeFilter }}">
+
+<header style="position:sticky;top:0;z-index:50;background:#0B0B0B;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid #2A2A2A">
+  <a href="Agora Home.dc.html" style="display:flex;align-items:center;text-decoration:none">
+    <img src="assets/agora-logo.png" alt="Ágora" style="height:28px;width:auto"/>
+  </a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:8px">
+        <a href="#entregas" style="background:#171717;color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#fff;color:#0B0B0B">Entregas</a>
+        <a href="Agora Home.dc.html#como-funciona" style="background:#171717;color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#fff;color:#0B0B0B">Como funciona</a>
+        <a href="Agora Home.dc.html#preco" style="background:#171717;color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#fff;color:#0B0B0B">Preço</a>
+      </nav>
+      <a href="Agora Home.dc.html#cta-final" style="background:#fff;color:#0B0B0B;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Contato</a>
+      <button onClick="{{ toggleTheme }}" aria-label="Alternar tema" style="width:36px;height:36px;border-radius:50%;border:1px solid #2A2A2A;background:transparent;position:relative;flex-shrink:0">
+        <span style="position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:{{ moonShadow }}"></span>
+      </button>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleTheme }}" aria-label="Alternar tema" style="width:36px;height:36px;border-radius:50%;border:1px solid #2A2A2A;background:transparent;position:relative;flex-shrink:0">
+        <span style="position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:{{ moonShadow }}"></span>
+      </button>
+      <button onClick="{{ toggleNav }}" style="background:transparent;border:1px solid #2A2A2A;border-radius:8px;padding:8px 12px;color:#fff;font-size:14px">Menu</button>
+    </sc-if>
+  </div>
+</header>
+
+<section style="background:#0B0B0B;color:#fff;padding:96px 24px 64px;display:flex;flex-direction:column;gap:20px">
+  <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9A9A9A">O que entregamos</div>
+  <h1 style="margin:0;max-width:720px;overflow:hidden;padding-top:0.25em;margin-top:-0.25em">
+  <span ref="{{ heroLineRef }}" style="display:block;transform:translateY(110%);transition:transform 900ms cubic-bezier(.16,1,.3,1);font-family:'Inter Tight';font-weight:600;font-size:clamp(34px,5vw,56px);line-height:1.2;letter-spacing:-.03em">Três frentes trabalhando <em style="font-family:'Instrument Serif';font-style:italic;font-weight:400;font-size:1.08em">juntas</em>, com um só responsável.</span>
+</h1>
+  <p style="max-width:560px;color:#9A9A9A;font-size:16px;line-height:1.6;margin:0">Google, anúncios e WhatsApp entram no ar de forma coordenada. Nada roda isolado, e você acompanha os três em um só relatório.</p>
+</section>
+
+<section id="entregas" style="background:#FFFFFF;padding:0 24px 32px;display:flex;flex-direction:column">
+
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;padding:64px 0;border-bottom:1px solid #D9D9D9;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="font-family:'JetBrains Mono';font-size:48px;color:#D9D9D9;line-height:1">01</div>
+      <div style="font-family:'Inter Tight';font-weight:500;font-size:26px">"Quem procura, te acha."</div>
+      <p style="font-size:15px;color:#5E5E5E;line-height:1.6;margin:0;max-width:460px">Seu negócio aparece pronto no Google Maps e num site rápido, feito para quem pesquisa pelo celular.</p>
+      <div style="display:flex;flex-direction:column">
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Perfil completo no Google Maps</div>
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">10 a 15 fotos reais</div>
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Site rápido, feito para celular</div>
+        <div style="border-top:1px solid #D9D9D9;border-bottom:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">5 textos da sua marca</div>
+      </div>
+      <div style="display:flex;gap:24px;margin-top:8px">
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 1</div><div style="font-size:13px;color:#0B0B0B">Fotos e perfil no ar</div></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 2</div><div style="font-size:13px;color:#0B0B0B">Site publicado</div></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 3</div><div style="font-size:13px;color:#0B0B0B">Primeiras buscas</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="aspect-ratio:3/2;background:repeating-linear-gradient(135deg,#EBEBEB 0px,#EBEBEB 10px,#F5F5F4 10px,#F5F5F4 20px);border-radius:8px;display:flex;align-items:center;justify-content:center">
+        <div style="font-family:'JetBrains Mono';font-size:11px;color:#5E5E5E;text-align:center;letter-spacing:.05em">FOTO · small shop owner<br/>brazil, natural light</div>
+      </div>
+      <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;align-self:flex-start">Exemplo ilustrativo</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="aspect-ratio:4/3;background:#F5F5F4;border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:5px">
+          <div style="font-family:'Inter Tight';font-weight:600;font-size:13px">Corretora</div>
+          <div style="font-size:10px;color:#5E5E5E">Imobiliária · Catolé</div>
+          <div style="display:flex;gap:4px;margin-top:2px"><div style="width:18px;height:18px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div><div style="width:18px;height:18px;background:linear-gradient(135deg,#8B5E34,#C98B4A)"></div><div style="width:18px;height:18px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div></div>
+        </div>
+        <div style="aspect-ratio:4/3;background:linear-gradient(135deg,#C98B4A,#8B5E34);border-radius:8px;display:flex;align-items:flex-end;padding:10px;color:#F3EDE3">
+          <div style="font-size:11px;font-weight:600">Casa em Cabo Branco</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;padding:64px 0;border-bottom:1px solid #D9D9D9;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:16px;order:2">
+      <div style="aspect-ratio:3/2;background:repeating-linear-gradient(135deg,#EBEBEB 0px,#EBEBEB 10px,#F5F5F4 10px,#F5F5F4 20px);border-radius:8px;display:flex;align-items:center;justify-content:center">
+        <div style="font-family:'JetBrains Mono';font-size:11px;color:#5E5E5E;text-align:center;letter-spacing:.05em">FOTO · hair salon interior<br/>natural light</div>
+      </div>
+      <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;align-self:flex-start">Exemplo ilustrativo</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="aspect-ratio:4/3;background:#fff;border:1px solid #D9D9D9;border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:6px">
+          <div style="border:1px solid #9A9A9A;font-family:'JetBrains Mono';font-size:8px;text-transform:uppercase;padding:1px 4px;color:#5E5E5E;align-self:flex-start">Anúncio</div>
+          <div style="font-size:11px;font-weight:600">Corretora — Imóveis</div>
+        </div>
+        <div style="aspect-ratio:4/3;background:#F5F5F4;border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:5px">
+          <div style="font-family:'JetBrains Mono';font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Meta Ads</div>
+          <div style="width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#8B5E34,#C98B4A);border-radius:4px"></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;order:1">
+      <div style="font-family:'JetBrains Mono';font-size:48px;color:#D9D9D9;line-height:1">02</div>
+      <div style="font-family:'Inter Tight';font-weight:500;font-size:26px">"Anúncios com responsável."</div>
+      <p style="font-size:15px;color:#5E5E5E;line-height:1.6;margin:0;max-width:460px">Google Ads e Meta Ads rodando com a verba que você define, ajustados e renovados todo mês.</p>
+      <div style="display:flex;flex-direction:column">
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Google Ads com termos da sua cidade</div>
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Meta Ads por região e interesse</div>
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">2 a 4 criativos novos por mês</div>
+        <div style="border-top:1px solid #D9D9D9;border-bottom:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Otimização contínua</div>
+      </div>
+      <div style="display:flex;gap:24px;margin-top:8px">
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 1</div><div style="font-size:13px;color:#0B0B0B">Termos da cidade</div></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 2</div><div style="font-size:13px;color:#0B0B0B">Campanhas no ar</div></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 3</div><div style="font-size:13px;color:#0B0B0B">Novos criativos</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;padding:64px 0;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="font-family:'JetBrains Mono';font-size:48px;color:#D9D9D9;line-height:1">03</div>
+      <div style="font-family:'Inter Tight';font-weight:500;font-size:26px">"Cada contato, medido."</div>
+      <p style="font-size:15px;color:#5E5E5E;line-height:1.6;margin:0;max-width:460px">WhatsApp com catálogo e respostas rápidas prontos, e um relatório mensal mostrando de onde veio cada contato.</p>
+      <div style="display:flex;flex-direction:column">
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">WhatsApp Business configurado</div>
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Catálogo e respostas rápidas</div>
+        <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Origem de cada contato registrada</div>
+        <div style="border-top:1px solid #D9D9D9;border-bottom:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">Relatório mensal</div>
+      </div>
+      <div style="display:flex;gap:24px;margin-top:8px">
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 1</div><div style="font-size:13px;color:#0B0B0B">WhatsApp configurado</div></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 2</div><div style="font-size:13px;color:#0B0B0B">Catálogo pronto</div></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Passo 3</div><div style="font-size:13px;color:#0B0B0B">Relatório mensal</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="aspect-ratio:3/2;background:repeating-linear-gradient(135deg,#EBEBEB 0px,#EBEBEB 10px,#F5F5F4 10px,#F5F5F4 20px);border-radius:8px;display:flex;align-items:center;justify-content:center">
+        <div style="font-family:'JetBrains Mono';font-size:11px;color:#5E5E5E;text-align:center;letter-spacing:.05em">FOTO · bakery counter<br/>warm light</div>
+      </div>
+      <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;align-self:flex-start">Exemplo ilustrativo</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="aspect-ratio:4/3;background:#EBEBEB;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;gap:6px;align-items:center;background:#fff;border-radius:6px;padding:5px"><div style="width:16px;height:16px;background:linear-gradient(135deg,#C98B4A,#8B5E34);flex-shrink:0"></div><div style="font-size:9px;font-weight:600">CG-0482</div></div>
+          <div style="display:flex;gap:6px;align-items:center;background:#fff;border-radius:6px;padding:5px"><div style="width:16px;height:16px;background:linear-gradient(135deg,#8B5E34,#C98B4A);flex-shrink:0"></div><div style="font-size:9px;font-weight:600">CG-0690</div></div>
+        </div>
+        <div style="aspect-ratio:4/3;background:#171717;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px;color:#fff">
+          <div style="font-family:'JetBrains Mono';font-size:16px;font-weight:600;font-variant-numeric:tabular-nums">42</div>
+          <div style="font-size:8px;color:#9A9A9A">contatos · R$ 18,50 cada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border-top:1px solid #D9D9D9;padding-top:20px;font-size:13px;color:#5E5E5E;font-style:italic;max-width:760px">O que não fazemos: redes sociais do dia a dia, logo do zero, fotografia profissional e blog. O atendimento no WhatsApp é seu; a gente configura e mede.</div>
+</section>
+
+<section id="cta-final" style="background:#0B0B0B;color:#fff;padding:96px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px;margin-top:56px">
+  <h2 data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0;max-width:600px">Quer ver como ficaria no seu negócio?</h2>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+    <a href="{{ waLink }}" target="_blank" style="background:#fff;color:#0B0B0B;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
+    <a href="{{ waLink }}" target="_blank" style="border:1px solid #2A2A2A;color:#fff;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Pedir diagnóstico</a>
+  </div>
+</section>
+
+<footer style="background:#0B0B0B;color:#9A9A9A;padding:56px 24px 96px;display:flex;flex-direction:column;gap:24px;border-top:1px solid #2A2A2A">
+  <img src="assets/agora-logo.png" alt="Ágora" style="height:22px;width:auto"/>
+  <div style="font-size:14px;color:#9A9A9A">Marketing digital para microempresas</div>
+  <nav style="display:flex;gap:20px;flex-wrap:wrap">
+    <a href="#entregas" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Entregas</a>
+    <a href="Agora Home.dc.html#como-funciona" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Como funciona</a>
+    <a href="Agora Home.dc.html#preco" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Preço</a>
+    <a href="Agora Home.dc.html#cta-final" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Contato</a>
+  </nav>
+  <div style="font-size:12px;color:#5E5E5E;display:flex;flex-direction:column;gap:4px">
+    <div>Campina Grande-PB</div>
+    <div>CNPJ 00.000.000/0001-00</div>
+    <a href="#" style="font-size:12px;color:#5E5E5E;text-decoration:none" style-hover="color:#9A9A9A">Política de privacidade</a>
+    <div>© 2026 Ágora</div>
+  </div>
+</footer>
+
+</div>
+
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;background:#0B0B0B;z-index:100;display:flex;flex-direction:column;padding:24px;gap:32px;filter:{{ themeFilter }}">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <img src="assets/agora-logo.png" alt="Ágora" style="height:26px;width:auto"/>
+      <button onClick="{{ closeNav }}" style="background:transparent;border:1px solid #2A2A2A;border-radius:8px;padding:8px 12px;color:#fff;font-size:14px">Fechar</button>
+    </div>
+    <nav style="display:flex;flex-direction:column;gap:20px">
+      <a onClick="{{ closeNav }}" href="#entregas" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Entregas</a>
+      <a onClick="{{ closeNav }}" href="Agora Home.dc.html#como-funciona" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Como funciona</a>
+      <a onClick="{{ closeNav }}" href="Agora Home.dc.html#preco" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Preço</a>
+      <a onClick="{{ closeNav }}" href="Agora Home.dc.html#cta-final" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Contato</a>
+    </nav>
+    <a href="{{ waLink }}" target="_blank" style="margin-top:auto;background:#fff;color:#0B0B0B;text-align:center;padding:16px;border-radius:8px;font-weight:600;text-decoration:none">Chamar no WhatsApp</a>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <a href="{{ waLink }}" target="_blank" style="position:fixed;bottom:0;left:0;right:0;z-index:60;background:#fff;color:#0B0B0B;text-align:center;padding:16px;border-top:1px solid #2A2A2A;font-weight:600;font-size:15px;text-decoration:none;filter:{{ themeFilter }}">Chamar no WhatsApp</a>
+</sc-if>
+<sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+  <a href="{{ waLink }}" target="_blank" style="position:fixed;bottom:24px;right:24px;z-index:60;background:#fff;color:#0B0B0B;border:1px solid #2A2A2A;padding:12px 20px;border-radius:12px;font-weight:600;font-size:14px;text-decoration:none;filter:{{ themeFilter }}">● Chamar no WhatsApp</a>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { isMobile:false, navOpen:false, theme:'light' };
+  rootRef = React.createRef();
+  heroLineRef = React.createRef();
+
+  toggleTheme = () => this.setState(s => ({ theme: s.theme === 'light' ? 'dark' : 'light' }));
+  toggleNav = () => this.setState(s => ({ navOpen: !s.navOpen }));
+  closeNav = () => this.setState({ navOpen: false });
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ isMobile: window.innerWidth < 768 });
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+    setTimeout(() => { if (this.heroLineRef.current) this.heroLineRef.current.style.transform = 'translateY(0)'; }, 300);
+
+    const root = this.rootRef.current;
+    if (!root) return;
+    const revealEls = Array.prototype.slice.call(root.querySelectorAll('[data-reveal]'));
+    this._revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const idx = revealEls.indexOf(e.target);
+          e.target.style.transitionDelay = ((idx % 6) * 80) + 'ms';
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          this._revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach((el) => this._revealObserver.observe(el));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._revealObserver) this._revealObserver.disconnect();
+  }
+
+  renderVals() {
+    const s = this.state;
+    const waMsg = encodeURIComponent('Olá! Vim pelo site da Ágora e quero um diagnóstico do meu negócio.');
+    const waLink = 'https://wa.me/5583900000000?text=' + waMsg;
+    return {
+      rootRef: this.rootRef,
+      heroLineRef: this.heroLineRef,
+      isMobile: s.isMobile,
+      isDesktopNav: !s.isMobile,
+      navOpen: s.navOpen,
+      toggleNav: this.toggleNav,
+      closeNav: this.closeNav,
+      waLink,
+      themeFilter: s.theme === 'dark' ? 'invert(1)' : 'none',
+      moonShadow: s.theme === 'dark' ? '6px -3px 0 0 #0B0B0B' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

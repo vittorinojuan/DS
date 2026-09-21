@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+html{scroll-behavior:smooth}
+::selection{background:#0B0B0B;color:#fff}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="font-family:Inter,sans-serif;overflow-x:hidden;position:relative">
+<div style="background:#FFFFFF;color:#0B0B0B;filter:{{ themeFilter }}">
+
+<header style="position:sticky;top:0;z-index:50;background:#0B0B0B;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid #2A2A2A">
+  <a href="#top" style="display:flex;align-items:center;text-decoration:none">
+    <img src="assets/agora-logo.png" alt="Ágora" style="height:28px;width:auto"/>
+  </a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:8px">
+        <a href="#entregas" style="background:#171717;color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#fff;color:#0B0B0B">Entregas</a>
+        <a href="#como-funciona" style="background:#171717;color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#fff;color:#0B0B0B">Como funciona</a>
+        <a href="#preco" style="background:#171717;color:#fff;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#fff;color:#0B0B0B">Preço</a>
+      </nav>
+      <a href="#cta-final" style="background:#fff;color:#0B0B0B;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Contato</a>
+      <button onClick="{{ toggleTheme }}" aria-label="Alternar tema" style="width:36px;height:36px;border-radius:50%;border:1px solid #2A2A2A;background:transparent;position:relative;flex-shrink:0">
+        <span style="position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:{{ moonShadow }}"></span>
+      </button>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleTheme }}" aria-label="Alternar tema" style="width:36px;height:36px;border-radius:50%;border:1px solid #2A2A2A;background:transparent;position:relative;flex-shrink:0">
+        <span style="position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:{{ moonShadow }}"></span>
+      </button>
+      <button onClick="{{ toggleNav }}" style="background:transparent;border:1px solid #2A2A2A;border-radius:8px;padding:8px 12px;color:#fff;font-size:14px">Menu</button>
+    </sc-if>
+  </div>
+</header>
+
+<section id="top" style="background:#0B0B0B;color:#fff;padding:100px 24px 72px;display:flex;flex-direction:column;gap:44px">
+  <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9A9A9A">Marketing digital para microempresas</div>
+
+  <div style="overflow:hidden;max-width:900px;padding-top:0.25em;margin-top:-0.25em">
+    <span ref="{{ heroLineRef }}" style="display:block;transform:translateY(110%);transition:transform 900ms cubic-bezier(.16,1,.3,1);font-family:'Inter Tight';font-weight:600;font-size:clamp(38px,6vw,72px);line-height:1.2;letter-spacing:-.03em">Seu negócio <em style="font-family:'Instrument Serif';font-style:italic;font-weight:400;font-size:1.08em">encontrado</em> no Google. Cliente novo chegando. Cada contato medido.</span>
+  </div>
+
+  <p style="max-width:520px;color:#9A9A9A;font-size:16px;line-height:1.6;margin:0">A gente monta, roda os anúncios e mostra os números todo mês.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <a href="{{ waLink }}" target="_blank" style="background:#fff;color:#0B0B0B;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
+    <a href="#preco" style="border:1px solid #2A2A2A;color:#fff;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Ver preço</a>
+  </div>
+
+  <div style="display:grid;grid-template-columns:minmax(320px,2fr) minmax(260px,1fr);gap:24px;align-items:start">
+    <div onMouseEnter="{{ onHeroEnter }}" onMouseLeave="{{ onHeroLeave }}" style="position:relative;width:100%;min-height:280px;aspect-ratio:{{ stageAspect }};background:#171717;border-radius:8px;overflow:hidden;border:1px solid #2A2A2A">
+      <div style="position:absolute;top:16px;left:16px;z-index:10;border:1px solid #9A9A9A;padding:4px 10px;border-radius:2px;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A9A9A">Exemplo ilustrativo</div>
+
+      <div style="position:absolute;inset:0;opacity:{{ mockupOpacity0 }};pointer-events:{{ mockupPointer0 }};transition:opacity 700ms ease">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#C98B4A,#8B5E34);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;color:#F3EDE3">
+          <div style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.85">Destaque · JP-1150</div>
+          <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(20px,2.6vw,32px);margin-top:6px">Casa em Cabo Branco, frente ao mar</div>
+          <div style="font-family:Inter;font-weight:600;font-size:20px;margin-top:8px;font-variant-numeric:tabular-nums">R$ 1.150.000</div>
+          <div style="font-size:12px;opacity:.85;margin-top:2px">4 quartos · 3 vagas · 210 m² · João Pessoa</div>
+        </div>
+      </div>
+
+      <div style="position:absolute;inset:0;opacity:{{ mockupOpacity1 }};pointer-events:{{ mockupPointer1 }};transition:opacity 700ms ease">
+        <div style="width:100%;height:100%;background:#F5F5F4;padding:20px;display:flex;flex-direction:column;gap:8px;color:#0B0B0B">
+          <div style="font-family:'Inter Tight';font-weight:600;font-size:18px">Corretora</div>
+          <div style="font-size:12px;color:#5E5E5E">Imobiliária · Av. Exemplo, 100 · Catolé, Campina Grande-PB</div>
+          <div style="font-size:12px;color:#5E5E5E">Seg–Sex 8h–18h</div>
+          <div style="display:flex;gap:6px;margin-top:4px">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div>
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#8B5E34,#C98B4A)"></div>
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div>
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#8B5E34,#C98B4A)"></div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:4px 10px;font-size:11px">Ligar</div>
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:4px 10px;font-size:11px">Rota</div>
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:4px 10px;font-size:11px">Site</div>
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:4px 10px;font-size:11px">WhatsApp</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute;inset:0;opacity:{{ mockupOpacity2 }};pointer-events:{{ mockupPointer2 }};transition:opacity 700ms ease">
+        <div style="width:100%;height:100%;background:#EBEBEB;padding:16px;display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:12px;font-weight:600">Corretora <span style="color:#5E5E5E;font-weight:400">· online</span></div>
+          <div style="display:flex;gap:8px;align-items:center;background:#fff;border-radius:6px;padding:8px">
+            <div style="width:32px;height:32px;background:linear-gradient(135deg,#C98B4A,#8B5E34);flex-shrink:0"></div>
+            <div style="font-size:11px"><div style="font-weight:600">CG-0482 Apto Catolé</div><div style="color:#5E5E5E;font-variant-numeric:tabular-nums">R$ 480.000</div></div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;background:#fff;border-radius:6px;padding:8px">
+            <div style="width:32px;height:32px;background:linear-gradient(135deg,#8B5E34,#C98B4A);flex-shrink:0"></div>
+            <div style="font-size:11px"><div style="font-weight:600">CG-0690 Casa Mirante</div><div style="color:#5E5E5E;font-variant-numeric:tabular-nums">R$ 690.000</div></div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;background:#fff;border-radius:6px;padding:8px">
+            <div style="width:32px;height:32px;background:linear-gradient(135deg,#C98B4A,#8B5E34);flex-shrink:0"></div>
+            <div style="font-size:11px"><div style="font-weight:600">JP-0320 Apto Bessa</div><div style="color:#5E5E5E;font-variant-numeric:tabular-nums">R$ 320.000</div></div>
+          </div>
+          <div style="margin-top:auto;background:#fff;border-radius:6px;padding:8px;font-size:11px;color:#5E5E5E">Olá! Tenho interesse no imóvel CG-0482.</div>
+        </div>
+      </div>
+
+      <div style="position:absolute;inset:0;opacity:{{ mockupOpacity3 }};pointer-events:{{ mockupPointer3 }};transition:opacity 700ms ease">
+        <div style="width:100%;height:100%;background:#fff;padding:20px;display:flex;flex-direction:column;gap:10px">
+          <div style="border:1px solid #D9D9D9;border-radius:999px;padding:8px 14px;font-size:12px;color:#5E5E5E">apartamento à venda Catolé Campina Grande</div>
+          <div style="border:1px solid #D9D9D9;border-radius:6px;padding:12px">
+            <div style="display:inline-block;border:1px solid #9A9A9A;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;color:#5E5E5E;margin-bottom:6px">Anúncio</div>
+            <div style="font-size:14px;font-weight:600">Corretora — Imóveis em Catolé</div>
+            <div style="font-size:11px;color:#5E5E5E">www.corretora-exemplo.com.br</div>
+            <div style="font-size:12px;color:#5E5E5E;margin-top:4px">Apartamentos e casas em Campina Grande. Fale agora com um corretor.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute;inset:0;opacity:{{ mockupOpacity4 }};pointer-events:{{ mockupPointer4 }};transition:opacity 700ms ease">
+        <div style="width:100%;height:100%;background:#171717;color:#fff;padding:20px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:inline-block;border:1px solid #5E5E5E;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;color:#9A9A9A;align-self:flex-start">Dados ilustrativos</div>
+          <div><div style="font-family:'JetBrains Mono';font-size:10px;text-transform:uppercase;color:#9A9A9A;letter-spacing:.1em">Contatos</div><div style="font-family:Inter;font-weight:600;font-size:28px;font-variant-numeric:tabular-nums">42</div></div>
+          <div style="display:flex;gap:10px;align-items:flex-end;height:36px">
+            <div style="width:24px;height:100%;background:#5E5E5E;display:flex;align-items:flex-end"><div style="width:100%;height:80%;background:#fff"></div></div>
+            <div style="width:24px;height:100%;background:#5E5E5E;display:flex;align-items:flex-end"><div style="width:100%;height:45%;background:#fff"></div></div>
+            <div style="width:24px;height:100%;background:#5E5E5E;display:flex;align-items:flex-end"><div style="width:100%;height:25%;background:#fff"></div></div>
+          </div>
+          <div style="font-size:11px;color:#9A9A9A">Google 24 · Meta 12 · Direto 6</div>
+          <div style="font-size:12px;font-variant-numeric:tabular-nums">Custo por contato: R$ 18,50</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="border:1px solid #2A2A2A;background:#171717;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Inter Tight';font-weight:500;font-size:20px">Implantação em 10 dias</div>
+        <div style="font-size:15px;font-variant-numeric:tabular-nums;color:#D9D9D9">R$ 1.800 · pagamento único</div>
+        <a href="#preco" style="font-size:13px;color:#fff;text-decoration:none;background-image:linear-gradient(#fff,#fff);background-repeat:no-repeat;background-size:0% 1px;background-position:0 100%;transition:background-size 250ms;padding-bottom:2px" style-hover="background-size:100% 1px">Ver preço →</a>
+      </div>
+      <div style="border:1px solid #2A2A2A;background:#171717;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Inter Tight';font-weight:500;font-size:20px">Diagnóstico de 20 minutos</div>
+        <div style="font-size:14px;color:#9A9A9A;line-height:1.5">Você recebe uma ficha de 1 página com o que falta no seu negócio.</div>
+        <a href="{{ waLink }}" target="_blank" style="font-size:13px;color:#fff;text-decoration:none;background-image:linear-gradient(#fff,#fff);background-repeat:no-repeat;background-size:0% 1px;background-position:0 100%;transition:background-size 250ms;padding-bottom:2px" style-hover="background-size:100% 1px">Pedir diagnóstico →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div data-stats="1" style="background:#FFFFFF;padding:32px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px;border-bottom:1px solid #D9D9D9">
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out">
+    <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Implantação</div>
+    <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(28px,3vw,40px);font-variant-numeric:tabular-nums">{{ statA }} dias</div>
+  </div>
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out">
+    <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Site</div>
+    <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(28px,3vw,40px);font-variant-numeric:tabular-nums">{{ statB }} páginas</div>
+  </div>
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out">
+    <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Entregas</div>
+    <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(28px,3vw,40px);font-variant-numeric:tabular-nums">{{ statC }} frentes</div>
+  </div>
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out">
+    <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Diagnóstico</div>
+    <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(28px,3vw,40px);font-variant-numeric:tabular-nums">{{ statD }} min</div>
+  </div>
+</div>
+
+<section id="vitrine" style="background:#FFFFFF;padding:88px 24px;display:flex;flex-direction:column;gap:32px">
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:flex;flex-direction:column;gap:16px;max-width:640px">
+    <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E5E">01 · Vitrine</div>
+    <h2 style="font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0">Tudo o que entregamos, num negócio-modelo.</h2>
+    <p style="font-size:15px;color:#5E5E5E;line-height:1.5;margin:0">Negócio fictício, só para mostrar o processo. Não são resultados de clientes.</p>
+  </div>
+
+  <div style="display:{{ vitrineDisplay }};grid-template-columns:repeat(auto-fit,minmax(280px,1fr));overflow-x:{{ vitrineOverflow }};scroll-snap-type:{{ vitrineSnap }};gap:24px">
+
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #D9D9D9;border-radius:8px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+      <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Site</div></div>
+        <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+      </div>
+      <div style="aspect-ratio:4/3;overflow:hidden;position:relative;background:#EBEBEB">
+        <div style="position:absolute;left:6%;top:10%;width:62%;height:80%;background:#171717;border-radius:6px;padding:4px;display:flex;flex-direction:column;gap:3px">
+          <div style="display:flex;gap:3px;padding:2px 4px"><div style="width:5px;height:5px;border-radius:50%;background:#5E5E5E"></div><div style="width:5px;height:5px;border-radius:50%;background:#5E5E5E"></div><div style="width:5px;height:5px;border-radius:50%;background:#5E5E5E"></div></div>
+          <div style="flex:1;background:linear-gradient(135deg,#C98B4A,#8B5E34);border-radius:3px;display:flex;align-items:flex-end;padding:6px;color:#F3EDE3;transition:transform 400ms" style-hover="transform:scale(1.03)"><div style="font-size:9px;font-weight:600">Casa em Cabo Branco</div></div>
+        </div>
+        <div style="position:absolute;right:6%;bottom:6%;width:24%;height:68%;background:#171717;border-radius:10px;padding:3px">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#8B5E34,#C98B4A);border-radius:7px;display:flex;align-items:flex-end;padding:4px"><div style="font-size:7px;color:#F3EDE3;font-weight:600">R$ 1.150.000</div></div>
+        </div>
+      </div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:'Inter Tight';font-weight:600;font-size:18px">Corretora</div>
+        <div style="font-size:14px;color:#5E5E5E;line-height:1.4">Vitrine de imóveis que abre rápido no celular.</div>
+        <div style="font-size:12px;color:#5E5E5E;font-variant-numeric:tabular-nums">4 quartos · 3 vagas · 210 m² · João Pessoa</div>
+        <div style="font-size:12px;color:#9A9A9A;line-height:1.4;font-style:italic;margin-top:4px">Demonstração de site para corretoras. Recursos avançados, como busca por mapa, são projeto à parte.</div>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #D9D9D9;border-radius:8px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+      <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Google</div></div>
+        <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+      </div>
+      <div style="aspect-ratio:4/3;overflow:hidden">
+        <div style="width:100%;height:100%;background:#F5F5F4;padding:16px;display:flex;flex-direction:column;gap:6px;transition:transform 400ms" style-hover="transform:scale(1.03)">
+          <div style="font-family:'Inter Tight';font-weight:600;font-size:15px">Corretora</div>
+          <div style="font-size:11px;color:#5E5E5E">Imobiliária · Av. Exemplo, 100</div>
+          <div style="display:flex;gap:6px;margin-top:4px">
+            <div style="width:28px;height:28px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div>
+            <div style="width:28px;height:28px;background:linear-gradient(135deg,#8B5E34,#C98B4A)"></div>
+            <div style="width:28px;height:28px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div>
+            <div style="width:28px;height:28px;background:linear-gradient(135deg,#8B5E34,#C98B4A)"></div>
+          </div>
+          <div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:3px 7px;font-size:9px">Ligar</div>
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:3px 7px;font-size:9px">Rota</div>
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:3px 7px;font-size:9px">Site</div>
+            <div style="border:1px solid #D9D9D9;border-radius:999px;padding:3px 7px;font-size:9px">WhatsApp</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:'Inter Tight';font-weight:600;font-size:18px">Corretora</div>
+        <div style="font-size:14px;color:#5E5E5E;line-height:1.4">Perfil completo no Maps, com fotos e botão de ligar.</div>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #D9D9D9;border-radius:8px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+      <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">WhatsApp</div></div>
+        <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+      </div>
+      <div style="aspect-ratio:4/3;overflow:hidden">
+        <div style="width:100%;height:100%;background:#EBEBEB;padding:14px;display:flex;flex-direction:column;gap:6px;transition:transform 400ms" style-hover="transform:scale(1.03)">
+          <div style="display:flex;gap:6px;align-items:center;background:#fff;border-radius:6px;padding:6px"><div style="width:22px;height:22px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div><div style="font-size:10px;font-weight:600">CG-0482 · R$ 480.000</div></div>
+          <div style="display:flex;gap:6px;align-items:center;background:#fff;border-radius:6px;padding:6px"><div style="width:22px;height:22px;background:linear-gradient(135deg,#8B5E34,#C98B4A)"></div><div style="font-size:10px;font-weight:600">CG-0690 · R$ 690.000</div></div>
+          <div style="display:flex;gap:6px;align-items:center;background:#fff;border-radius:6px;padding:6px"><div style="width:22px;height:22px;background:linear-gradient(135deg,#C98B4A,#8B5E34)"></div><div style="font-size:10px;font-weight:600">JP-0320 · R$ 320.000</div></div>
+        </div>
+      </div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:'Inter Tight';font-weight:600;font-size:18px">Corretora</div>
+        <div style="font-size:14px;color:#5E5E5E;line-height:1.4">Catálogo e respostas rápidas prontos desde o dia 1.</div>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #D9D9D9;border-radius:8px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+      <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Anúncios</div></div>
+        <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+      </div>
+      <div style="aspect-ratio:4/3;overflow:hidden">
+        <div style="width:100%;height:100%;background:#fff;padding:14px;display:flex;flex-direction:column;gap:8px;transition:transform 400ms" style-hover="transform:scale(1.03)">
+          <div style="border:1px solid #D9D9D9;border-radius:999px;padding:6px 10px;font-size:10px;color:#5E5E5E">apartamento à venda Catolé Campina Grande</div>
+          <div style="border:1px solid #D9D9D9;border-radius:6px;padding:8px">
+            <div style="display:inline-block;border:1px solid #9A9A9A;font-family:'JetBrains Mono';font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:1px 5px;color:#5E5E5E">Anúncio</div>
+            <div style="font-size:12px;font-weight:600;margin-top:4px">Corretora — Imóveis em Catolé</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:'Inter Tight';font-weight:600;font-size:18px">Corretora</div>
+        <div style="font-size:14px;color:#5E5E5E;line-height:1.4">Google Ads rodando com a verba que você define.</div>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #D9D9D9;border-radius:8px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+      <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Relatório</div></div>
+        <div style="border:1px solid #9A9A9A;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+      </div>
+      <div style="aspect-ratio:4/3;overflow:hidden">
+        <div style="width:100%;height:100%;background:#171717;color:#fff;padding:14px;display:flex;flex-direction:column;gap:6px;transition:transform 400ms" style-hover="transform:scale(1.03)">
+          <div style="display:inline-block;border:1px solid #5E5E5E;font-family:'JetBrains Mono';font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:1px 5px;color:#9A9A9A;align-self:flex-start">Dados ilustrativos</div>
+          <div style="font-family:Inter;font-weight:600;font-size:22px;font-variant-numeric:tabular-nums">42 <span style="font-size:11px;color:#9A9A9A;font-weight:400">contatos</span></div>
+          <div style="font-size:10px;color:#9A9A9A">Google 24 · Meta 12 · Direto 6</div>
+          <div style="font-size:10px;color:#fff;font-variant-numeric:tabular-nums">R$ 18,50 por contato</div>
+        </div>
+      </div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:'Inter Tight';font-weight:600;font-size:18px">Corretora</div>
+        <div style="font-size:14px;color:#5E5E5E;line-height:1.4">Contatos, origem e custo por cliente novo, todo mês.</div>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #2A2A2A;border-radius:8px;overflow:hidden;background:#0B0B0B;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:32px;gap:16px;{{ tileSwipeExtra }}">
+      <div style="align-self:flex-end;background:#fff;color:#0B0B0B;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase">Real</div>
+      <img src="assets/agora-logo.png" alt="Ágora" style="width:140px;height:auto;border-radius:4px"/>
+      <div style="font-family:'JetBrains Mono';font-size:12px;color:#9A9A9A;text-align:center">Este site foi feito com o mesmo processo.<br/>Cliente nº 0</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="entregas" style="background:#F5F5F4;padding:88px 24px;display:flex;flex-direction:column;gap:48px">
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:flex;flex-direction:column;gap:16px;max-width:640px">
+    <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E5E">02 · Entregas</div>
+    <h2 style="font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0">Três frentes. Um só responsável.</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px">
+    <sc-for list="{{ frentes }}" as="f" hint-placeholder-count="3">
+      <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:flex;flex-direction:column;gap:16px">
+        <div style="font-family:'JetBrains Mono';font-size:40px;color:#D9D9D9;line-height:1">{{ f.n }}</div>
+        <div style="font-family:'Inter Tight';font-weight:500;font-size:20px">{{ f.title }}</div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ f.bullets }}" as="b" hint-placeholder-count="4">
+            <div style="border-top:1px solid #D9D9D9;padding:10px 0;font-size:14px;color:#5E5E5E">{{ b }}</div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border-top:1px solid #D9D9D9;padding-top:20px;font-size:13px;color:#5E5E5E;font-style:italic;max-width:760px">O que não fazemos: redes sociais do dia a dia, logo do zero, fotografia profissional e blog. O atendimento no WhatsApp é seu; a gente configura e mede.</div>
+</section>
+
+<section id="como-funciona" style="background:#FFFFFF;padding:88px 24px;display:flex;flex-direction:column;gap:56px">
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:flex;flex-direction:column;gap:16px;max-width:640px">
+    <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E5E">03 · Como funciona</div>
+    <h2 style="font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0">Do zero ao ar em 10 dias.</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:{{ stepsGridCols }};gap:40px">
+    <div style="position:{{ stepsPosition }};top:104px;height:fit-content;background:#0B0B0B;color:#fff;border-radius:8px;padding:32px;min-height:260px;display:flex;flex-direction:column;gap:12px;justify-content:center">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <sc-if value="{{ s.isActive }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'JetBrains Mono';font-size:12px;color:#9A9A9A;letter-spacing:.1em;font-variant-numeric:tabular-nums">{{ s.range }}</div>
+          <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(24px,3vw,32px)">{{ s.title }}</div>
+          <div style="font-size:14px;color:#9A9A9A;line-height:1.5">{{ s.desc }}</div>
+        </sc-if>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <div data-step-idx="{{ s.i }}" onClick="{{ s.setActive }}" style="border-left:3px solid {{ s.borderColor }};padding:20px 24px;cursor:pointer;transition:border-color 300ms;display:flex;gap:16px;align-items:baseline">
+          <div style="font-family:'JetBrains Mono';font-size:13px;color:#9A9A9A;flex-shrink:0">{{ s.n }}</div>
+          <div>
+            <div style="font-family:'Inter Tight';font-weight:500;font-size:18px">{{ s.title }}</div>
+            <div style="font-size:13px;color:#5E5E5E;margin-top:2px">{{ s.desc }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border-top:1px solid #D9D9D9;padding-top:40px;display:flex;flex-direction:column;gap:24px">
+    <h3 style="font-family:'Inter Tight';font-weight:500;font-size:clamp(20px,2.5vw,24px);margin:0">Anúncios no ar. Números na mesa.</h3>
+    <div data-timeline="1" style="height:4px;background:#D9D9D9;border-radius:2px;overflow:hidden;max-width:800px">
+      <div style="height:100%;width:{{ timelineWidth }};background:#0B0B0B;transition:width 1.2s ease-out"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;max-width:800px">
+      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Semana 1<br/><span style="color:#0B0B0B;font-family:Inter;text-transform:none;letter-spacing:0;font-size:13px">Campanhas montadas</span></div>
+      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Semanas 2–3<br/><span style="color:#0B0B0B;font-family:Inter;text-transform:none;letter-spacing:0;font-size:13px">Ajustes e criativos novos</span></div>
+      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Semana 4<br/><span style="color:#0B0B0B;font-family:Inter;text-transform:none;letter-spacing:0;font-size:13px">Relatório + reunião de 20 min</span></div>
+      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Sempre<br/><span style="color:#0B0B0B;font-family:Inter;text-transform:none;letter-spacing:0;font-size:13px">Até 2 alterações no site, respondidas em até 3 dias úteis</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="preco" style="background:#F5F5F4;padding:88px 24px;display:flex;flex-direction:column;gap:40px">
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:flex;flex-direction:column;gap:16px;max-width:640px">
+    <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E5E">04 · Preço</div>
+    <h2 style="font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0">Preço aberto. Sem surpresa.</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#fff;border:1px solid #D9D9D9;border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Implantação</div>
+      <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(40px,5vw,56px);font-variant-numeric:tabular-nums;line-height:1">R$ 1.800</div>
+      <div style="font-size:14px;color:#5E5E5E">pagamento único · 10 dias</div>
+      <div style="border-top:1px solid #D9D9D9;margin-top:8px;display:flex;flex-direction:column">
+        <div style="padding:10px 0;border-bottom:1px solid #D9D9D9;font-size:14px;color:#5E5E5E">— Google Meu Negócio otimizado</div>
+        <div style="padding:10px 0;border-bottom:1px solid #D9D9D9;font-size:14px;color:#5E5E5E">— Site de 5 páginas</div>
+        <div style="padding:10px 0;border-bottom:1px solid #D9D9D9;font-size:14px;color:#5E5E5E">— WhatsApp Business configurado</div>
+        <div style="padding:10px 0;border-bottom:1px solid #D9D9D9;font-size:14px;color:#5E5E5E">— Medição de contatos ativada</div>
+        <div style="padding:10px 0;font-size:14px;color:#5E5E5E">— Treinamento</div>
+      </div>
+    </div>
+
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#0B0B0B;color:#fff;border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Gestão mensal</div>
+      <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(40px,5vw,56px);font-variant-numeric:tabular-nums;line-height:1">R$ 800<span style="font-size:20px;font-weight:500">/mês</span></div>
+      <div style="font-size:14px;color:#9A9A9A">contrato mínimo de 3 meses</div>
+      <div style="border-top:1px solid #2A2A2A;margin-top:8px;display:flex;flex-direction:column">
+        <div style="padding:10px 0;border-bottom:1px solid #2A2A2A;font-size:14px;color:#D9D9D9">— Google Ads e Meta Ads</div>
+        <div style="padding:10px 0;border-bottom:1px solid #2A2A2A;font-size:14px;color:#D9D9D9">— Otimização e novos criativos</div>
+        <div style="padding:10px 0;border-bottom:1px solid #2A2A2A;font-size:14px;color:#D9D9D9">— Relatório mensal + reunião de 20 min</div>
+        <div style="padding:10px 0;font-size:14px;color:#D9D9D9">— Até 2 alterações no site por mês</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#0B0B0B;color:#fff;border-radius:8px;padding:20px 24px;text-align:center;font-size:14px;line-height:1.5">A verba de anúncios é paga por você direto ao Google e à Meta. Nunca passa pela Ágora.</div>
+
+  <div style="display:flex;flex-direction:column;max-width:800px">
+    <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="5">
+      <div style="border-top:1px solid #D9D9D9">
+        <button onClick="{{ item.toggle }}" style="width:100%;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;padding:18px 0;text-align:left">
+          <span style="font-family:'Inter Tight';font-weight:500;font-size:16px">{{ item.q }}</span>
+          <span style="font-family:'JetBrains Mono';font-size:18px;color:#5E5E5E">{{ item.icon }}</span>
+        </button>
+        <div style="max-height:{{ item.maxH }};opacity:{{ item.op }};overflow:hidden;transition:max-height 300ms ease,opacity 300ms ease">
+          <p style="font-size:14px;color:#5E5E5E;line-height:1.6;padding-bottom:18px;margin:0;max-width:600px">{{ item.a }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="cta-final" style="background:#0B0B0B;color:#fff;padding:96px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px">
+  <h2 data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0;max-width:600px">Quer ver como ficaria no seu negócio?</h2>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+    <a href="{{ waLink }}" target="_blank" style="background:#fff;color:#0B0B0B;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
+    <a href="{{ waLink }}" target="_blank" style="border:1px solid #2A2A2A;color:#fff;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Pedir diagnóstico</a>
+  </div>
+</section>
+
+<footer style="background:#0B0B0B;color:#9A9A9A;padding:56px 24px 96px;display:flex;flex-direction:column;gap:24px;border-top:1px solid #2A2A2A">
+  <img src="assets/agora-logo.png" alt="Ágora" style="height:22px;width:auto"/>
+  <div style="font-size:14px;color:#9A9A9A">Marketing digital para microempresas</div>
+  <nav style="display:flex;gap:20px;flex-wrap:wrap">
+    <a href="#entregas" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Entregas</a>
+    <a href="#como-funciona" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Como funciona</a>
+    <a href="#preco" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Preço</a>
+    <a href="#cta-final" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Contato</a>
+  </nav>
+  <div style="font-size:12px;color:#5E5E5E;display:flex;flex-direction:column;gap:4px">
+    <div>Campina Grande-PB</div>
+    <div>CNPJ 00.000.000/0001-00</div>
+    <a href="#" style="font-size:12px;color:#5E5E5E;text-decoration:none" style-hover="color:#9A9A9A">Política de privacidade</a>
+    <div>© 2026 Ágora</div>
+  </div>
+</footer>
+
+</div>
+
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;background:#0B0B0B;z-index:100;display:flex;flex-direction:column;padding:24px;gap:32px;filter:{{ themeFilter }}">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <img src="assets/agora-logo.png" alt="Ágora" style="height:26px;width:auto"/>
+      <button onClick="{{ closeNav }}" style="background:transparent;border:1px solid #2A2A2A;border-radius:8px;padding:8px 12px;color:#fff;font-size:14px">Fechar</button>
+    </div>
+    <nav style="display:flex;flex-direction:column;gap:20px">
+      <a onClick="{{ closeNav }}" href="#entregas" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Entregas</a>
+      <a onClick="{{ closeNav }}" href="#como-funciona" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Como funciona</a>
+      <a onClick="{{ closeNav }}" href="#preco" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Preço</a>
+      <a onClick="{{ closeNav }}" href="#cta-final" style="color:#fff;font-family:'Inter Tight';font-size:24px;font-weight:500;text-decoration:none">Contato</a>
+    </nav>
+    <a href="{{ waLink }}" target="_blank" style="margin-top:auto;background:#fff;color:#0B0B0B;text-align:center;padding:16px;border-radius:8px;font-weight:600;text-decoration:none">Chamar no WhatsApp</a>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <a href="{{ waLink }}" target="_blank" style="position:fixed;bottom:0;left:0;right:0;z-index:60;background:#fff;color:#0B0B0B;text-align:center;padding:16px;border-top:1px solid #2A2A2A;font-weight:600;font-size:15px;text-decoration:none;filter:{{ themeFilter }}">Chamar no WhatsApp</a>
+</sc-if>
+<sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+  <a href="{{ waLink }}" target="_blank" style="position:fixed;bottom:24px;right:24px;z-index:60;background:#fff;color:#0B0B0B;border:1px solid #2A2A2A;padding:12px 20px;border-radius:12px;font-weight:600;font-size:14px;text-decoration:none;filter:{{ themeFilter }}">● Chamar no WhatsApp</a>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { isMobile:false, navOpen:false, activeMockup:0, activeStep:0, openFaq:null, reducedMotion:false, timelineProgress:0, statProgress:0, theme:'light' };
+  rootRef = React.createRef();
+  heroLineRef = React.createRef();
+
+  toggleTheme = () => this.setState(s => ({ theme: s.theme === 'light' ? 'dark' : 'light' }));
+  toggleNav = () => this.setState(s => ({ navOpen: !s.navOpen }));
+  closeNav = () => this.setState({ navOpen: false });
+
+  onHeroEnter = () => { if (this._heroInterval) clearInterval(this._heroInterval); };
+  onHeroLeave = () => { if (!this.state.reducedMotion) this.startHero(); };
+
+  startHero = () => {
+    if (this._heroInterval) clearInterval(this._heroInterval);
+    this._heroInterval = setInterval(() => {
+      this.setState(s => ({ activeMockup: (s.activeMockup + 1) % 5 }));
+    }, 7000);
+  };
+
+  animateTimeline = () => {
+    const start = performance.now(); const dur = 1200;
+    const step = (t) => {
+      const p = Math.min(1, (t - start) / dur);
+      this.setState({ timelineProgress: p });
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  animateStats = () => {
+    const start = performance.now(); const dur = 900;
+    const step = (t) => {
+      const p = Math.min(1, (t - start) / dur);
+      this.setState({ statProgress: p });
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  componentDidMount() {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.setState({ reducedMotion: mq.matches });
+
+    this._onResize = () => this.setState({ isMobile: window.innerWidth < 768 });
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+
+    if (!mq.matches) this.startHero();
+
+    setTimeout(() => {
+      if (this.heroLineRef.current) this.heroLineRef.current.style.transform = 'translateY(0)';
+    }, 300);
+
+    const root = this.rootRef.current;
+    if (!root) return;
+
+    const revealEls = Array.prototype.slice.call(root.querySelectorAll('[data-reveal]'));
+    this._revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const idx = revealEls.indexOf(e.target);
+          e.target.style.transitionDelay = ((idx % 6) * 80) + 'ms';
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          this._revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach((el) => this._revealObserver.observe(el));
+
+    const stepEls = root.querySelectorAll('[data-step-idx]');
+    this._stepObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) this.setState({ activeStep: parseInt(e.target.getAttribute('data-step-idx'), 10) });
+      });
+    }, { threshold: 0.6 });
+    stepEls.forEach((el) => this._stepObserver.observe(el));
+
+    const tl = root.querySelector('[data-timeline]');
+    if (tl) {
+      this._tlObserver = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { this.animateTimeline(); this._tlObserver.disconnect(); } });
+      }, { threshold: 0.4 });
+      this._tlObserver.observe(tl);
+    }
+
+    const stats = root.querySelector('[data-stats]');
+    if (stats) {
+      this._statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { this.animateStats(); this._statsObserver.disconnect(); } });
+      }, { threshold: 0.4 });
+      this._statsObserver.observe(stats);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._heroInterval) clearInterval(this._heroInterval);
+    if (this._revealObserver) this._revealObserver.disconnect();
+    if (this._stepObserver) this._stepObserver.disconnect();
+    if (this._tlObserver) this._tlObserver.disconnect();
+    if (this._statsObserver) this._statsObserver.disconnect();
+  }
+
+  renderVals() {
+    const s = this.state;
+    const waMsg = encodeURIComponent('Olá! Vim pelo site da Ágora e quero um diagnóstico do meu negócio.');
+    const waLink = 'https://wa.me/5583900000000?text=' + waMsg;
+
+    const faqsData = [
+      { q: 'Quanto vou gastar em anúncios?', a: 'A verba é sua e você decide. Sugerimos um valor inicial no diagnóstico.' },
+      { q: 'Preciso já ter site?', a: 'Não. A gente cria o seu.' },
+      { q: 'Quem responde o WhatsApp?', a: 'Você. A gente configura e mede.' },
+      { q: 'Em quanto tempo vejo resultado?', a: 'Google e site ficam no ar em 10 dias. Os anúncios levam semanas de ajuste, por isso o contrato de 3 meses.' },
+      { q: 'Posso mudar o site quando quiser?', a: 'Até 2 alterações por mês. Mudanças estruturais ficam fora.' }
+    ];
+    const faqs = faqsData.map((f, i) => {
+      const isOpen = s.openFaq === i;
+      return {
+        ...f, i,
+        icon: isOpen ? '−' : '+',
+        maxH: isOpen ? '240px' : '0px',
+        op: isOpen ? 1 : 0,
+        toggle: () => this.setState(st => ({ openFaq: st.openFaq === i ? null : i }))
+      };
+    });
+
+    const stepsData = [
+      { n: '01', range: 'Dias 1–3', title: 'Google no ar', desc: 'Perfil otimizado e fotos reais.' },
+      { n: '02', range: 'Dia 4', title: 'Conhecemos seu negócio', desc: 'Fotos, entrevista e textos.' },
+      { n: '03', range: 'Dias 5–8', title: 'Site publicado', desc: 'Cinco páginas, rápidas e prontas para o Google.' },
+      { n: '04', range: 'Dia 9', title: 'Contatos medidos', desc: 'WhatsApp configurado e medição ativada.' },
+      { n: '05', range: 'Dia 10', title: 'Entrega e treinamento', desc: 'Você aprende a usar tudo.' }
+    ];
+    const steps = stepsData.map((st, i) => ({
+      ...st, i,
+      isActive: s.activeStep === i,
+      borderColor: s.activeStep === i ? '#0B0B0B' : '#D9D9D9',
+      setActive: () => this.setState({ activeStep: i })
+    }));
+
+    const frentes = [
+      { n: '01', title: '"Quem procura, te acha."', bullets: ['Perfil completo no Google Maps', '10 a 15 fotos reais', 'Site rápido, feito para celular', '5 textos da sua marca'] },
+      { n: '02', title: '"Anúncios com responsável."', bullets: ['Google Ads com termos da sua cidade', 'Meta Ads por região e interesse', '2 a 4 criativos novos por mês', 'Otimização contínua'] },
+      { n: '03', title: '"Cada contato, medido."', bullets: ['WhatsApp Business configurado', 'Catálogo e respostas rápidas', 'Origem de cada contato registrada', 'Relatório mensal'] }
+    ];
+
+    const statProgress = s.statProgress || 0;
+    const targets = [10, 5, 3, 20];
+    const vals = targets.map(t => Math.round(t * statProgress));
+
+    const mockOpacity = [0, 1, 2, 3, 4].map(i => s.activeMockup === i ? 1 : 0);
+    const mockPointer = [0, 1, 2, 3, 4].map(i => s.activeMockup === i ? 'auto' : 'none');
+
+    return {
+      rootRef: this.rootRef,
+      heroLineRef: this.heroLineRef,
+      isMobile: s.isMobile,
+      isDesktopNav: !s.isMobile,
+      navOpen: s.navOpen,
+      toggleNav: this.toggleNav,
+      closeNav: this.closeNav,
+      onHeroEnter: this.onHeroEnter,
+      onHeroLeave: this.onHeroLeave,
+      waLink,
+      themeFilter: s.theme === 'dark' ? 'invert(1)' : 'none',
+      moonShadow: s.theme === 'dark' ? '6px -3px 0 0 #0B0B0B' : 'none',
+      stageAspect: s.isMobile ? '4/5' : '21/9',
+      stepsGridCols: s.isMobile ? '1fr' : 'minmax(280px,1fr) minmax(320px,1.6fr)',
+      stepsPosition: s.isMobile ? 'static' : 'sticky',
+      vitrineDisplay: s.isMobile ? 'flex' : 'grid',
+      vitrineOverflow: s.isMobile ? 'auto' : 'visible',
+      vitrineSnap: s.isMobile ? 'x mandatory' : 'none',
+      tileSwipeExtra: s.isMobile ? 'flex:0 0 82%;scroll-snap-align:start;' : '',
+      mockupOpacity0: mockOpacity[0], mockupOpacity1: mockOpacity[1], mockupOpacity2: mockOpacity[2], mockupOpacity3: mockOpacity[3], mockupOpacity4: mockOpacity[4],
+      mockupPointer0: mockPointer[0], mockupPointer1: mockPointer[1], mockupPointer2: mockPointer[2], mockupPointer3: mockPointer[3], mockupPointer4: mockPointer[4],
+      statA: vals[0], statB: vals[1], statC: vals[2], statD: vals[3],
+      timelineWidth: ((s.timelineProgress || 0) * 100) + '%',
+      faqs, steps, frentes
+    };
+  }
+}
+</script>
+</body>
+</html>

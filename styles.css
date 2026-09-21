@@ -223,6 +223,7 @@ html:not(.js) .btn-menu{display:none}
 .cta-final .h2{max-width:600px}
 .cta-buttons{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .cta-buttons .btn-primary,.cta-buttons .btn-ghost{padding:14px 28px}
+.cta-note{font-size:14px;color:var(--muted);line-height:1.5;max-width:460px}
 
 /* ===== Responsivo (corpo) ===== */
 @media (max-width: 767px){

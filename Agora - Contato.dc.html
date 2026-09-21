@@ -63,13 +63,13 @@ input::placeholder,textarea::placeholder{color:#9A9A9A}
       <p style="font-size:15px;color:#5E5E5E;line-height:1.6;margin:0;max-width:360px">O jeito mais rápido de começar. A conversa já vai com a mensagem pronta.</p>
       <a href="{{ waLink }}" target="_blank" style="align-self:flex-start;background:#0B0B0B;color:#fff;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
 
-      <div style="border-top:1px solid #D9D9D9;margin-top:20px;padding-top:20px;display:flex;flex-direction:column;gap:6px">
+      <div style="border-top:1px solid #DFDFDF;margin-top:20px;padding-top:20px;display:flex;flex-direction:column;gap:6px">
         <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Ágora</div>
         <div style="font-size:14px;color:#5E5E5E">Campina Grande-PB</div>
       </div>
     </div>
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#F5F5F4;border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:16px">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#F0F0F0;border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:16px">
       <div style="font-family:'Inter Tight';font-weight:500;font-size:20px">Pedir diagnóstico</div>
 
       <sc-if value="{{ showSuccess }}" hint-placeholder-val="{{ false }}">
@@ -82,19 +82,19 @@ input::placeholder,textarea::placeholder{color:#9A9A9A}
       <form onSubmit="{{ handleSubmit }}" style="display:flex;flex-direction:column;gap:14px">
         <div style="display:flex;flex-direction:column;gap:6px">
           <label style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Nome</label>
-          <input type="text" value="{{ nome }}" onChange="{{ setNome }}" placeholder="Seu nome" style="border:1px solid #D9D9D9;border-radius:6px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
+          <input type="text" value="{{ nome }}" onChange="{{ setNome }}" placeholder="Seu nome" style="border:1px solid #DFDFDF;border-radius:5px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px">
           <label style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Nome do negócio</label>
-          <input type="text" value="{{ negocio }}" onChange="{{ setNegocio }}" placeholder="Nome da sua empresa" style="border:1px solid #D9D9D9;border-radius:6px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
+          <input type="text" value="{{ negocio }}" onChange="{{ setNegocio }}" placeholder="Nome da sua empresa" style="border:1px solid #DFDFDF;border-radius:5px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px">
           <label style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">WhatsApp</label>
-          <input type="tel" value="{{ whats }}" onChange="{{ setWhats }}" placeholder="(83) 90000-0000" style="border:1px solid #D9D9D9;border-radius:6px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
+          <input type="tel" value="{{ whats }}" onChange="{{ setWhats }}" placeholder="(83) 90000-0000" style="border:1px solid #DFDFDF;border-radius:5px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px">
           <label style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E5E">Instagram ou site</label>
-          <input type="text" value="{{ insta }}" onChange="{{ setInsta }}" placeholder="@seunegocio (opcional)" style="border:1px solid #D9D9D9;border-radius:6px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
+          <input type="text" value="{{ insta }}" onChange="{{ setInsta }}" placeholder="@seunegocio (opcional)" style="border:1px solid #DFDFDF;border-radius:5px;padding:12px 14px;font-size:15px;background:#fff;color:#0B0B0B"/>
         </div>
         <button type="submit" style="margin-top:8px;background:#0B0B0B;color:#fff;padding:14px;border:none;border-radius:8px;font-weight:600;font-size:15px">Pedir diagnóstico</button>
       </form>

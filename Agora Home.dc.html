@@ -25,16 +25,16 @@ button{font-family:inherit;cursor:pointer}
 <div ref="{{ rootRef }}" style="font-family:Inter,sans-serif;overflow-x:hidden;position:relative">
 <div style="background:#FAFAFA;color:#0B0B0B">
 
-<header style="position:sticky;top:0;z-index:50;background:#FAFAFA;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid #DFDFDF">
+<header style="position:sticky;top:0;z-index:50;background:#FAFAFA;display:flex;align-items:center;justify-content:space-between;padding:14px 24px">
   <a href="#top" style="display:flex;align-items:center;text-decoration:none">
     <img src="assets/agora-logo-dark.png" alt="Ágora" style="height:24px;width:auto;display:block"/>
   </a>
   <div style="display:flex;align-items:center;gap:8px">
     <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
       <nav style="display:flex;gap:8px">
-        <a href="#entregas" style="background:#F0F0F0;color:#0B0B0B;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#0B0B0B;color:#fff">Entregas</a>
-        <a href="#como-funciona" style="background:#F0F0F0;color:#0B0B0B;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#0B0B0B;color:#fff">Como funciona</a>
-        <a href="#preco" style="background:#F0F0F0;color:#0B0B0B;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="background:#0B0B0B;color:#fff">Preço</a>
+        <a href="#entregas" style="background:transparent;color:#0B0B0B;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="color:#5E5E5E">Entregas</a>
+        <a href="#como-funciona" style="background:transparent;color:#0B0B0B;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="color:#5E5E5E">Como funciona</a>
+        <a href="#preco" style="background:transparent;color:#0B0B0B;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:background 200ms,color 200ms" style-hover="color:#5E5E5E">Preço</a>
       </nav>
       <a href="#cta-final" style="background:#0B0B0B;color:#fff;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Contato</a>
     </sc-if>
@@ -44,22 +44,22 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </header>
 
-<section id="top" style="background:#0B0B0B;color:#fff;padding:112px 24px 88px;display:flex;flex-direction:column;gap:44px">
-  <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9A9A9A">Marketing digital para microempresas</div>
+<section id="top" style="background:#FAFAFA;color:#0B0B0B;padding:112px 24px 88px;display:flex;flex-direction:column;gap:44px">
+  <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E5E">Marketing digital para microempresas</div>
 
   <div style="overflow:hidden;max-width:900px;padding-top:0.25em;margin-top:-0.25em">
     <span ref="{{ heroLineRef }}" style="display:block;transform:translateY(110%);transition:transform 900ms cubic-bezier(.16,1,.3,1);font-family:'Inter Tight';font-weight:600;font-size:clamp(38px,6vw,72px);line-height:1.2;letter-spacing:-.03em">Seu negócio <em style="font-family:'Instrument Serif';font-style:italic;font-weight:400;font-size:1.08em">encontrado</em> no Google. Cliente novo chegando. Cada contato medido.</span>
   </div>
 
-  <p style="max-width:520px;color:#9A9A9A;font-size:16px;line-height:1.6;margin:0">A gente monta, roda os anúncios e mostra os números todo mês.</p>
+  <p style="max-width:520px;color:#5E5E5E;font-size:16px;line-height:1.6;margin:0">A gente monta, roda os anúncios e mostra os números todo mês.</p>
 
   <div style="display:flex;gap:12px;flex-wrap:wrap">
-    <a href="{{ waLink }}" target="_blank" style="background:#fff;color:#0B0B0B;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
-    <a href="#preco" style="border:1px solid #2A2A2A;color:#fff;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Ver preço</a>
+    <a href="{{ waLink }}" target="_blank" style="background:#0B0B0B;color:#fff;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
+    <a href="#preco" style="border:1px solid #C9C8C6;color:#0B0B0B;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Ver preço</a>
   </div>
 
   <div style="display:grid;grid-template-columns:minmax(320px,2fr) minmax(260px,1fr);gap:24px;align-items:start">
-    <div onMouseEnter="{{ onHeroEnter }}" onMouseLeave="{{ onHeroLeave }}" style="position:relative;width:100%;min-height:280px;aspect-ratio:{{ stageAspect }};background:#171717;border-radius:8px;overflow:hidden;border:1px solid #2A2A2A">
+    <div onMouseEnter="{{ onHeroEnter }}" onMouseLeave="{{ onHeroLeave }}" style="position:relative;width:100%;min-height:280px;aspect-ratio:{{ stageAspect }};background:#FAFAFA;overflow:hidden">
       <div style="position:absolute;top:16px;left:16px;z-index:10;border:1px solid #9A9A9A;padding:4px 10px;border-radius:2px;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A9A9A">Exemplo ilustrativo</div>
 
       <div style="position:absolute;inset:0;opacity:{{ mockupOpacity0 }};pointer-events:{{ mockupPointer0 }};transition:opacity 700ms ease">
@@ -138,21 +138,21 @@ button{font-family:inherit;cursor:pointer}
     </div>
 
     <div style="display:flex;flex-direction:column;gap:16px">
-      <div style="border:1px solid #2A2A2A;background:#171717;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:8px">
+      <div style="border-top:1px solid #DFDFDF;padding:20px 0;display:flex;flex-direction:column;gap:8px">
         <div style="font-family:'Inter Tight';font-weight:500;font-size:20px">Implantação em 10 dias</div>
-        <div style="font-size:15px;font-variant-numeric:tabular-nums;color:#9A9A9A">R$ 1.800 · pagamento único</div>
-        <a href="#preco" style="font-size:13px;color:#fff;text-decoration:none;background-image:linear-gradient(#fff,#fff);background-repeat:no-repeat;background-size:0% 1px;background-position:0 100%;transition:background-size 250ms;padding-bottom:2px" style-hover="background-size:100% 1px">Ver preço →</a>
+        <div style="font-size:15px;font-variant-numeric:tabular-nums;color:#5E5E5E">R$ 1.800 · pagamento único</div>
+        <a href="#preco" style="font-size:13px;color:#0B0B0B;text-decoration:none;background-image:linear-gradient(#0B0B0B,#0B0B0B);background-repeat:no-repeat;background-size:0% 1px;background-position:0 100%;transition:background-size 250ms;padding-bottom:2px" style-hover="background-size:100% 1px">Ver preço →</a>
       </div>
-      <div style="border:1px solid #2A2A2A;background:#171717;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:8px">
+      <div style="border-top:1px solid #DFDFDF;padding:20px 0;display:flex;flex-direction:column;gap:8px">
         <div style="font-family:'Inter Tight';font-weight:500;font-size:20px">Diagnóstico de 20 minutos</div>
-        <div style="font-size:14px;color:#9A9A9A;line-height:1.5">Você recebe uma ficha de 1 página com o que falta no seu negócio.</div>
-        <a href="{{ waLink }}" target="_blank" style="font-size:13px;color:#fff;text-decoration:none;background-image:linear-gradient(#fff,#fff);background-repeat:no-repeat;background-size:0% 1px;background-position:0 100%;transition:background-size 250ms;padding-bottom:2px" style-hover="background-size:100% 1px">Pedir diagnóstico →</a>
+        <div style="font-size:14px;color:#5E5E5E;line-height:1.5">Você recebe uma ficha de 1 página com o que falta no seu negócio.</div>
+        <a href="{{ waLink }}" target="_blank" style="font-size:13px;color:#0B0B0B;text-decoration:none;background-image:linear-gradient(#0B0B0B,#0B0B0B);background-repeat:no-repeat;background-size:0% 1px;background-position:0 100%;transition:background-size 250ms;padding-bottom:2px" style-hover="background-size:100% 1px">Pedir diagnóstico →</a>
       </div>
     </div>
   </div>
 </section>
 
-<div data-stats="1" style="background:#FAFAFA;padding:32px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px;border-bottom:1px solid #DFDFDF">
+<div data-stats="1" style="background:#FAFAFA;padding:32px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px">
   <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out">
     <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Implantação</div>
     <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(28px,3vw,40px);font-variant-numeric:tabular-nums">{{ statA }} dias</div>
@@ -180,10 +180,10 @@ button{font-family:inherit;cursor:pointer}
 
   <div style="display:{{ vitrineDisplay }};grid-template-columns:repeat(auto-fit,minmax(280px,1fr));overflow-x:{{ vitrineOverflow }};scroll-snap-type:{{ vitrineSnap }};gap:24px">
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #DFDFDF;border-radius:5px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;overflow:hidden;{{ tileSwipeExtra }}">
       <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
         <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Site</div></div>
-        <div style="border:1px solid #C9C8C6;border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+        <div style="padding:2px 0;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
       </div>
       <div style="aspect-ratio:4/3;overflow:hidden;position:relative;background:#EBEBEB">
         <div style="position:absolute;left:6%;top:10%;width:62%;height:80%;background:#171717;border-radius:6px;padding:4px;display:flex;flex-direction:column;gap:3px">
@@ -198,14 +198,14 @@ button{font-family:inherit;cursor:pointer}
         <div style="font-family:'Inter Tight';font-weight:600;font-size:18px">Corretora</div>
         <div style="font-size:14px;color:#5E5E5E;line-height:1.4">Vitrine de imóveis que abre rápido no celular.</div>
         <div style="font-size:12px;color:#5E5E5E;font-variant-numeric:tabular-nums">4 quartos · 3 vagas · 210 m² · João Pessoa</div>
-        <div style="font-size:12px;color:#9A9A9A;line-height:1.4;font-style:italic;margin-top:4px">Demonstração de site para corretoras. Recursos avançados, como busca por mapa, são projeto à parte.</div>
+        <div style="font-size:12px;color:#5E5E5E;line-height:1.4;font-style:italic;margin-top:4px">Demonstração de site para corretoras. Recursos avançados, como busca por mapa, são projeto à parte.</div>
       </div>
     </div>
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #DFDFDF;border-radius:5px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;overflow:hidden;{{ tileSwipeExtra }}">
       <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
         <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Google</div></div>
-        <div style="border:1px solid #C9C8C6;border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+        <div style="padding:2px 0;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
       </div>
       <div style="aspect-ratio:4/3;overflow:hidden">
         <div style="width:100%;height:100%;background:#F0F0F0;padding:16px;display:flex;flex-direction:column;gap:6px;transition:transform 400ms" style-hover="transform:scale(1.03)">
@@ -231,10 +231,10 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #DFDFDF;border-radius:5px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;overflow:hidden;{{ tileSwipeExtra }}">
       <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
         <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">WhatsApp</div></div>
-        <div style="border:1px solid #C9C8C6;border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+        <div style="padding:2px 0;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
       </div>
       <div style="aspect-ratio:4/3;overflow:hidden">
         <div style="width:100%;height:100%;background:#EBEBEB;padding:14px;display:flex;flex-direction:column;gap:6px;transition:transform 400ms" style-hover="transform:scale(1.03)">
@@ -249,10 +249,10 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #DFDFDF;border-radius:5px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;overflow:hidden;{{ tileSwipeExtra }}">
       <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
         <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Anúncios</div></div>
-        <div style="border:1px solid #C9C8C6;border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+        <div style="padding:2px 0;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
       </div>
       <div style="aspect-ratio:4/3;overflow:hidden">
         <div style="width:100%;height:100%;background:#fff;padding:14px;display:flex;flex-direction:column;gap:8px;transition:transform 400ms" style-hover="transform:scale(1.03)">
@@ -269,10 +269,10 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #DFDFDF;border-radius:5px;overflow:hidden;background:#fff;{{ tileSwipeExtra }}" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;overflow:hidden;{{ tileSwipeExtra }}">
       <div style="padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
         <div><div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Relatório</div></div>
-        <div style="border:1px solid #C9C8C6;border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
+        <div style="padding:2px 0;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap">Exemplo ilustrativo</div>
       </div>
       <div style="aspect-ratio:4/3;overflow:hidden">
         <div style="width:100%;height:100%;background:#171717;color:#fff;padding:14px;display:flex;flex-direction:column;gap:6px;transition:transform 400ms" style-hover="transform:scale(1.03)">
@@ -288,10 +288,10 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border:1px solid #2A2A2A;border-radius:8px;overflow:hidden;background:#0B0B0B;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:32px;gap:16px;{{ tileSwipeExtra }}">
-      <div style="align-self:flex-end;background:#fff;color:#0B0B0B;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase">Real</div>
-      <img src="assets/agora-logo.png" alt="Ágora" style="width:140px;height:auto;border-radius:4px"/>
-      <div style="font-family:'JetBrains Mono';font-size:12px;color:#9A9A9A;text-align:center">Este site foi feito com o mesmo processo.<br/>Cliente nº 0</div>
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:32px;gap:16px;{{ tileSwipeExtra }}">
+      <div style="align-self:flex-end;background:#0B0B0B;color:#fff;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase">Real</div>
+      <img src="assets/agora-logo-dark.png" alt="Ágora" style="width:140px;height:auto"/>
+      <div style="font-family:'JetBrains Mono';font-size:12px;color:#5E5E5E;text-align:center">Este site foi feito com o mesmo processo.<br/>Cliente nº 0</div>
     </div>
 
   </div>
@@ -306,8 +306,8 @@ button{font-family:inherit;cursor:pointer}
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
     <sc-for list="{{ resultados }}" as="r" hint-placeholder-count="4">
-      <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#FFFFFF;border:1px solid #DFDFDF;border-radius:5px;padding:28px;display:flex;flex-direction:column;gap:10px">
-        <div style="border:1px solid #C9C8C6;border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap;align-self:flex-start">Exemplo ilustrativo · Corretora</div>
+      <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border-top:1px solid #DFDFDF;padding:24px 0 0;display:flex;flex-direction:column;gap:10px">
+        <div style="padding:2px 0;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E;white-space:nowrap;align-self:flex-start">Exemplo ilustrativo · Corretora</div>
         <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(28px,4vw,40px);font-variant-numeric:tabular-nums;margin-top:4px">{{ r.n }}</div>
         <div style="font-size:15px;color:#0B0B0B">{{ r.label }}</div>
         <div style="font-size:13px;color:#5E5E5E">{{ r.sub }}</div>
@@ -316,7 +316,7 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </section>
 
-<section id="entregas" style="background:#F0F0F0;padding:120px 24px;display:flex;flex-direction:column;gap:48px">
+<section id="entregas" style="background:#FAFAFA;padding:120px 24px;display:flex;flex-direction:column;gap:48px">
   <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:flex;flex-direction:column;gap:16px;max-width:640px">
     <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E5E">02 · Entregas</div>
     <h2 style="font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0">Três frentes. Um só responsável.</h2>
@@ -346,12 +346,12 @@ button{font-family:inherit;cursor:pointer}
   </div>
 
   <div style="display:grid;grid-template-columns:{{ stepsGridCols }};gap:40px">
-    <div style="position:{{ stepsPosition }};top:104px;height:fit-content;background:#0B0B0B;color:#fff;border-radius:8px;padding:32px;min-height:260px;display:flex;flex-direction:column;gap:12px;justify-content:center">
+    <div style="position:{{ stepsPosition }};top:104px;height:fit-content;border-top:1px solid #DFDFDF;padding:24px 0 0;min-height:260px;display:flex;flex-direction:column;gap:12px;justify-content:center">
       <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
         <sc-if value="{{ s.isActive }}" hint-placeholder-val="{{ false }}">
-          <div style="font-family:'JetBrains Mono';font-size:12px;color:#9A9A9A;letter-spacing:.1em;font-variant-numeric:tabular-nums">{{ s.range }}</div>
+          <div style="font-family:'JetBrains Mono';font-size:12px;color:#5E5E5E;letter-spacing:.1em;font-variant-numeric:tabular-nums">{{ s.range }}</div>
           <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(24px,3vw,32px)">{{ s.title }}</div>
-          <div style="font-size:14px;color:#9A9A9A;line-height:1.5">{{ s.desc }}</div>
+          <div style="font-size:14px;color:#5E5E5E;line-height:1.5">{{ s.desc }}</div>
         </sc-if>
       </sc-for>
     </div>
@@ -383,14 +383,14 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </section>
 
-<section id="preco" style="background:#F0F0F0;padding:120px 24px;display:flex;flex-direction:column;gap:40px">
+<section id="preco" style="background:#FAFAFA;padding:120px 24px;display:flex;flex-direction:column;gap:40px">
   <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;display:flex;flex-direction:column;gap:16px;max-width:640px">
     <div style="font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5E5E5E">04 · Preço</div>
     <h2 style="font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0">Preço aberto. Sem surpresa.</h2>
   </div>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#fff;border:1px solid #DFDFDF;border-radius:5px;padding:32px;display:flex;flex-direction:column;gap:16px">
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border-top:1px solid #DFDFDF;padding:24px 0 0;display:flex;flex-direction:column;gap:16px">
       <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Implantação</div>
       <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(40px,5vw,56px);font-variant-numeric:tabular-nums;line-height:1">R$ 1.800</div>
       <div style="font-size:14px;color:#5E5E5E">pagamento único · 10 dias</div>
@@ -403,20 +403,20 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
 
-    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#0B0B0B;color:#fff;border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:16px">
-      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9A9A9A">Gestão mensal</div>
+    <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border-top:1px solid #DFDFDF;padding:24px 0 0;display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5E5E5E">Gestão mensal</div>
       <div style="font-family:'Inter Tight';font-weight:600;font-size:clamp(40px,5vw,56px);font-variant-numeric:tabular-nums;line-height:1">R$ 800<span style="font-size:20px;font-weight:500">/mês</span></div>
-      <div style="font-size:14px;color:#9A9A9A">contrato mínimo de 3 meses</div>
-      <div style="border-top:1px solid #2A2A2A;margin-top:8px;display:flex;flex-direction:column">
-        <div style="padding:10px 0;border-bottom:1px solid #2A2A2A;font-size:14px;color:#9A9A9A">— Google Ads e Meta Ads</div>
-        <div style="padding:10px 0;border-bottom:1px solid #2A2A2A;font-size:14px;color:#9A9A9A">— Otimização e novos criativos</div>
-        <div style="padding:10px 0;border-bottom:1px solid #2A2A2A;font-size:14px;color:#9A9A9A">— Relatório mensal + reunião de 20 min</div>
-        <div style="padding:10px 0;font-size:14px;color:#9A9A9A">— Até 2 alterações no site por mês</div>
+      <div style="font-size:14px;color:#5E5E5E">contrato mínimo de 3 meses</div>
+      <div style="border-top:1px solid #DFDFDF;margin-top:8px;display:flex;flex-direction:column">
+        <div style="padding:10px 0;border-bottom:1px solid #DFDFDF;font-size:14px;color:#5E5E5E">— Google Ads e Meta Ads</div>
+        <div style="padding:10px 0;border-bottom:1px solid #DFDFDF;font-size:14px;color:#5E5E5E">— Otimização e novos criativos</div>
+        <div style="padding:10px 0;border-bottom:1px solid #DFDFDF;font-size:14px;color:#5E5E5E">— Relatório mensal + reunião de 20 min</div>
+        <div style="padding:10px 0;font-size:14px;color:#5E5E5E">— Até 2 alterações no site por mês</div>
       </div>
     </div>
   </div>
 
-  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;background:#0B0B0B;color:#fff;border-radius:8px;padding:20px 24px;text-align:center;font-size:14px;line-height:1.5">A verba de anúncios é paga por você direto ao Google e à Meta. Nunca passa pela Ágora.</div>
+  <div data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;border-top:1px solid #DFDFDF;padding:24px 0 0;text-align:center;font-size:14px;line-height:1.5">A verba de anúncios é paga por você direto ao Google e à Meta. Nunca passa pela Ágora.</div>
 
   <div style="display:flex;flex-direction:column;max-width:800px">
     <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="5">
@@ -433,27 +433,27 @@ button{font-family:inherit;cursor:pointer}
   </div>
 </section>
 
-<section id="cta-final" style="background:#0B0B0B;color:#fff;padding:96px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px">
+<section id="cta-final" style="background:#FAFAFA;color:#0B0B0B;padding:96px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px">
   <h2 data-reveal="1" style="opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;font-family:'Inter Tight';font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em;margin:0;max-width:600px">Quer ver como ficaria no seu negócio?</h2>
   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-    <a href="{{ waLink }}" target="_blank" style="background:#fff;color:#0B0B0B;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
-    <a href="{{ waLink }}" target="_blank" style="border:1px solid #2A2A2A;color:#fff;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Pedir diagnóstico</a>
+    <a href="{{ waLink }}" target="_blank" style="background:#0B0B0B;color:#fff;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Chamar no WhatsApp</a>
+    <a href="{{ waLink }}" target="_blank" style="border:1px solid #C9C8C6;color:#0B0B0B;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Pedir diagnóstico</a>
   </div>
 </section>
 
-<footer style="background:#0B0B0B;color:#9A9A9A;padding:56px 24px 96px;display:flex;flex-direction:column;gap:24px;border-top:1px solid #2A2A2A">
-  <img src="assets/agora-logo-light.png" alt="Ágora" style="height:22px;width:auto;display:block"/>
-  <div style="font-size:14px;color:#9A9A9A">Marketing digital para microempresas</div>
+<footer style="background:#FAFAFA;color:#5E5E5E;padding:56px 24px 96px;display:flex;flex-direction:column;gap:24px;border-top:1px solid #DFDFDF">
+  <img src="assets/agora-logo-dark.png" alt="Ágora" style="height:22px;width:auto;display:block;align-self:flex-start"/>
+  <div style="font-size:14px;color:#5E5E5E">Marketing digital para microempresas</div>
   <nav style="display:flex;gap:20px;flex-wrap:wrap">
-    <a href="#entregas" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Entregas</a>
-    <a href="#como-funciona" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Como funciona</a>
-    <a href="#preco" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Preço</a>
-    <a href="#cta-final" style="font-size:13px;font-weight:500;color:#9A9A9A;text-decoration:none" style-hover="color:#fff">Contato</a>
+    <a href="#entregas" style="font-size:13px;font-weight:500;color:#5E5E5E;text-decoration:none" style-hover="color:#0B0B0B">Entregas</a>
+    <a href="#como-funciona" style="font-size:13px;font-weight:500;color:#5E5E5E;text-decoration:none" style-hover="color:#0B0B0B">Como funciona</a>
+    <a href="#preco" style="font-size:13px;font-weight:500;color:#5E5E5E;text-decoration:none" style-hover="color:#0B0B0B">Preço</a>
+    <a href="#cta-final" style="font-size:13px;font-weight:500;color:#5E5E5E;text-decoration:none" style-hover="color:#0B0B0B">Contato</a>
   </nav>
   <div style="font-size:12px;color:#5E5E5E;display:flex;flex-direction:column;gap:4px">
     <div>Campina Grande-PB</div>
     <div>CNPJ 00.000.000/0001-00</div>
-    <a href="#" style="font-size:12px;color:#5E5E5E;text-decoration:none" style-hover="color:#9A9A9A">Política de privacidade</a>
+    <a href="#" style="font-size:12px;color:#5E5E5E;text-decoration:none" style-hover="color:#0B0B0B">Política de privacidade</a>
     <div>© 2026 Ágora</div>
   </div>
 </footer>
@@ -607,7 +607,7 @@ class Component extends DCLogic {
       return {
         ...f, i,
         icon: isOpen ? '−' : '+',
-        iconColor: isOpen ? '#C98B4A' : '#5E5E5E',
+        iconColor: isOpen ? '#0B0B0B' : '#5E5E5E',
         maxH: isOpen ? '240px' : '0px',
         op: isOpen ? 1 : 0,
         toggle: () => this.setState(st => ({ openFaq: st.openFaq === i ? null : i }))
@@ -624,7 +624,7 @@ class Component extends DCLogic {
     const steps = stepsData.map((st, i) => ({
       ...st, i,
       isActive: s.activeStep === i,
-      borderColor: s.activeStep === i ? '#C98B4A' : '#DFDFDF',
+      borderColor: s.activeStep === i ? '#0B0B0B' : '#DFDFDF',
       setActive: () => this.setState({ activeStep: i })
     }));
 

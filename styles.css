@@ -135,9 +135,103 @@ html:not(.js) .btn-menu{display:none}
 .stat-value{font-family:var(--display);font-weight:600;font-size:clamp(28px,3vw,40px);font-variant-numeric:tabular-nums}
 .stat-note{font-size:13px;color:var(--muted);line-height:1.4;margin-top:4px}
 
+/* ===== Vitrine ===== */
+.vitrine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.tile{overflow:hidden}
+.tile-head{padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.tile-kind{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tile-head .tag-ilustrativo{padding:2px 0}
+.tile-art-box{aspect-ratio:4/3;overflow:hidden}
+.tile-art{transition:transform 400ms}
+.tile-art:hover{transform:scale(1.03)}
+.tile-body{padding:16px;display:flex;flex-direction:column;gap:6px}
+.tile-name{font-family:var(--display);font-weight:600;font-size:18px}
+.tile-desc{font-size:14px;color:var(--muted);line-height:1.4}
+.tile-meta{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tile-note{font-size:12px;color:var(--muted);line-height:1.4;font-style:italic;margin-top:4px}
+.tile-real{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:32px;gap:16px}
+.badge-real{align-self:flex-end;background:var(--ink);color:#fff;padding:2px 8px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.tile-real img{width:140px;height:auto}
+.tile-real-text{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center}
+
+/* ===== Medição ===== */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.result{border-top:1px solid var(--line);padding:24px 0 0;display:flex;flex-direction:column;gap:10px}
+.result .tag-ilustrativo{padding:2px 0;align-self:flex-start}
+.result-num{font-family:var(--display);font-weight:600;font-size:clamp(28px,4vw,40px);font-variant-numeric:tabular-nums;margin-top:4px}
+.result-label{font-size:15px}
+.result-sub{font-size:13px;color:var(--muted)}
+
+/* ===== Entregas ===== */
+.frentes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
+.frente{display:flex;flex-direction:column;gap:16px}
+.frente-num{font-family:var(--mono);font-size:40px;color:var(--line-strong);line-height:1}
+.frente-title{font-family:var(--display);font-weight:500;font-size:20px}
+.frente-list{display:flex;flex-direction:column}
+.frente-list li{border-top:1px solid var(--line);padding:10px 0;font-size:14px;color:var(--muted)}
+.not-doing{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--muted);font-style:italic;max-width:760px}
+
+/* ===== Como funciona ===== */
+.steps-grid{display:grid;grid-template-columns:minmax(280px,1fr) minmax(320px,1.6fr);gap:40px}
+.step-panel{position:sticky;top:104px;height:fit-content;border-top:1px solid var(--line);padding:24px 0 0;min-height:260px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.step-detail{display:none;flex-direction:column;gap:12px}
+.step-detail.is-active{display:flex}
+.step-range{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em;font-variant-numeric:tabular-nums}
+.step-detail-title{font-family:var(--display);font-weight:600;font-size:clamp(24px,3vw,32px)}
+.step-detail-desc{font-size:14px;color:var(--muted);line-height:1.5}
+.step-list{display:flex;flex-direction:column;padding:0;margin:0;list-style:none}
+.step{border-left:3px solid var(--line);padding:20px 24px;cursor:pointer;transition:border-color 300ms;display:flex;gap:16px;align-items:baseline}
+.step.is-active{border-left-color:var(--ink)}
+.step-n{font-family:var(--mono);font-size:13px;color:var(--faint);flex-shrink:0}
+.step-title{font-family:var(--display);font-weight:500;font-size:18px}
+.step-desc{font-size:13px;color:var(--muted);margin-top:2px}
+.step-days{font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+.monthly{border-top:1px solid var(--line);padding-top:40px;display:flex;flex-direction:column;gap:24px}
+.monthly-title{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.5vw,24px)}
+.timeline{height:4px;background:var(--line);border-radius:2px;overflow:hidden;max-width:800px}
+.timeline-fill{height:100%;width:100%;background:var(--ink)}
+.js .timeline-fill{width:0;transition:width 1.2s ease-out}
+.js .timeline-fill.is-full{width:100%}
+.monthly-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;max-width:800px}
+.monthly-item{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.monthly-item span{color:var(--ink);font-family:var(--sans);text-transform:none;letter-spacing:0;font-size:13px}
+
+/* ===== Preço ===== */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.price-card{border-top:1px solid var(--line);padding:24px 0 0;display:flex;flex-direction:column;gap:16px}
+.price-label{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.price-value{font-family:var(--display);font-weight:600;font-size:clamp(40px,5vw,56px);font-variant-numeric:tabular-nums;line-height:1}
+.price-value span{font-size:20px;font-weight:500}
+.price-note{font-size:14px;color:var(--muted)}
+.price-list{border-top:1px solid var(--line);margin-top:8px;display:flex;flex-direction:column}
+.price-list li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
+.price-list li:last-child{border-bottom:0}
+.ad-budget{border-top:1px solid var(--line);padding:24px 0 0;text-align:center;font-size:14px;line-height:1.5}
+
+/* ===== FAQ (details nativo, funciona sem JS) ===== */
+.faq{display:flex;flex-direction:column;max-width:800px}
+.faq-item{border-top:1px solid var(--line)}
+.faq-item summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;cursor:pointer;font-family:var(--display);font-weight:500;font-size:16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-family:var(--mono);font-size:18px;color:var(--muted);flex-shrink:0}
+.faq-item[open] summary::after{content:"−";color:var(--ink)}
+.faq-item p{font-size:14px;color:var(--muted);line-height:1.6;padding-bottom:18px;max-width:600px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ===== CTA final ===== */
+.cta-final{background:var(--bg);color:var(--ink);padding:96px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:32px}
+.cta-final .h2{max-width:600px}
+.cta-buttons{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.cta-buttons .btn-primary,.cta-buttons .btn-ghost{padding:14px 28px}
+
+/* ===== Responsivo (corpo) ===== */
 @media (max-width: 767px){
   .stage{aspect-ratio:4/5}
   .hero-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .step-panel{position:static}
+  .vitrine-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
+  .vitrine-grid .tile{flex:0 0 82%;scroll-snap-align:start}
 }
 
 /* @@END@@ */

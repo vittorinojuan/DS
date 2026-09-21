@@ -126,5 +126,15 @@ document.documentElement.classList.add('js');
     }
   }
 
-  /* @@JS-END@@ */
+  /* ----- Medição: um evento por botão de WhatsApp (data-cta) ----- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-cta]');
+    if (!a || typeof gtag !== 'function') return;
+    var sec = a.closest('section');
+    gtag('event', 'clique_whatsapp', {
+      cta: a.getAttribute('data-cta'),
+      local: sec && sec.id ? sec.id : 'global'
+    });
+  });
+
 })();

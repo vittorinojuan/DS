@@ -147,8 +147,6 @@ html:not(.js) .btn-menu{display:none}
 .tile-body{padding:16px;display:flex;flex-direction:column;gap:6px}
 .tile-name{font-family:var(--display);font-weight:600;font-size:18px}
 .tile-desc{font-size:14px;color:var(--muted);line-height:1.4}
-.tile-meta{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.tile-note{font-size:12px;color:var(--muted);line-height:1.4;font-style:italic;margin-top:4px}
 .tile-real{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:32px;gap:16px}
 .badge-real{align-self:flex-end;background:var(--ink);color:#fff;padding:2px 8px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 .tile-real img{width:140px;height:auto}

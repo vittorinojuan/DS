@@ -1,0 +1,111 @@
+/* ===== Tokens ===== */
+:root{
+  --bg:#FAFAFA;
+  --ink:#0B0B0B;
+  --muted:#5E5E5E;
+  --faint:#9A9A9A;
+  --line:#DFDFDF;
+  --line-strong:#C9C8C6;
+  --panel:#F0F0F0;
+  --panel-2:#EBEBEB;
+  --dark:#171717;
+  --sans:Inter,sans-serif;
+  --display:'Inter Tight',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --serif:'Instrument Serif',serif;
+}
+
+/* ===== Reset ===== */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);overflow-x:clip}
+::selection{background:#0B0B0B;color:#fff}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+
+/* ===== Acessibilidade ===== */
+.skip-link{position:absolute;left:16px;top:-60px;z-index:200;background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.skip-link:focus{top:12px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.btn-primary:focus-visible,.wa-float:focus-visible{outline-color:var(--ink);outline-offset:3px;box-shadow:0 0 0 2px var(--bg)}
+
+/* ===== Reveal: visível por padrão, só some quando o JS está ativo ===== */
+.reveal{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}
+.js .reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .js .reveal{opacity:1;transform:none}
+}
+
+/* ===== Padrões repetidos ===== */
+.section{padding:120px 24px;display:flex;flex-direction:column}
+.section-head{display:flex;flex-direction:column;gap:16px;max-width:640px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.h2{font-family:var(--display);font-weight:600;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.03em}
+.lede{font-size:15px;color:var(--muted);line-height:1.5}
+.btn-primary,.btn-ghost{display:inline-block;padding:14px 24px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--ink)}
+.tag-ilustrativo{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.link-underline{font-size:13px;color:var(--ink);text-decoration:none;background-image:linear-gradient(var(--ink),var(--ink));background-repeat:no-repeat;background-size:0% 1px;background-position:0 100%;transition:background-size 250ms;padding-bottom:2px;align-self:flex-start}
+.link-underline:hover,.link-underline:focus-visible{background-size:100% 1px}
+
+/* ===== Header ===== */
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.logo-link{display:flex;align-items:center;text-decoration:none}
+.logo-link img{height:24px;width:auto}
+.header-actions{display:flex;align-items:center;gap:8px}
+.nav-desktop{display:flex;gap:8px}
+.nav-link{padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;color:var(--ink);transition:background 200ms,color 200ms}
+.nav-link:hover{color:var(--muted)}
+.nav-cta{background:var(--ink);color:#fff;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.btn-menu{display:none;background:transparent;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--ink);font-size:14px}
+
+/* Menu mobile (overlay) */
+.nav-overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:100;flex-direction:column;padding:24px;gap:32px}
+.nav-overlay.is-open{display:flex}
+.nav-overlay-top{display:flex;justify-content:space-between;align-items:center}
+.nav-overlay-top img{height:24px;width:auto}
+.nav-overlay nav{display:flex;flex-direction:column;gap:20px}
+.nav-overlay nav a{color:var(--ink);font-family:var(--display);font-size:24px;font-weight:500;text-decoration:none}
+.nav-overlay .btn-primary{margin-top:auto;text-align:center;padding:16px}
+
+/* ===== Botão flutuante de WhatsApp ===== */
+.wa-float{position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--ink);color:#fff;text-align:center;padding:16px;border-top:1px solid #2A2A2A;font-weight:600;font-size:15px;text-decoration:none}
+
+/* ===== Footer ===== */
+.site-footer{background:var(--bg);color:var(--muted);padding:56px 24px 96px;display:flex;flex-direction:column;gap:24px;border-top:1px solid var(--line)}
+.site-footer img{height:22px;width:auto;align-self:flex-start}
+.footer-tagline{font-size:14px}
+.footer-nav{display:flex;gap:20px;flex-wrap:wrap}
+.footer-nav a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none}
+.footer-nav a:hover{color:var(--ink)}
+.footer-legal{font-size:12px;display:flex;flex-direction:column;gap:4px}
+.footer-legal a{font-size:12px;color:var(--muted);text-decoration:none}
+.footer-legal a:hover{color:var(--ink)}
+
+/* ===== Responsivo ===== */
+@media (max-width: 767px){
+  .nav-desktop,.nav-cta{display:none}
+  .btn-menu{display:flex}
+}
+@media (min-width: 768px){
+  .wa-float{left:auto;right:24px;bottom:24px;width:auto;border:1px solid #2A2A2A;padding:12px 20px;border-radius:12px;font-size:14px}
+  .wa-float::before{content:"● "}
+}
+/* Sem JS no celular: o botão de menu não funcionaria, então mostra os links direto */
+html:not(.js) .btn-menu{display:none}
+@media (max-width: 767px){
+  html:not(.js) .site-header{flex-wrap:wrap;gap:8px}
+  html:not(.js) .nav-desktop{display:flex;flex-wrap:wrap;gap:0}
+  html:not(.js) .nav-cta{display:inline-block}
+}
+
+/* @@END@@ */

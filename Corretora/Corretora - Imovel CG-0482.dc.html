@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F5F1EC;color:#7D6551;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+a{color:#433224;text-decoration:none}a:hover{color:#2E2118}
+select,input,button{font-family:Inter,system-ui,sans-serif}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;transition-delay:var(--d,0ms)}.rv.in{opacity:1;transform:none}
+.ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}.ln>span{display:block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}.ln.in>span{transform:none}
+.bu{filter:blur(14px) saturate(.85) sepia(.12);transform:scale(1.04);opacity:.7;transition:filter .8s ease,opacity .8s ease,transform .8s ease}.bu.ld{filter:saturate(.85) sepia(.12);transform:none;opacity:1}
+.card{transition:transform .4s ease,box-shadow .4s ease}.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(46,33,24,.10)}.card img{transition:transform .4s ease,filter .8s ease,opacity .8s ease}.card:hover img{transform:scale(1.03)}
+.ul{position:relative}.ul::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s ease}.ul:hover::after{transform:scaleX(1)}
+.btn,.nw{white-space:nowrap}.btn{transition:background .25s ease,color .25s ease,border-color .25s ease,transform .25s ease;cursor:pointer}.btn:hover{transform:translateY(-1px)}
+.gal{cursor:none;scrollbar-width:none;-webkit-overflow-scrolling:touch}.gal::-webkit-scrollbar{display:none}.gal a,.gal img{pointer-events:none;user-select:none}
+.d{display:none!important}.m{display:flex!important}
+@media(min-width:1024px){.d{display:flex!important}.m{display:none!important}.lay{grid-template-columns:minmax(0,1fr) 360px!important}.ficha{grid-template-columns:repeat(4,1fr)!important}.sim{grid-template-columns:1fr 1fr!important}.two{grid-template-columns:1fr 1fr!important}.foot{grid-template-columns:2fr 1fr 1fr 1fr!important}.brand{grid-column:auto!important}.pad-m{padding-bottom:0!important}}
+@media(prefers-reduced-motion:reduce){.rv,.ln>span,.bu,.card,.card img,.btn{transition:none!important;transform:none!important;opacity:1!important}.bu{filter:saturate(.85) sepia(.12)!important}}
+input[type=range]{accent-color:#433224}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F5F1EC">
+<header style="position:sticky;top:0;z-index:50;background:rgba(245,241,236,.92);backdrop-filter:blur(10px);border-bottom:1px solid #DDD4C7">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,80px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="Corretora - Home.dc.html" style="font:600 22px/1 Fraunces,serif;letter-spacing:-.01em;color:#2E2118">CORRETORA</a>
+    <nav class="d" style="display:flex;gap:32px;font:500 14px/1 Inter,sans-serif">
+      <a class="ul" href="Corretora - Busca.dc.html">Imóveis</a>
+      <a class="ul" href="Corretora - Home.dc.html#cidades">Cidades</a>
+      <a class="ul" href="Corretora - Home.dc.html#como-funciona">Como funciona</a>
+      <a class="ul" href="Corretora - Home.dc.html#vender">Vender</a>
+    </nav>
+    <a class="d btn" href="{{ waGeral }}" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border:1px solid #B89E8A;border-radius:8px;font:600 14px/1 Inter,sans-serif;color:#433224">Falar com corretor</a>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div style="max-width:1280px;margin:0 auto;padding:20px clamp(20px,5vw,80px) 0;display:flex;flex-wrap:wrap;gap:8px;font:400 13px/1 Inter,sans-serif;color:#7D6551">
+  <a class="ul" href="Corretora - Busca.dc.html" style="color:#7D6551">Imóveis</a><span>/</span><a class="ul" href="Corretora - Busca.dc.html" style="color:#7D6551">Campina Grande</a><span>/</span><a class="ul" href="Corretora - Busca.dc.html" style="color:#7D6551">Catolé</a><span>/</span><span style="color:#2E2118">{{ im.cod }}</span>
+</div>
+
+<!-- Galeria arrastável -->
+<section style="position:relative;margin-top:20px">
+  <div class="gal" ref="{{ galRef }}" onPointerDown="{{ galDown }}" onPointerMove="{{ galMove }}" onPointerUp="{{ galUp }}" onPointerLeave="{{ galLeave }}" onPointerEnter="{{ galEnter }}" style="display:flex;gap:12px;overflow-x:auto;padding:0 clamp(20px,5vw,80px);scroll-snap-type:x proximity">
+    <sc-for list="{{ fotos }}" as="ft" hint-placeholder-count="5">
+      <a href="#" onClick="{{ ft.open }}" style="flex:none;width:min(84vw,760px);aspect-ratio:3/2;border-radius:12px;overflow:hidden;background:#DDD4C7;scroll-snap-align:start;position:relative;display:block">
+        <img class="bu" src="{{ ft.src }}" alt="{{ ft.alt }}" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block">
+        <span style="position:absolute;left:14px;bottom:14px;padding:6px 10px;border-radius:6px;background:rgba(46,33,24,.6);color:#F5F1EC;font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;font-variant-numeric:tabular-nums">{{ ft.n }} / 14</span>
+      </a>
+    </sc-for>
+    <a href="#" onClick="{{ openAll }}" style="flex:none;width:min(60vw,320px);aspect-ratio:3/4;border-radius:12px;background:#433224;color:#FAF8F6;display:grid;align-content:end;gap:8px;padding:28px;scroll-snap-align:start"><span style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D0C5B5">Galeria</span><span style="font:500 24px/1.2 Fraunces,serif">Ver todas as 14 fotos →</span></a>
+  </div>
+  <div ref="{{ curRef }}" style="position:fixed;left:0;top:0;z-index:40;pointer-events:none;opacity:0;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;background:#FAF8F6;color:#2E2118;display:grid;place-items:center;text-align:center;font:600 11px/1.3 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 8px 24px rgba(46,33,24,.15);transition:opacity .2s ease,transform .1s ease">Arraste<br>⟷</div>
+  <div style="max-width:1280px;margin:0 auto;padding:16px clamp(20px,5vw,80px) 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <span class="d" style="font:400 13px/1 Inter,sans-serif;color:#7D6551">Arraste para navegar · {{ fotosTotal }} fotos</span>
+    <button class="ul" onClick="{{ openAll }}" style="background:none;border:0;padding:0;font:600 14px/1 Inter,sans-serif;color:#433224;cursor:pointer">Ver todas as 14 fotos →</button>
+  </div>
+</section>
+
+<!-- Conteúdo + card lateral -->
+<main class="lay" style="max-width:1280px;margin:0 auto;padding:clamp(32px,4vw,56px) clamp(20px,5vw,80px) clamp(64px,8vw,112px);display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(32px,4vw,64px);align-items:start">
+  <div style="display:grid;gap:clamp(48px,6vw,80px);min-width:0">
+    <!-- Cabeçalho -->
+    <div style="display:grid;gap:20px">
+      <div class="rv" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+        <span style="padding:6px 10px;border-radius:6px;background:#C8912C;color:#2E2118;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Destaque</span>
+        <span style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">Código {{ im.cod }} · Atualizado há 3 dias</span>
+      </div>
+      <h1 style="margin:0;font:600 clamp(40px,5.5vw,72px)/1.05 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">
+        <span class="ln"><span>Apartamento no Catolé,</span></span>
+        <span class="ln" style="--d:120ms"><span>a cinco minutos do Parque.</span></span>
+      </h1>
+      <div class="rv" style="--d:160ms;font:400 16px/1.6 Inter,sans-serif;color:#7D6551">Rua Manoel Tavares, Catolé · Campina Grande – PB</div>
+      <div class="rv" style="--d:240ms;display:flex;flex-wrap:wrap;align-items:flex-end;gap:24px 48px;padding-top:24px;border-top:1px solid #DDD4C7">
+        <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Venda</span><span style="font:600 clamp(24px,2.4vw,32px)/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ im.preco }}</span></div>
+        <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Condomínio</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">R$ 480/mês</span></div>
+        <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">IPTU</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">R$ 1.240/ano</span></div>
+        <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Preço por m²</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">R$ 4.898</span></div>
+      </div>
+    </div>
+
+    <!-- Ficha técnica -->
+    <section style="display:grid;gap:24px">
+      <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">01 — Ficha técnica</div>
+      <div class="ficha" style="display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid #DDD4C7;border-left:1px solid #DDD4C7">
+        <sc-for list="{{ ficha }}" as="d" hint-placeholder-count="8">
+          <div class="rv" style="--d:{{ d.d }};display:grid;gap:8px;padding:20px;border-right:1px solid #DDD4C7;border-bottom:1px solid #DDD4C7"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ d.label }}</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ d.value }}</span></div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Descrição + características -->
+    <section class="two" style="display:grid;grid-template-columns:1fr;gap:clamp(32px,4vw,56px)">
+      <div style="display:grid;gap:20px">
+        <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">02 — Sobre o imóvel</div>
+        <h2 class="rv" style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Luz o dia inteiro, varanda voltada para o nascente.</h2>
+        <p class="rv" style="margin:0;font:400 16px/1.6 Inter,sans-serif;color:#7D6551;text-wrap:pretty">Apartamento de 98 m² no 7º andar de um edifício de 2019, com três quartos (uma suíte), sala integrada à varanda gourmet e cozinha com bancada em granito. Piso em porcelanato em todos os ambientes, esquadrias de alumínio e infraestrutura para ar-condicionado split.</p>
+        <p class="rv" style="margin:0;font:400 16px/1.6 Inter,sans-serif;color:#7D6551;text-wrap:pretty">O condomínio tem piscina, salão de festas, academia e portaria 24h. Duas vagas cobertas e demarcadas. A cinco minutos do Parque da Criança, do Partage Shopping e de escolas particulares do bairro.</p>
+      </div>
+      <div style="display:grid;gap:20px;align-content:start">
+        <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">Características</div>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px 24px">
+          <sc-for list="{{ caracteristicas }}" as="c" hint-placeholder-count="10">
+            <li class="rv" style="--d:{{ c.d }};display:flex;align-items:center;gap:12px;min-height:40px;font:400 15px/1.4 Inter,sans-serif;color:#5C4635;border-bottom:1px solid #E8E1D8"><span style="flex:none;width:20px;height:20px;border-radius:6px;background:#E8E1D8;color:#433224;display:grid;place-items:center;font:600 11px/1 Inter,sans-serif">{{ c.icon }}</span>{{ c.nome }}</li>
+          </sc-for>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Planta baixa -->
+    <section style="display:grid;gap:24px">
+      <div class="rv" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">03 — Planta baixa</div><span style="font:400 13px/1 Inter,sans-serif;color:#7D6551;font-variant-numeric:tabular-nums">Área útil 98 m² · Área total 124 m²</span></div>
+      <div class="rv" style="position:relative;aspect-ratio:16/10;border-radius:12px;border:1px solid #D0C5B5;background:#FAF8F6;overflow:hidden;background-image:repeating-linear-gradient(45deg,#E8E1D8 0 1px,transparent 1px 12px)">
+        <div style="position:absolute;inset:8%;border:2px solid #7D6551;border-radius:2px;display:grid;grid-template-columns:38% 24% 38%;grid-template-rows:45% 55%">
+          <div style="border-right:2px solid #7D6551;border-bottom:2px solid #7D6551;display:grid;align-content:end;padding:10px;gap:4px"><span style="font:500 10px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Suíte</span><span style="font:500 13px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">14,2 m²</span></div>
+          <div style="border-right:2px solid #7D6551;border-bottom:2px solid #7D6551;display:grid;align-content:end;padding:10px;gap:4px"><span style="font:500 10px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Banho</span><span style="font:500 13px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">4,1 m²</span></div>
+          <div style="border-bottom:2px solid #7D6551;display:grid;align-content:end;padding:10px;gap:4px"><span style="font:500 10px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Quartos 2 e 3</span><span style="font:500 13px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">10,8 + 9,6 m²</span></div>
+          <div style="grid-column:1/3;border-right:2px solid #7D6551;display:grid;align-content:end;padding:10px;gap:4px"><span style="font:500 10px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Sala + varanda gourmet</span><span style="font:500 13px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">32,5 m²</span></div>
+          <div style="display:grid;align-content:end;padding:10px;gap:4px"><span style="font:500 10px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Cozinha + serviço</span><span style="font:500 13px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">12,4 m²</span></div>
+        </div>
+        <span style="position:absolute;right:14px;top:14px;padding:6px 10px;border-radius:6px;background:#FFFFFF;border:1px solid #D0C5B5;font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#7D6551">planta esquemática · substituir pela planta do imóvel</span>
+      </div>
+    </section>
+
+    <!-- Entorno -->
+    <section style="display:grid;gap:24px">
+      <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">04 — Entorno</div>
+      <div class="two" style="display:grid;grid-template-columns:1fr;gap:clamp(16px,2vw,28px)">
+        <div class="rv" style="position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#E8E1D8;border:1px solid #D0C5B5">
+          <iframe ref="{{ mapRef }}" src="map.html" title="Mapa do entorno" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#E8E1D8"></iframe>
+        </div>
+        <ol style="list-style:none;margin:0;padding:0;display:grid;gap:0;align-content:start;border-top:1px solid #DDD4C7">
+          <sc-for list="{{ pois }}" as="p" hint-placeholder-count="5">
+            <li class="rv" onMouseEnter="{{ p.hover }}" onMouseLeave="{{ unhover }}" style="--d:{{ p.d }};display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DDD4C7;background:{{ p.rowBg }};transition:background .25s ease;cursor:default">
+              <span style="width:28px;height:28px;border-radius:50%;background:#E8E1D8;color:#433224;display:grid;place-items:center;font:600 11px/1 Inter,sans-serif">{{ p.n }}</span>
+              <span style="display:grid;gap:2px"><span style="font:500 15px/1.3 Inter,sans-serif;color:#2E2118">{{ p.nome }}</span><span style="font:400 12px/1 Inter,sans-serif;color:#7D6551">{{ p.tipo }}</span></span>
+              <span style="font:500 14px/1 Inter,sans-serif;color:#5C4635;font-variant-numeric:tabular-nums;white-space:nowrap">{{ p.dist }}</span>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Simulador -->
+    <section id="simulador" style="display:grid;gap:24px;scroll-margin-top:120px">
+      <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">05 — Simule o financiamento</div>
+      <div class="sim rv" style="display:grid;grid-template-columns:1fr;gap:clamp(24px,3vw,40px);padding:clamp(24px,3vw,40px);background:#E8E1D8;border-radius:12px">
+        <div style="display:grid;gap:28px">
+          <div style="display:grid;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Entrada</span><span style="font:500 16px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ sim.entradaLabel }} · {{ sim.entradaPct }}%</span></div>
+            <input type="range" min="20" max="80" step="5" value="{{ sim.entradaPct }}" onInput="{{ setEntrada }}" onChange="{{ setEntrada }}" style="width:100%">
+          </div>
+          <div style="display:grid;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Prazo</span><span style="font:500 16px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ sim.prazo }} meses · {{ sim.anos }} anos</span></div>
+            <input type="range" min="60" max="420" step="12" value="{{ sim.prazo }}" onInput="{{ setPrazo }}" onChange="{{ setPrazo }}" style="width:100%">
+          </div>
+          <div style="display:grid;gap:10px">
+            <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Sistema</span>
+            <div style="display:inline-flex;padding:4px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;justify-self:start"><button class="btn" onClick="{{ setSac }}" style="{{ segSac }}">SAC</button><button class="btn" onClick="{{ setPrice }}" style="{{ segPrice }}">Price</button></div>
+          </div>
+        </div>
+        <div style="display:grid;gap:20px;padding:clamp(20px,2.5vw,32px);background:#FAF8F6;border-radius:12px;border:1px solid #D0C5B5;align-content:start">
+          <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ sim.parcelaLabel }}</span><span style="font:600 clamp(28px,3vw,40px)/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ sim.parcela }}</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-top:16px;border-top:1px solid #DDD4C7">
+            <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Valor financiado</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ sim.financiado }}</span></div>
+            <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Renda mínima</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ sim.renda }}</span></div>
+          </div>
+          <p style="margin:0;font:400 12px/1.5 Inter,sans-serif;color:#7D6551">Simulação ilustrativa com taxa de referência de 10,5% a.a. + TR. Valores finais dependem da análise de crédito do banco.</p>
+          <a class="btn" href="{{ waSim }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 14px/1 Inter,sans-serif"><span style="width:8px;height:8px;border-radius:50%;background:#2E2118"></span>Enviar simulação no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Semelhantes -->
+    <section style="display:grid;gap:24px">
+      <div class="rv" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">06 — Imóveis semelhantes</div><a class="ul" href="Corretora - Busca.dc.html" style="font:500 14px/1 Inter,sans-serif">Ver todos em Campina Grande →</a></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:clamp(16px,2vw,24px)">
+        <sc-for list="{{ semelhantes }}" as="s" hint-placeholder-count="3">
+          <a class="rv card" href="{{ s.wa }}" target="_blank" style="--d:{{ s.d }};display:grid;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;overflow:hidden;color:inherit">
+            <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#DDD4C7"><img class="bu" src="{{ s.img }}" alt="{{ s.alt }}" style="width:100%;height:100%;object-fit:cover;display:block"><sc-if value="{{ s.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:6px;background:{{ s.badgeBg }};color:{{ s.badgeFg }};font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">{{ s.badge }}</span></sc-if></div>
+            <div style="padding:20px;display:grid;gap:12px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:600 20px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ s.preco }}</div><div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#7D6551">{{ s.cod }}</div></div>
+              <div style="font:500 clamp(20px,1.6vw,24px)/1.2 Fraunces,serif;color:#2E2118">{{ s.tipo }} no {{ s.bairro }}</div>
+              <div style="font:400 14px/1.5 Inter,sans-serif;color:#7D6551">{{ s.cidade }}</div>
+              <div style="display:flex;gap:16px;padding-top:12px;border-top:1px solid #E8E1D8;font:400 14px/1.5 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#5C4635"><span>{{ s.q }} qts</span><span>{{ s.v }} {{ s.vagaLabel }}</span><span>{{ s.a }} m²</span></div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+
+  <!-- Card lateral fixo (desktop) -->
+  <aside class="d" style="position:sticky;top:124px;display:flex;flex-direction:column;gap:20px;padding:24px;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px">
+    <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ im.cod }} · Venda</span><span style="font:600 32px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ im.preco }}</span><span style="font:400 14px/1.5 Inter,sans-serif;color:#7D6551;font-variant-numeric:tabular-nums">Condomínio R$ 480/mês · IPTU R$ 1.240/ano</span></div>
+    <div style="display:flex;gap:14px;align-items:center;padding:16px 0;border-top:1px solid #E8E1D8;border-bottom:1px solid #E8E1D8">
+      <img class="bu" src="{{ corretor.img }}" alt="{{ corretor.nome }}" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none">
+      <div style="display:grid;gap:4px"><span style="font:500 18px/1.2 Fraunces,serif;color:#2E2118">{{ corretor.nome }}</span><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ corretor.creci }}</span><span style="font:400 12px/1 Inter,sans-serif;color:#5A7D4E">Responde em até 2h</span></div>
+    </div>
+    <a class="btn" href="{{ waIm }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 15px/1 Inter,sans-serif"><span style="width:8px;height:8px;border-radius:50%;background:#2E2118"></span>Falar no WhatsApp</a>
+    <a class="btn" href="{{ waVisita }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;height:52px;border:1px solid #B89E8A;color:#433224;border-radius:8px;font:600 15px/1 Inter,sans-serif">Agendar visita</a>
+    <div style="display:flex;justify-content:space-between;gap:12px;font:400 12px/1.5 Inter,sans-serif;color:#7D6551">
+      <button onClick="{{ toggleFav }}" class="ul" style="background:none;border:0;padding:0;font:500 13px/1 Inter,sans-serif;color:{{ favColor }};cursor:pointer">{{ favLabel }}</button>
+      <a class="ul" href="#simulador" style="font:500 13px/1 Inter,sans-serif;color:#433224">Simular financiamento</a>
+    </div>
+  </aside>
+</main>
+
+<!-- Rodapé -->
+<footer class="pad-m" style="background:#2E2118;color:#F5F1EC;padding-bottom:96px">
+  <div class="foot" style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,80px) 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4vw,56px)">
+    <div class="brand" style="display:grid;gap:16px;align-content:start;grid-column:1/-1">
+      <div style="font:600 24px/1 Fraunces,serif;letter-spacing:-.01em">CORRETORA</div>
+      <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D0C5B5">CRECI-PB 00000-J</div>
+      <address style="font:400 14px/1.6 Inter,sans-serif;font-style:normal;color:#DDD4C7;max-width:32ch">Av. Prefeito Severino Cabral, 1200 · Catolé<br>Campina Grande – PB · 58410-000<br>Av. Cabo Branco, 3400 · Cabo Branco<br>João Pessoa – PB · 58045-010</address>
+    </div>
+    <nav style="display:grid;gap:12px;align-content:start;font:400 14px/1.5 Inter,sans-serif"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D0C5B5;margin-bottom:4px">Navegação</span><a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Imóveis</a><a class="ul" href="Corretora - Home.dc.html#cidades" style="color:#F5F1EC;justify-self:start">Cidades</a><a class="ul" href="Corretora - Home.dc.html#como-funciona" style="color:#F5F1EC;justify-self:start">Como funciona</a><a class="ul" href="Corretora - Home.dc.html#vender" style="color:#F5F1EC;justify-self:start">Vender</a></nav>
+    <nav style="display:grid;gap:12px;align-content:start;font:400 14px/1.5 Inter,sans-serif"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D0C5B5;margin-bottom:4px">Imóveis</span><a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Campina Grande</a><a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">João Pessoa</a><a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Casas</a><a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Apartamentos</a></nav>
+    <nav style="display:grid;gap:12px;align-content:start;font:400 14px/1.5 Inter,sans-serif"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D0C5B5;margin-bottom:4px">Legal</span><a class="ul" href="#" style="color:#F5F1EC;justify-self:start">Política de privacidade</a><a class="ul" href="#" style="color:#F5F1EC;justify-self:start">Termos de uso</a><a class="ul" href="#" style="color:#F5F1EC;justify-self:start">LGPD</a></nav>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:24px clamp(20px,5vw,80px);border-top:1px solid #5C4635;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font:400 12px/1.5 Inter,sans-serif;color:#D0C5B5"><span>© 2026 CORRETORA · Todos os direitos reservados</span><span>Atendimento seg–sáb, 8h às 19h</span></div>
+</footer>
+
+<!-- Barra fixa inferior (mobile) -->
+<div class="m" style="position:fixed;left:0;right:0;bottom:0;z-index:55;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(250,248,246,.96);backdrop-filter:blur(10px);border-top:1px solid #DDD4C7">
+  <img class="bu" src="{{ corretor.img }}" alt="{{ corretor.nome }}" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none">
+  <div style="display:grid;gap:3px;min-width:0;flex:1"><span style="font:600 15px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ im.preco }}</span><span style="font:500 10px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7D6551;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ corretor.creci }}</span></div>
+  <a class="btn" href="{{ waVisita }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 14px;border:1px solid #B89E8A;color:#433224;border-radius:8px;font:600 13px/1 Inter,sans-serif">Agendar</a>
+  <a class="btn" href="{{ waIm }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 14px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 13px/1 Inter,sans-serif">WhatsApp</a>
+</div>
+
+<!-- Lightbox -->
+<sc-if value="{{ lightbox }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:80;background:#2E2118;color:#F5F1EC;overflow:auto">
+  <div style="position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(20px,5vw,80px);background:rgba(46,33,24,.92);backdrop-filter:blur(8px)">
+    <div style="display:grid;gap:4px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D0C5B5">{{ im.cod }}</span><span style="font:500 20px/1.2 Fraunces,serif">Todas as 14 fotos</span></div>
+    <button onClick="{{ closeAll }}" aria-label="Fechar" style="width:44px;height:44px;border:1px solid #7D6551;border-radius:8px;background:transparent;color:#F5F1EC;font:500 20px/1 Inter,sans-serif;cursor:pointer">×</button>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:24px clamp(20px,5vw,80px) 96px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:12px">
+    <sc-for list="{{ todasFotos }}" as="ft" hint-placeholder-count="14">
+      <figure style="margin:0;display:grid;gap:8px"><div style="aspect-ratio:3/2;border-radius:8px;overflow:hidden;background:#433224"><img class="bu" src="{{ ft.src }}" alt="{{ ft.alt }}" style="width:100%;height:100%;object-fit:cover;display:block"></div><figcaption style="font:400 12px/1 Inter,sans-serif;color:#D0C5B5;font-variant-numeric:tabular-nums">{{ ft.n }} / 14 · {{ ft.alt }}</figcaption></figure>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Protótipo&quot;}}">
+const WA = '5583900000000';
+const U = (id, w) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
+const fmt = n => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+const IM = { cod: 'CG-0482', tipo: 'Apartamento', bairro: 'Catolé', cidade: 'Campina Grande', preco: 480000, q: 3, v: 2, a: 98 };
+const SIMILARES = [
+  { cod: 'CG-0410', tipo: 'Apartamento', bairro: 'Catolé', cidade: 'Campina Grande', preco: 410000, q: 3, v: 1, a: 84, badge: '', img: 'photo-1484154218962-a197022b5858', alt: 'Cozinha integrada' },
+  { cod: 'CG-0355', tipo: 'Apartamento', bairro: 'Alto Branco', cidade: 'Campina Grande', preco: 355000, q: 2, v: 1, a: 72, badge: 'NOVO', img: 'photo-1560448204-e02f11c3d0e2', alt: 'Apartamento com janelas amplas' },
+  { cod: 'CG-0690', tipo: 'Casa', bairro: 'Mirante', cidade: 'Campina Grande', preco: 690000, q: 3, v: 2, a: 140, badge: 'NOVO', img: 'photo-1600585154340-be6161a56a0c', alt: 'Casa contemporânea com fachada clara' },
+];
+const FOTOS = [['photo-1502672260266-1c1ef2d93688', 'Sala integrada à varanda'], ['photo-1522708323590-d24dbb6b0267', 'Living com madeira e concreto'], ['photo-1484154218962-a197022b5858', 'Cozinha com bancada em granito'], ['photo-1567496898669-ee935f5f647a', 'Suíte com cabeceira em madeira'], ['photo-1493809842364-78817add7ffb', 'Sala ao fim da tarde'], ['photo-1560448204-e02f11c3d0e2', 'Quarto 2 com janela ampla'], ['photo-1600607687939-ce8a6c25118c', 'Pé-direito e iluminação natural'], ['photo-1600566753190-17f0baa2a6c3', 'Banheiro da suíte'], ['photo-1600585154340-be6161a56a0c', 'Fachada do edifício'], ['photo-1600596542815-ffad4c1539a9', 'Piscina do condomínio'], ['photo-1512917774080-9991f1c4c750', 'Área de lazer ao anoitecer'], ['photo-1600047509807-ba8f99d2cdde', 'Portaria e acesso'], ['photo-1613490493576-7fde63acd811', 'Varanda gourmet'], ['photo-1564013799919-ab600027ffc6', 'Vista do 7º andar']];
+const wa = (cod, msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+
+class Component extends DCLogic {
+  state = { entradaPct: 30, prazo: 360, sistema: 'SAC', fav: false, lightbox: false, poi: null };
+  galRef = React.createRef(); curRef = React.createRef(); mapRef = React.createRef(); mapReady = false;
+  onMsg = e => { const m = e.data; if (!m || m.src !== 'corretora-map') return; if (m.type === 'ready') { this.mapReady = true; this.fit = true; this.pushMap(); } else if (m.type === 'poi') this.setState({ poi: m.n == null ? null : m.n - 1 }); };
+  pushMap() { const f = this.mapRef.current; if (!f || !this.mapReady || !this.lastMap) return; f.contentWindow.postMessage({ type: 'set', ...this.lastMap, fit: this.fit }, '*'); this.fit = false; }
+  componentDidUpdate() { this.pushMap(); }
+  drag = null;
+  componentDidMount() {
+    window.addEventListener('message', this.onMsg);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } }), { threshold: 0.12 });
+    const scan = () => document.querySelectorAll('.rv:not(.in),.ln:not(.in)').forEach(el => { if (el.dataset.ob) return; el.dataset.ob = 1; reduced ? el.classList.add('in') : rv.observe(el); });
+    scan(); this.rv = rv;
+    this.iv = setInterval(() => { scan(); document.querySelectorAll('img.bu:not(.ld)').forEach(img => { if (img.complete && img.naturalWidth) img.classList.add('ld'); else if (!img.dataset.bu) { img.dataset.bu = 1; img.addEventListener('load', () => img.classList.add('ld'), { once: true }); } }); }, 250);
+  }
+  componentWillUnmount() { clearInterval(this.iv); this.rv && this.rv.disconnect(); window.removeEventListener('message', this.onMsg); }
+  cursor(e, show) { const c = this.curRef.current; if (!c || e.pointerType === 'touch') return; c.style.opacity = show ? '1' : '0'; if (show) c.style.transform = `translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%) scale(${this.drag ? .85 : 1})`; }
+  renderVals() {
+    const s = this.state, preco = IM.preco;
+    const styleObj = st => Object.fromEntries(st.split(';').filter(Boolean).map(kv => { const i = kv.indexOf(':'); return [kv.slice(0, i).trim().replace(/-([a-z])/g, (_, c) => c.toUpperCase()), kv.slice(i + 1).trim()]; }));
+    const seg = on => styleObj(`height:36px;padding:0 16px;border:0;border-radius:6px;background:${on ? '#433224' : 'transparent'};color:${on ? '#FAF8F6' : '#433224'};font:600 13px/1 Inter,sans-serif;cursor:pointer`);
+    const entrada = preco * s.entradaPct / 100, fin = preco - entrada, i = 0.105 / 12, n = s.prazo;
+    const price = fin * i / (1 - Math.pow(1 + i, -n)), sac = fin / n + fin * i;
+    const parcela = s.sistema === 'SAC' ? sac : price;
+    const gal = this.galRef;
+    const fotos = FOTOS.map(([id, alt], k) => ({ n: k + 1, src: U(id, 1400), alt, open: e => { e.preventDefault(); if (!this.moved) this.setState({ lightbox: true }); } }));
+    const poisBase = [{ nome: 'Parque da Criança', tipo: 'Lazer', dist: '650 m', lat: -7.2352, lng: -35.8898 }, { nome: 'Partage Shopping', tipo: 'Compras', dist: '1,1 km', lat: -7.2408, lng: -35.8964 }, { nome: 'Colégio Motiva', tipo: 'Educação', dist: '900 m', lat: -7.2482, lng: -35.8815 }, { nome: 'Hospital de Clínicas', tipo: 'Saúde', dist: '1,4 km', lat: -7.2311, lng: -35.8802 }, { nome: 'Supermercado', tipo: 'Mercado', dist: '450 m', lat: -7.2448, lng: -35.8846 }];
+    this.lastMap = { pins: [{ cod: IM.cod, lat: -7.2418, lng: -35.8869, label: IM.cod, home: true }], pois: poisBase.map((p, k) => ({ n: k + 1, lat: p.lat, lng: p.lng })), activePoi: s.poi == null ? null : s.poi + 1, maxZoom: 15 };
+    return {
+      im: { ...IM, preco: fmt(preco) },
+      waGeral: wa('', 'Olá! Vim pelo site da CORRETORA e gostaria de falar com um corretor.'),
+      waIm: wa(IM.cod, `Olá! Tenho interesse no imóvel ${IM.cod} (Apartamento no Catolé, Campina Grande – ${fmt(preco)}). Podemos conversar?`),
+      waVisita: wa(IM.cod, `Olá! Quero agendar uma visita ao imóvel ${IM.cod} (Apartamento no Catolé, Campina Grande). Quais horários estão disponíveis?`),
+      waSim: wa(IM.cod, `Olá! Simulei o financiamento do imóvel ${IM.cod}: entrada de ${fmt(entrada)} (${s.entradaPct}%), ${n} meses, ${s.sistema}, parcela inicial de ${fmt(parcela)}. Podem me orientar?`),
+      corretor: { nome: 'Rafael Nóbrega', creci: 'CRECI-PB 00000-J', img: U('photo-1560250097-0b93528c311a', 200) },
+      fotos: fotos.slice(0, 6), todasFotos: fotos, fotosTotal: 14,
+      galRef: gal, curRef: this.curRef,
+      galDown: e => { const el = gal.current; if (!el || e.pointerType === 'touch') return; this.drag = { x: e.clientX, sl: el.scrollLeft }; this.moved = false; el.style.scrollSnapType = 'none'; this.cursor(e, true); },
+      galMove: e => { const el = gal.current; if (this.drag && el) { const dx = e.clientX - this.drag.x; if (Math.abs(dx) > 4) this.moved = true; el.scrollLeft = this.drag.sl - dx; } this.cursor(e, true); },
+      galUp: e => { const el = gal.current; this.drag = null; if (el) el.style.scrollSnapType = 'x proximity'; this.cursor(e, true); setTimeout(() => { this.moved = false; }, 0); },
+      galLeave: e => { this.drag = null; this.cursor(e, false); },
+      galEnter: e => this.cursor(e, true),
+      openAll: e => { e && e.preventDefault && e.preventDefault(); this.setState({ lightbox: true }); }, closeAll: () => this.setState({ lightbox: false }), lightbox: s.lightbox,
+      ficha: [['Quartos', '3'], ['Suítes', '1'], ['Vagas', '2 cobertas'], ['Área útil', '98 m²'], ['Área total', '124 m²'], ['Andar', '7º de 12'], ['Ano de construção', '2019'], ['Mobiliado', 'Não']].map(([label, value], k) => ({ label, value, d: (k * 60) + 'ms' })),
+      caracteristicas: ['Varanda gourmet', 'Piscina', 'Academia', 'Salão de festas', 'Portaria 24h', 'Elevador', 'Nascente', 'Piso porcelanato', 'Infra para split', 'Aceita financiamento'].map((nome, k) => ({ nome, icon: '✓', d: (k * 50) + 'ms' })),
+      pois: poisBase.map((p, k) => { const on = s.poi === k; return { ...p, n: k + 1, d: (k * 60) + 'ms', hover: () => this.setState({ poi: k }), bg: on ? '#2E2118' : '#FFFFFF', fg: on ? '#FAF8F6' : '#2E2118', border: on ? '#2E2118' : '#B89E8A', rowBg: on ? '#E8E1D8' : 'transparent' }; }),
+      unhover: () => this.setState({ poi: null }), mapRef: this.mapRef,
+      sim: { entradaPct: s.entradaPct, entradaLabel: fmt(entrada), prazo: n, anos: n / 12, parcela: fmt(parcela), parcelaLabel: s.sistema === 'SAC' ? 'Primeira parcela (SAC)' : 'Parcela fixa (Price)', financiado: fmt(fin), renda: fmt(parcela / 0.3) },
+      setEntrada: e => this.setState({ entradaPct: +e.target.value }), setPrazo: e => this.setState({ prazo: +e.target.value }),
+      setSac: () => this.setState({ sistema: 'SAC' }), setPrice: () => this.setState({ sistema: 'Price' }), segSac: seg(s.sistema === 'SAC'), segPrice: seg(s.sistema === 'Price'),
+      semelhantes: SIMILARES.map((x, k) => ({ ...x, preco: fmt(x.preco), img: U(x.img, 900), d: (k * 80) + 'ms', vagaLabel: x.v === 1 ? 'vaga' : 'vagas', badgeBg: x.badge === 'NOVO' ? '#5A7D4E' : '#C8912C', badgeFg: x.badge === 'NOVO' ? '#FAF8F6' : '#2E2118', wa: wa(x.cod, `Olá! Tenho interesse no imóvel ${x.cod} (${x.tipo} em ${x.bairro}, ${x.cidade} – ${fmt(x.preco)}). Podemos conversar?`) })),
+      toggleFav: () => this.setState(t => ({ fav: !t.fav })), favLabel: s.fav ? '♥ Salvo nos favoritos' : '♡ Salvar imóvel', favColor: s.fav ? '#B34237' : '#433224',
+    };
+  }
+}
+</script>
+</body>
+</html>

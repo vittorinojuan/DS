@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body,#map{margin:0;height:100%;background:#E8E1D8;font-family:Inter,system-ui,sans-serif}
+.leaflet-tile-pane{filter:saturate(.25) sepia(.28) brightness(1.03) contrast(.95)}
+.leaflet-control-zoom{border:1px solid #D0C5B5!important;border-radius:8px!important;overflow:hidden;box-shadow:none!important;margin:12px!important}
+.leaflet-control-zoom a{width:40px!important;height:40px!important;line-height:40px!important;background:rgba(250,248,246,.95)!important;color:#2E2118!important;border-color:#D0C5B5!important;font:500 18px/40px Inter,sans-serif!important}
+.leaflet-control-attribution{background:rgba(250,248,246,.85)!important;color:#7D6551!important;font:400 10px/1.4 Inter,sans-serif!important}
+.leaflet-control-attribution a{color:#433224!important}
+.pin{position:relative;transform:translate(-50%,-100%);white-space:nowrap;padding:6px 10px;border-radius:8px;border:1px solid #B89E8A;background:#fff;color:#2E2118;font:600 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(46,33,24,.15);transition:transform .2s ease,background .2s ease,color .2s ease;cursor:pointer}
+.pin::after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;background:inherit;border-right:1px solid #B89E8A;border-bottom:1px solid #B89E8A;transform:translateX(-50%) rotate(45deg)}
+.pin.on{background:#2E2118;color:#FAF8F6;border-color:#2E2118;transform:translate(-50%,-100%) scale(1.06);z-index:10}
+.pin.on::after{border-color:#2E2118}
+.pin.home{background:#2E2118;color:#FAF8F6;border-color:#2E2118}
+.cluster{transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;background:#C8912C;color:#2E2118;font:600 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(46,33,24,.15);cursor:pointer}
+.poi{transform:translate(-50%,-50%);width:28px;height:28px;display:grid;place-items:center;border-radius:50%;border:1px solid #B89E8A;background:#fff;color:#2E2118;font:600 11px/1 Inter,sans-serif;box-shadow:0 2px 8px rgba(46,33,24,.12);transition:background .2s ease;cursor:pointer}
+.poi.on{background:#2E2118;color:#FAF8F6;border-color:#2E2118}
+.leaflet-marker-icon{background:none;border:0}
+</style></head><body><div id="map"></div>
+<script>
+const map=L.map('map',{zoomControl:true,attributionControl:true,scrollWheelZoom:false}).setView([-7.18,-35.35],9);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+map.zoomControl.setPosition('topright');
+const post=m=>parent.postMessage(Object.assign({src:'corretora-map'},m),'*');
+let layer=L.layerGroup().addTo(map),markers={},lastKey='';
+const icon=(html,cls,w,h)=>L.divIcon({html:`<div class="${cls}">${html}</div>`,className:'',iconSize:[0,0],iconAnchor:[0,0]});
+function render(d){
+  const key=JSON.stringify([d.pins.map(p=>p.cod+p.label),d.clusters,d.pois]);
+  if(key!==lastKey){
+    layer.clearLayers();markers={};
+    (d.pins||[]).forEach(p=>{const m=L.marker([p.lat,p.lng],{icon:icon(p.label,'pin'+(p.home?' home':''),0,0),zIndexOffset:p.home?500:0}).addTo(layer);
+      m.on('click',()=>post({type:'click',cod:p.cod}));m.on('mouseover',()=>post({type:'hover',cod:p.cod}));m.on('mouseout',()=>post({type:'hover',cod:null}));markers[p.cod]=m;});
+    (d.clusters||[]).forEach(c=>{const s=c.size||44;const m=L.marker([c.lat,c.lng],{icon:L.divIcon({html:`<div class="cluster" style="width:${s}px;height:${s}px">${c.label}</div>`,className:'',iconSize:[0,0]})}).addTo(layer);m.on('click',()=>post({type:'cluster',id:c.id}));});
+    (d.pois||[]).forEach(p=>{const m=L.marker([p.lat,p.lng],{icon:icon(p.n,'poi')}).addTo(layer);m.on('mouseover',()=>post({type:'poi',n:p.n}));m.on('mouseout',()=>post({type:'poi',n:null}));markers['poi'+p.n]=m;});
+    if(d.fit){const pts=[...(d.pins||[]),...(d.clusters||[]),...(d.pois||[])].map(p=>[p.lat,p.lng]);if(pts.length>1){map.fitBounds(pts,{padding:[56,56],maxZoom:d.maxZoom||15});}else if(pts.length===1){map.setView(pts[0],d.maxZoom||15);}}
+    lastKey=key;
+  }
+  Object.entries(markers).forEach(([k,m])=>{const el=m.getElement()&&m.getElement().firstElementChild;if(!el)return;const on=k===d.active||k===('poi'+d.activePoi);el.classList.toggle('on',on);m.setZIndexOffset(on?1000:(k.startsWith('poi')?0:0));});
+}
+window.addEventListener('message',e=>{const d=e.data;if(!d||d.type!=='set')return;render(d);});
+map.on('moveend',()=>post({type:'moved',zoom:map.getZoom()}));
+map.on('click',()=>post({type:'click',cod:null}));
+post({type:'ready'});
+</script></body></html>

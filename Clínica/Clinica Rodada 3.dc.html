@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=block">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F6FAF8;color:#56675F;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+*{box-sizing:border-box}
+a{color:#145440}
+a:hover{color:#0E3B2D}
+input::placeholder{color:#56675F;opacity:1}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none !important}}
+</style>
+</helmet>
+
+<sc-if value="{{ showPage }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;background:#F6FAF8">
+
+  <section id="topo" data-screen-label="Equipe · Topo" style="background:#3F7A62;color:#FFFFFF">
+    <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,2.2vw,32px) clamp(40px,5vw,72px)">
+      <header style="display:flex;align-items:center;gap:16px;padding:20px 0 0">
+        <a href="Clinica Rodada 1.dc.html" style="flex:none;display:flex;align-items:center;height:52px;padding:0 22px;border-radius:12px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#FFFFFF;text-decoration:none;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:0.08em">CLÍNICA</a>
+        <sc-if value="{{ fullNav }}" hint-placeholder-val="{{ true }}">
+          <nav style="flex:1;display:flex;justify-content:space-around;align-items:center;height:52px;padding:0 6px;border-radius:12px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)">
+            <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+              <a href="{{ n.href }}" onClick="{{ n.go }}" style="display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;transition:background 200ms" style-hover="background:#145440;color:#FFFFFF">
+                <sc-if value="{{ n.active }}"><span style="width:6px;height:6px;border-radius:50%;background:#F2C14E"></span></sc-if>
+                <span>{{ n.label }}</span>
+              </a>
+            </sc-for>
+          </nav>
+          <a href="{{ wa }}" target="_blank" rel="noopener" style="flex:none;display:flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;transition:background 200ms" style-hover="background:#F6FAF8;color:#0E3B2D"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>Agendar pelo WhatsApp</a>
+        </sc-if>
+        <sc-if value="{{ compactNav }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1"></div>
+          <sc-if value="{{ tablet }}">
+            <a href="{{ wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;height:48px;padding:0 22px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px">Agendar pelo WhatsApp</a>
+          </sc-if>
+          <button onClick="{{ toggleMenu }}" style="display:flex;align-items:center;gap:8px;height:48px;padding:0 20px;border:0;border-radius:999px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#FFFFFF;font-family:'Inter',sans-serif;font-weight:500;font-size:15px;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">menu</span>Menu</button>
+        </sc-if>
+      </header>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px 40px;padding-top:clamp(40px,6vw,96px)">
+        <h1 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(52px,8.9vw,128px);line-height:0.92;letter-spacing:-0.05em;color:#FFFFFF">
+          <span style="display:block;overflow:hidden;padding:0.06em 0.04em 0.05em 0"><span data-line="1" style="display:block">Equipe</span></span>
+          <span style="display:block;overflow:hidden;padding:0.06em 0.04em 0.05em 0"><span data-line="1" style="display:block">e contato</span></span>
+        </h1>
+        <div data-hero-fade="1" style="width:min(100%,380px);display:flex;flex-direction:column;gap:16px;padding-bottom:8px">
+          <p style="margin:0;font-family:'Inter',sans-serif;font-size:18px;line-height:1.55;color:#FFFFFF">Três dentistas, cada um com sua especialidade, atendendo no Catolé há 12 anos.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <a href="#equipe" onClick="{{ goEquipe }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;transition:background 200ms" style-hover="background:#336650;color:#FFFFFF">Ver equipe</a>
+            <a href="#contato" onClick="{{ goContato }}" style="flex:none;white-space:nowrap;display:inline-flex;align-items:center;height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(255,255,255,0.6);color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;transition:background 200ms" style-hover="background:#336650;color:#FFFFFF">Ir para contato</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section id="equipe" data-screen-label="Equipe · Profissionais" style="background:#FFFFFF">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,2.2vw,32px);display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px)">
+      <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px;max-width:760px;margin-bottom:clamp(12px,2vw,24px)">
+        <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D;text-wrap:balance">Quem cuida de você</h2>
+      </div>
+      <sc-for list="{{ team }}" as="m" hint-placeholder-count="3">
+        <article data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(20px,3vw,48px);align-items:center;padding:12px;border-radius:16px;background:#F6FAF8;border:1px solid #D5E4DC">
+          <div style="position:relative;aspect-ratio:1/1;max-height:520px;border-radius:12px;overflow:hidden;background:#EAF3EE">
+            <img data-blur="1" src="{{ m.src }}" alt="{{ m.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:filter 700ms ease-out">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:18px;padding:clamp(8px,2vw,24px)">
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">{{ m.spec }}</span>
+            <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(30px,3.4vw,44px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D">{{ m.name }}</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <span style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;background:#DDF0E6;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:#0E3B2D;font-variant-numeric:tabular-nums">{{ m.cro }}</span>
+              <sc-if value="{{ m.rt }}"><span style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;border:1px solid #D5E4DC;background:#FFFFFF;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:#2A3832">Responsável técnica</span></sc-if>
+            </div>
+            <p style="margin:0;max-width:56ch;font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:#56675F;text-wrap:pretty">{{ m.bio }}</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px 24px">
+              <sc-for list="{{ m.facts }}" as="f" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid #D5E4DC">
+                  <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#56675F">{{ f.l }}</span>
+                  <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:18px;line-height:1.35;color:#0E3B2D;font-variant-numeric:tabular-nums">{{ f.v }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <a href="{{ m.wa }}" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;margin-top:4px;border-radius:999px;border:1px solid #145440;color:#145440;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;transition:background 200ms" style-hover="background:#DDF0E6;color:#145440"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>{{ m.cta }}</a>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" data-screen-label="Contato" style="background:#F6FAF8">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,2.2vw,32px)">
+      <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px;max-width:760px;margin-bottom:clamp(32px,4vw,56px)">
+        <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D;text-wrap:balance">Fale com a gente</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,3vw,40px);align-items:start">
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div data-reveal="1" style="display:flex;flex-direction:column;border-radius:16px;background:#FFFFFF;border:1px solid #D5E4DC;padding:8px 24px">
+            <sc-for list="{{ channels }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;gap:16px;align-items:center;padding:18px 0;border-top:{{ c.border }}">
+                <span style="flex:none;width:48px;height:48px;border-radius:50%;background:#DDF0E6;color:#145440;display:flex;align-items:center;justify-content:center"><sc-if value="{{ c.isWa }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg></sc-if><sc-if value="{{ c.notWa }}"><span style="font-family:'Material Symbols Rounded';font-size:24px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">{{ c.icon }}</span></sc-if></span>
+                <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+                  <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#56675F">{{ c.l }}</span>
+                  <a href="{{ c.href }}" target="{{ c.target }}" rel="noopener" style="align-self:flex-start;padding-bottom:2px;font-family:'Inter',sans-serif;font-weight:600;font-size:18px;line-height:1.35;color:#0E3B2D;text-decoration:none;font-variant-numeric:tabular-nums;background-image:linear-gradient(#0E3B2D,#0E3B2D);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1px;transition:background-size 300ms ease" style-hover="background-size:100% 1px;color:#0E3B2D">{{ c.v }}</a>
+                  <span style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#56675F">{{ c.note }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px">
+            <div style="display:flex;flex-direction:column;justify-content:space-between;gap:20px;padding:22px;border-radius:16px;background:#3F7A62">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;color:#FFFFFF">Horário de atendimento</span>
+                <sc-for list="{{ hours }}" as="h" hint-placeholder-count="3">
+                  <div style="display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-top:1px solid rgba(255,255,255,0.24);font-family:'Inter',sans-serif;font-size:14px;color:#FFFFFF;font-variant-numeric:tabular-nums"><span>{{ h.d }}</span><span>{{ h.t }}</span></div>
+                </sc-for>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px;padding:16px 18px;border-radius:16px;background:#336650">
+                <div style="display:flex;justify-content:space-between;gap:12px;font-family:'Inter',sans-serif;font-size:clamp(16px,1.4vw,20px);color:#FFFFFF;font-variant-numeric:tabular-nums"><span>{{ dayText }}</span><span>{{ timeText }}</span></div>
+                <div style="display:flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#FFFFFF"><span style="width:8px;height:8px;border-radius:50%;background:{{ statusDot }}"></span>{{ statusText }}</div>
+              </div>
+            </div>
+            <div style="position:relative;min-height:260px;border-radius:16px;overflow:hidden;background:#336650">
+              <div style="position:absolute;left:-10%;right:-10%;top:30%;height:12px;background:rgba(255,255,255,0.16);transform:rotate(-7deg)"></div>
+              <div style="position:absolute;left:-10%;right:-10%;top:74%;height:8px;background:rgba(255,255,255,0.16);transform:rotate(4deg)"></div>
+              <div style="position:absolute;top:-10%;bottom:-10%;left:62%;width:12px;background:rgba(255,255,255,0.16);transform:rotate(12deg)"></div>
+              <div style="position:absolute;top:-10%;bottom:-10%;left:20%;width:8px;background:rgba(255,255,255,0.16);transform:rotate(-18deg)"></div>
+              <div style="position:absolute;left:68%;top:8%;width:24%;height:16%;border-radius:8px;background:rgba(255,255,255,0.16)"></div>
+              <div style="position:absolute;left:46%;top:52%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:8px">
+                <span style="display:flex;align-items:center;height:32px;padding:0 14px;border-radius:999px;background:#FFFFFF;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;color:#0E3B2D;white-space:nowrap">CLÍNICA · Catolé</span>
+                <span style="width:18px;height:18px;border-radius:50%;background:#FFFFFF;box-shadow:0 0 0 8px rgba(255,255,255,0.24)"></span>
+              </div>
+              <a href="https://maps.google.com/?q=Catol%C3%A9%2C%20Campina%20Grande%20PB" target="_blank" rel="noopener" style="position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px" style-hover="background:#F6FAF8;color:#0E3B2D"><span style="font-family:'Material Symbols Rounded';font-size:18px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">directions</span>Como chegar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMULÁRIO -->
+        <div data-reveal="1" style="display:flex;flex-direction:column;gap:24px;padding:clamp(24px,3vw,40px);border-radius:16px;background:#FFFFFF;border:1px solid #D5E4DC">
+          <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(24px,2.2vw,30px);line-height:1.2;letter-spacing:-0.02em;color:#0E3B2D">Pedir um horário</h3>
+              <p style="margin:0;font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;color:#56675F">Preencha os dados e montamos a mensagem para você enviar pelo WhatsApp. A confirmação do horário acontece na conversa.</p>
+            </div>
+            <sc-if value="{{ hasErrors }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#F6E1DE;border:1px solid #B3382E">
+                <span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga';color:#B3382E">error</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:1.5;color:#B3382E">{{ errorSummary }}</span>
+              </div>
+            </sc-if>
+            <form onSubmit="{{ submit }}" novalidate="novalidate" style="display:flex;flex-direction:column;gap:20px">
+              <label style="display:flex;flex-direction:column;gap:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#2A3832">Nome
+                <input name="nome" autocomplete="name" value="{{ form.nome }}" onChange="{{ setNome }}" onBlur="{{ blurNome }}" placeholder="Seu nome completo" aria-invalid="{{ err.nomeOn }}" style="height:52px;padding:0 16px;border-radius:12px;border:1px solid {{ err.nomeBorder }};background:{{ err.nomeBg }};font-family:'Inter',sans-serif;font-size:16px;color:#0E3B2D;outline:none;transition:border-color 200ms, box-shadow 200ms" style-focus="border-color:#145440;box-shadow:0 0 0 3px #DDF0E6">
+                <sc-if value="{{ err.nomeOn }}"><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#B3382E"><span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">error</span>{{ err.nome }}</span></sc-if>
+              </label>
+              <label style="display:flex;flex-direction:column;gap:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#2A3832">WhatsApp
+                <input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" value="{{ form.whats }}" onChange="{{ setWhats }}" onBlur="{{ blurWhats }}" placeholder="(83) 90000-0000" aria-invalid="{{ err.whatsOn }}" style="height:52px;padding:0 16px;border-radius:12px;border:1px solid {{ err.whatsBorder }};background:{{ err.whatsBg }};font-family:'Inter',sans-serif;font-size:16px;color:#0E3B2D;outline:none;font-variant-numeric:tabular-nums;transition:border-color 200ms, box-shadow 200ms" style-focus="border-color:#145440;box-shadow:0 0 0 3px #DDF0E6">
+                <sc-if value="{{ err.whatsOn }}"><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#B3382E"><span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">error</span>{{ err.whats }}</span></sc-if>
+              </label>
+              <label style="display:flex;flex-direction:column;gap:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#2A3832">Tratamento de interesse
+                <span style="position:relative;display:block">
+                  <select name="tratamento" value="{{ form.trat }}" onChange="{{ setTrat }}" aria-invalid="{{ err.tratOn }}" style="width:100%;height:52px;padding:0 44px 0 16px;border-radius:12px;border:1px solid {{ err.tratBorder }};background:{{ err.tratBg }};font-family:'Inter',sans-serif;font-size:16px;color:{{ tratColor }};appearance:none;-webkit-appearance:none;outline:none;cursor:pointer" style-focus="border-color:#145440;box-shadow:0 0 0 3px #DDF0E6">
+                    <option value="">Selecione</option>
+                    <sc-for list="{{ tratOptions }}" as="o" hint-placeholder-count="7"><option value="{{ o }}">{{ o }}</option></sc-for>
+                  </select>
+                  <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;font-family:'Material Symbols Rounded';font-size:22px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga';color:#145440">expand_more</span>
+                </span>
+                <sc-if value="{{ err.tratOn }}"><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#B3382E"><span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">error</span>{{ err.trat }}</span></sc-if>
+              </label>
+              <div role="radiogroup" aria-label="Melhor período" style="display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#2A3832">Melhor período</span>
+                <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+                  <sc-for list="{{ periods }}" as="p" hint-placeholder-count="3">
+                    <button type="button" role="radio" aria-checked="{{ p.on }}" onClick="{{ p.pick }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:60px;padding:8px;border-radius:12px;border:1px solid {{ p.border }};background:{{ p.bg }};cursor:pointer;transition:background 200ms, border-color 200ms">
+                      <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:{{ p.color }}">{{ p.l }}</span>
+                      <span style="font-family:'Inter',sans-serif;font-size:12px;color:{{ p.sub }};font-variant-numeric:tabular-nums">{{ p.h }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ err.periodoOn }}"><span style="display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:#B3382E"><span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">error</span>{{ err.periodo }}</span></sc-if>
+              </div>
+              <button type="submit" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;margin-top:4px;border:0;border-radius:999px;background:#145440;color:#FFFFFF;font-family:'Inter',sans-serif;font-weight:600;font-size:16px;cursor:pointer;transition:background 200ms" style-hover="background:#0E3B2D"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>Continuar no WhatsApp</button>
+              <span style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;color:#56675F">Usamos seus dados apenas para responder ao seu pedido de horário.</span>
+            </form>
+          </sc-if>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div role="status" style="display:flex;flex-direction:column;gap:20px">
+              <span style="width:56px;height:56px;border-radius:50%;background:#DDF0E6;color:#145440;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:28px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">check</span></span>
+              <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(24px,2.2vw,30px);line-height:1.2;letter-spacing:-0.02em;color:#0E3B2D">Mensagem pronta, {{ firstName }}.</h3>
+              <p style="margin:0;font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;color:#56675F">Abra o WhatsApp e envie a mensagem abaixo. Respondemos no horário de atendimento.</p>
+              <div style="padding:16px 18px;border-radius:12px;background:#EAF3EE;font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;color:#2A3832">{{ previewMsg }}</div>
+              <div style="display:flex;flex-wrap:wrap;gap:12px">
+                <a href="{{ waForm }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;background:#145440;color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px" style-hover="background:#0E3B2D;color:#FFFFFF"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>Abrir no WhatsApp</a>
+                <button onClick="{{ editForm }}" style="min-height:52px;padding:0 22px;border-radius:999px;border:1px solid #145440;background:transparent;color:#145440;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;cursor:pointer" style-hover="background:#DDF0E6">Editar dados</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer data-screen-label="Rodapé" style="background:#0E3B2D;color:#F6FAF8;padding-bottom:{{ footerPad }}">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(56px,6vw,80px) clamp(16px,2.2vw,32px) 32px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px 32px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.16)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;letter-spacing:0.08em;color:#FFFFFF">CLÍNICA</span>
+          <span style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#F6FAF8">Clínica Odontológica Exemplo Ltda.<br>CNPJ <span style="font-variant-numeric:tabular-nums">00.000.000/0001-00</span></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#F6FAF8;margin-bottom:4px">Navegação</span>
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+            <a href="{{ n.href }}" onClick="{{ n.go }}" style="align-self:flex-start;padding-bottom:2px;font-family:'Inter',sans-serif;font-size:14px;color:#F6FAF8;text-decoration:none;background-image:linear-gradient(#F6FAF8,#F6FAF8);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1px;transition:background-size 300ms ease" style-hover="background-size:100% 1px;color:#FFFFFF">{{ n.label }}</a>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#F6FAF8">
+          <span style="font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px">Contato</span>
+          <span>Rua Exemplo, 250 · Catolé<br>Campina Grande-PB</span>
+          <a href="{{ wa }}" target="_blank" rel="noopener" style="align-self:flex-start;color:#F6FAF8;font-variant-numeric:tabular-nums" style-hover="color:#FFFFFF">WhatsApp (83) 90000-0000</a>
+          <span style="font-variant-numeric:tabular-nums">Seg a sex 8h–19h · Sáb 8h–12h</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#F6FAF8;margin-bottom:4px">Legal</span>
+          <a href="#topo" style="align-self:flex-start;font-family:'Inter',sans-serif;font-size:14px;color:#F6FAF8;text-decoration:none" style-hover="color:#FFFFFF;text-decoration:underline">Política de privacidade</a>
+          <a href="#topo" style="align-self:flex-start;font-family:'Inter',sans-serif;font-size:14px;color:#F6FAF8;text-decoration:none" style-hover="color:#FFFFFF;text-decoration:underline">Termos de uso</a>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;padding-top:24px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:#F6FAF8;font-variant-numeric:tabular-nums">
+        <span>CRO-PB 0000 (EPAO) · Responsável técnica: Dra. Helena Martins · CRO-PB 00001</span>
+        <span>© 2026 CLÍNICA · Campina Grande-PB</span>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+    <a href="{{ wa }}" target="_blank" rel="noopener" aria-label="Agendar pelo WhatsApp" style="position:fixed;right:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:10px;height:56px;padding:0 22px;border-radius:999px;background:#145440;color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;box-shadow:0 4px 16px rgba(14,59,45,0.16);transition:background 200ms" style-hover="background:#0E3B2D;color:#FFFFFF"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>WhatsApp</a>
+  </sc-if>
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:#FFFFFF;border-top:1px solid #D5E4DC">
+      <a href="{{ wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;height:52px;border-radius:999px;background:#145440;color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:16px"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>Agendar pelo WhatsApp</a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;background:#3F7A62;padding:20px 16px;display:flex;flex-direction:column;gap:16px;overflow-y:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="display:flex;align-items:center;height:52px;padding:0 22px;border-radius:12px;background:#336650;color:#FFFFFF;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:0.08em">CLÍNICA</span>
+        <button onClick="{{ toggleMenu }}" style="display:flex;align-items:center;gap:8px;height:48px;padding:0 20px;border:0;border-radius:999px;background:#336650;color:#FFFFFF;font-family:'Inter',sans-serif;font-weight:500;font-size:15px;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">close</span>Fechar</button>
+      </div>
+      <nav style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:16px;border-radius:16px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+          <a href="{{ n.href }}" onClick="{{ n.go }}" style="display:flex;align-items:center;gap:12px;min-height:60px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none;font-family:'Inter Tight',sans-serif;font-weight:500;font-size:32px;letter-spacing:-0.03em" style-hover="background:#145440;color:#FFFFFF"><sc-if value="{{ n.active }}"><span style="width:8px;height:8px;border-radius:50%;background:#F2C14E"></span></sc-if>{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <a href="{{ wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;height:56px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:16px">Agendar pelo WhatsApp</a>
+      <span style="text-align:center;font-family:'Inter',sans-serif;font-size:14px;color:#FFFFFF;font-variant-numeric:tabular-nums">{{ statusText }}</span>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<!-- REVISÃO FINAL -->
+<sc-if value="{{ showReview }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Revisão final" style="min-height:100vh;background:#F6FAF8;padding-bottom:96px">
+  <section style="background:#3F7A62;color:#FFFFFF">
+    <div style="max-width:1440px;margin:0 auto;padding:24px clamp(16px,2.2vw,32px) clamp(48px,6vw,88px);display:flex;flex-direction:column;gap:clamp(40px,6vw,88px)">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+        <span style="display:flex;align-items:center;height:52px;padding:0 22px;border-radius:12px;background:#336650;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:0.08em">CLÍNICA</span>
+        <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px">Rodada 3 · Revisão final</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <h1 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(52px,8.9vw,128px);line-height:0.92;letter-spacing:-0.05em">Revisão final</h1>
+        <p style="margin:0;max-width:560px;font-family:'Inter',sans-serif;font-size:18px;line-height:1.6">As quatro telas do protótipo e a conferência das restrições de ética odontológica do briefing.</p>
+      </div>
+    </div>
+  </section>
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,2.2vw,32px)">
+    <section style="padding:clamp(56px,7vw,96px) 0;border-bottom:1px solid #D5E4DC;display:flex;flex-direction:column;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">01 · Navegação</span>
+        <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D">As quatro telas</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+        <sc-for list="{{ screens }}" as="c" hint-placeholder-count="4">
+          <a href="{{ c.href }}" style="display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #D5E4DC;text-decoration:none;transition:transform 400ms ease, box-shadow 400ms ease" style-hover="transform:translateY(-4px);box-shadow:0 10px 28px rgba(14,59,45,0.08)">
+            <span style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'Inter Tight',sans-serif;font-weight:500;font-size:48px;line-height:1;letter-spacing:-0.04em;color:#145440;font-variant-numeric:tabular-nums">{{ c.n }}</span><span style="font-family:'Material Symbols Rounded';font-size:22px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga';color:#0E3B2D">arrow_outward</span></span>
+            <span style="font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;line-height:1.25;color:#0E3B2D">{{ c.t }}</span>
+            <span style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#56675F">{{ c.d }}</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:12px;color:#2A3832">{{ c.file }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+    <section style="padding:clamp(56px,7vw,96px) 0;display:flex;flex-direction:column;gap:32px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">02 · Restrições</span>
+          <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D">Checklist de conformidade</h2>
+        </div>
+        <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#2A3832;font-variant-numeric:tabular-nums">{{ checkSummary }}</span>
+      </div>
+      <div style="border-bottom:1px solid #D5E4DC">
+        <sc-for list="{{ checks }}" as="k" hint-placeholder-count="14">
+          <div style="display:grid;grid-template-columns:{{ checkCols }};gap:12px 24px;align-items:start;padding:20px 0;border-top:1px solid #D5E4DC">
+            <span style="justify-self:start;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:999px;background:{{ k.bg }};border:1px solid {{ k.border }};font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:#0E3B2D"><span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">{{ k.icon }}</span>{{ k.s }}</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;line-height:1.45;color:#0E3B2D">{{ k.t }}</span>
+            <span style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.55;color:#56675F">{{ k.d }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showMobile }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Mobile 390" style="min-height:100vh;background:#EAF3EE;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:40px;padding:40px 16px 96px">
+    <sc-for list="{{ mobileFrames }}" as="f" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+        <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">{{ f.l }} · 390 × 844</span>
+        <iframe src="{{ f.src }}" title="{{ f.l }}" style="width:390px;height:844px;max-width:100%;border:1px solid #D5E4DC;border-radius:28px;background:#FFFFFF"></iframe>
+      </div>
+    </sc-for>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showSwitcher }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;left:16px;bottom:{{ switcherBottom }};z-index:90;display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:24px;background:#0E3B2D;box-shadow:0 4px 16px rgba(14,59,45,0.16);max-width:calc(100vw - 32px)">
+    <sc-for list="{{ views }}" as="v" hint-placeholder-count="3">
+      <button onClick="{{ v.pick }}" style="height:36px;padding:0 14px;border:0;border-radius:999px;background:{{ v.bg }};color:{{ v.color }};font-family:'Inter',sans-serif;font-weight:600;font-size:13px;cursor:pointer">{{ v.l }}</button>
+    </sc-for>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Protótipo&quot;},&quot;showViewSwitcher&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Protótipo&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1440, now: Date.now(), view: 'equipe', embed: false, menu: false,
+    form: { nome: '', whats: '', trat: '', periodo: '' }, touched: {}, tried: false, sent: false };
+
+  componentDidMount() {
+    const p = new URLSearchParams(location.search);
+    this.setState({ view: p.get('view') || 'equipe', embed: p.has('embed') });
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    const sched = () => { this.to = setTimeout(() => { this.setState({ now: Date.now() }); sched(); }, 60000 - (Date.now() % 60000) + 50); };
+    sched();
+    setTimeout(() => { this.fx(); if (location.hash) { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 16); } }, 60);
+  }
+  componentDidUpdate(pp, ps) {
+    if (ps.view !== this.state.view || (ps.w < 768) !== (this.state.w < 768) || ps.sent !== this.state.sent) setTimeout(() => this.fx(), 40);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); clearTimeout(this.to); if (this.io) this.io.disconnect(); }
+  reduced() { return (this.props.motion === false) || window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+  fx() {
+    const reduce = this.reduced();
+    document.querySelectorAll('img[data-blur]:not([data-fx])').forEach(img => {
+      img.dataset.fx = '1';
+      if (!img.complete || !img.naturalWidth) { if (!reduce) img.style.filter = 'blur(16px)'; img.addEventListener('load', () => { img.style.filter = 'blur(0px)'; }, { once: true }); }
+    });
+    if (reduce) return;
+    document.querySelectorAll('[data-line]:not([data-fx])').forEach((el, i) => { el.dataset.fx = '1'; el.animate([{ transform: 'translateY(105%)' }, { transform: 'translateY(0)' }], { duration: 700, delay: 80 + i * 120, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }); });
+    document.querySelectorAll('[data-hero-fade]:not([data-fx])').forEach(el => { el.dataset.fx = '1'; el.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 420, easing: 'ease-out', fill: 'backwards' }); });
+    if (!this.io) this.io = new IntersectionObserver(es => es.forEach(en => { if (!en.isIntersecting) return; if (en.target._anim) en.target._anim.play(); this.io.unobserve(en.target); }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]:not([data-fx])').forEach(el => {
+      el.dataset.fx = '1';
+      const sibs = [...el.parentElement.children].filter(c => c.hasAttribute('data-reveal'));
+      const a = el.animate([{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: Math.max(0, sibs.indexOf(el)) * 80, easing: 'ease-out', fill: 'both' });
+      a.pause(); a.onfinish = () => a.cancel(); el._anim = a; this.io.observe(el);
+    });
+  }
+
+  go(id) { return e => { if (e) e.preventDefault(); this.setState({ menu: false }); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 16, behavior: this.reduced() ? 'auto' : 'smooth' }); }; }
+  setView(v) { return () => { this.setState({ view: v, menu: false }); window.scrollTo(0, 0); try { const u = new URL(location.href); u.searchParams.set('view', v); u.hash = ''; history.replaceState(null, '', u); } catch (_) {} }; }
+
+  clock() {
+    const d = new Date(this.state.now);
+    const wd = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Recife', weekday: 'short' }).format(d);
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Recife', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(d);
+    const h = +parts.find(p => p.type === 'hour').value, m = +parts.find(p => p.type === 'minute').value;
+    const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(wd);
+    const names = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+    const sched = i => (i === 0 ? null : i === 6 ? [8, 12] : [8, 19]);
+    const mins = h * 60 + m, today = sched(day);
+    let open = false, status;
+    if (today && mins >= today[0] * 60 && mins < today[1] * 60) { open = true; status = 'Aberto agora · até ' + today[1] + 'h'; }
+    else if (today && mins < today[0] * 60) status = 'Fechado · abre hoje às ' + today[0] + 'h';
+    else { let k = 1; while (!sched((day + k) % 7)) k++; const nd = (day + k) % 7; status = 'Fechado · abre ' + (k === 1 ? 'amanhã' : names[nd]) + ' às ' + sched(nd)[0] + 'h'; }
+    return { dayText: 'Hoje é ' + names[day], timeText: String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'), statusText: status, statusDot: open ? '#BDEBC9' : 'rgba(255,255,255,0.5)' };
+  }
+
+  validate(f) {
+    const e = {};
+    const nome = f.nome.trim();
+    if (!nome) e.nome = 'Informe seu nome.';
+    else if (nome.length < 3) e.nome = 'Nome muito curto. Informe nome e sobrenome.';
+    const dg = f.whats.replace(/\D/g, '');
+    if (!dg) e.whats = 'Informe seu WhatsApp.';
+    else if (dg.length < 10) e.whats = 'Informe um WhatsApp com DDD, ex.: (83) 90000-0000.';
+    if (!f.trat) e.trat = 'Escolha um tratamento ou "Ainda não sei".';
+    if (!f.periodo) e.periodo = 'Escolha o melhor período.';
+    return e;
+  }
+  mask(v) {
+    const d = v.replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 2) return d.length ? '(' + d : '';
+    if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+    if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+    return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+  }
+  setField(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v } })); }
+  touch(k) { return () => this.setState(s => ({ touched: { ...s.touched, [k]: true } })); }
+
+  renderVals() {
+    const s = this.state, w = s.w, isMobile = w < 768, compactNav = w < 1100;
+    const msg = t => 'https://wa.me/5583900000000?text=' + encodeURIComponent(t);
+    const base = 'Olá! Gostaria de agendar uma avaliação na CLÍNICA.';
+    const wa = msg(base);
+    const R1 = 'Clinica Rodada 1.dc.html', R2 = 'Clinica Rodada 2.dc.html';
+    const navItems = [
+      ['Início', R1, null], ['Tratamentos', R2 + '?view=lista', null], ['Equipe', '#equipe', this.go('equipe')],
+      ['Primeira consulta', R1 + '#primeira-consulta', null], ['Contato', '#contato', this.go('contato')]
+    ].map(([label, href, go], i) => ({ label, href, go: go || (() => {}), active: i === 2 }));
+
+    const img = id => 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=1000&q=80';
+    const team = [
+      { name: 'Dra. Helena Martins', spec: 'Ortodontia', cro: 'CRO-PB 00001', rt: true, src: img('1594824476967-48c8b964273f'),
+        bio: 'Fundadora e responsável técnica da CLÍNICA. Atende adultos e adolescentes com aparelho fixo e alinhadores transparentes, sempre com o plano explicado antes do início.',
+        facts: [['Formação', 'Odontologia'], ['Especialização', 'Ortodontia'], ['Na CLÍNICA desde', '2014'], ['Registro', 'CRO-PB 00001']] },
+      { name: 'Dr. Rafael Nóbrega', spec: 'Implantodontia', cro: 'CRO-PB 00002', rt: false, src: img('1612349317150-e413f6a5b16d'),
+        bio: 'Conduz a avaliação, o planejamento digital e a instalação de implantes. Acompanha cada paciente nos retornos programados até a adaptação da prótese.',
+        facts: [['Formação', 'Odontologia'], ['Especialização', 'Implantodontia'], ['Na CLÍNICA desde', '2017'], ['Registro', 'CRO-PB 00002']] },
+      { name: 'Dra. Lívia Araújo', spec: 'Odontopediatria', cro: 'CRO-PB 00003', rt: false, src: img('1580489944761-15a19d654956'),
+        bio: 'Atende bebês, crianças e adolescentes na sala infantil. As primeiras consultas são de adaptação, com calma e no tempo de cada criança.',
+        facts: [['Formação', 'Odontologia'], ['Especialização', 'Odontopediatria'], ['Na CLÍNICA desde', '2019'], ['Registro', 'CRO-PB 00003']] }
+    ].map(m => ({ ...m, facts: m.facts.map(([l, v]) => ({ l, v })), cta: 'Agendar com ' + m.name.split(' ').slice(0, 2).join(' '),
+      wa: msg(base + ' Gostaria de ser atendido(a) por ' + m.name + '.') }));
+
+    const f = s.form, errs = this.validate(f);
+    const show = k => !!errs[k] && (s.tried || s.touched[k]);
+    const err = {};
+    ['nome', 'whats', 'trat', 'periodo'].forEach(k => {
+      const on = show(k);
+      err[k] = errs[k] || ''; err[k + 'On'] = on;
+      err[k + 'Border'] = on ? '#B3382E' : '#D5E4DC'; err[k + 'Bg'] = on ? '#F6E1DE' : '#FFFFFF';
+    });
+    const visible = ['nome', 'whats', 'trat', 'periodo'].filter(show).length;
+    const periodsData = [['Manhã', '8h–12h'], ['Tarde', '13h–19h'], ['Sábado', '8h–12h']];
+    const periods = periodsData.map(([l, h]) => {
+      const on = f.periodo === l, bad = show('periodo');
+      return { l, h, on, pick: () => this.setState(st => ({ form: { ...st.form, periodo: l }, touched: { ...st.touched, periodo: true } })),
+        bg: on ? '#145440' : (bad ? '#F6E1DE' : '#FFFFFF'), border: on ? '#145440' : (bad ? '#B3382E' : '#D5E4DC'),
+        color: on ? '#FFFFFF' : '#0E3B2D', sub: on ? '#FFFFFF' : '#56675F' };
+    });
+    const fullMsg = base + ' Nome: ' + f.nome.trim() + '. Tratamento de interesse: ' + f.trat + '. Melhor período: ' + (f.periodo || '').toLowerCase() + '.';
+
+    const views = [['equipe', 'Equipe + Contato'], ['revisao', 'Revisão final'], ['mobile', 'Mobile 390']].map(([k, l]) => ({
+      l, pick: this.setView(k), bg: s.view === k ? '#FFFFFF' : 'transparent', color: s.view === k ? '#0E3B2D' : '#FFFFFF' }));
+
+    const ok = (t, d) => ({ s: 'Atende', icon: 'check', bg: '#DDF0E6', border: '#DDF0E6', t, d });
+    const warn = (t, d) => ({ s: 'Atenção', icon: 'priority_high', bg: '#FFFFFF', border: '#145440', t, d });
+    const checks = [
+      ok('Nenhuma imagem de antes e depois', 'Nenhuma tela usa comparação de resultado, real ou gerada.'),
+      ok('Nenhuma foto de procedimento, close de dentes ou instrumento em uso', 'Fotos só de retrato, profissionais e ambientes. O topo de Implantes mostra o consultório vazio.'),
+      ok('Nenhum preço, desconto, promoção, gratuidade ou parcelamento', 'Nenhum valor ou condição comercial em nenhuma tela. Convênio aparece só como "Atendemos convênios. Consulte o seu."'),
+      ok('Expressões proibidas', 'Textos varridos por "sem dor", "garantido", "perfeito", "o melhor", "o mais moderno", "resultado em X dias", "100%" e "definitivo". Nenhuma ocorrência.'),
+      ok('Nenhum depoimento, avaliação ou estrela', 'Não há prova social; a confiança vem de CRO, equipe e processo explicado.'),
+      ok('Nenhum logo de convênio ou marca real', 'Sem logos de terceiros; ícones genéricos apenas.'),
+      ok('Todo profissional com nome e CRO', 'Home, detalhe de Implantes e Equipe mostram nome, especialidade e CRO-PB.'),
+      ok('Responsável técnica e CRO da clínica no rodapé', 'CRO-PB 0000 (EPAO) · Dra. Helena Martins · CRO-PB 00001, com razão social e CNPJ, nas 4 telas.'),
+      ok('Agendamento somente por WhatsApp', 'Sem calendário ou agenda online. O formulário apenas monta a mensagem e abre o WhatsApp.'),
+      ok('Todo CTA com mensagem pré-preenchida', '"Olá! Gostaria de agendar uma avaliação na CLÍNICA." em todos os CTAs; Implantes inclui o nome do tratamento; Equipe inclui o nome do profissional.'),
+      ok('Sem seletor de idioma', 'Site somente em português do Brasil.'),
+      ok('Sem gradiente colorido, sem sombra pesada, raios padronizados', '28px na foto do hero, 16px em vidro e cards grandes, 12px em cards pequenos e inputs, pílula em botões. Sombra máxima 16% de --green-900.'),
+      ok('Somente tokens da paleta', 'Todas as cores saem dos tokens do briefing; transparências usam branco ou --green-900.'),
+      ok('Português com acentuação, sem lorem ipsum', 'Todos os campos preenchidos com os dados fictícios do briefing, iguais nas 4 telas.'),
+      ok('Contraste AA em todo texto pequeno', 'Nav, pílula do logo, botão Menu e widget de horário usam --green-700 sólido (branco a 6,6:1); hover em --green-800. Vidro fica só em elementos decorativos e nos cards sobre a foto.'),
+      warn('Fotos provisórias do Unsplash', 'Uso livre, mas ilustrativas. Na venda real, substituir por fotos da própria clínica e da equipe.')
+    ];
+    const nOk = checks.filter(c => c.s === 'Atende').length;
+    const screens = [
+      ['01', 'Home', 'Hero, tratamentos, primeira consulta, estrutura, equipe, dados, FAQ e CTA.', R1, 'Rodada 1'],
+      ['02', 'Tratamentos', 'Lista T01–T06 com filtro por chips.', R2 + '?view=lista', 'Rodada 2'],
+      ['03', 'Implantes', 'Detalhe do T04 com card fixo lateral e barra inferior no mobile.', R2 + '?view=detalhe', 'Rodada 2'],
+      ['04', 'Equipe + Contato', 'Equipe com mini bio, contato, horário ao vivo e formulário.', location.pathname, 'Rodada 3']
+    ].map(([n, t, d, href, file]) => ({ n, t, d, href, file }));
+
+    return {
+      wa, navItems, isMobile, notMobile: !isMobile, compactNav, fullNav: !compactNav, tablet: !isMobile && compactNav,
+      showPage: s.view === 'equipe', showReview: s.view === 'revisao', showMobile: s.view === 'mobile',
+      menuOpen: s.menu, toggleMenu: () => this.setState({ menu: !s.menu }),
+      goEquipe: this.go('equipe'), goContato: this.go('contato'),
+      ...this.clock(),
+      hours: [{ d: 'Segunda a sexta', t: '8h–19h' }, { d: 'Sábado', t: '8h–12h' }, { d: 'Domingo', t: 'Fechado' }],
+      team,
+      channels: [
+        { icon: 'chat', l: 'WhatsApp', v: '(83) 90000-0000', href: wa, target: '_blank', note: 'Canal de agendamento. Resposta no horário de atendimento.' },
+        { icon: 'call', l: 'Telefone', v: '(83) 3000-0000', href: 'tel:+558330000000', target: '_self', note: 'Para informações gerais.' },
+        { icon: 'location_on', l: 'Endereço', v: 'Rua Exemplo, 250 · Catolé', href: 'https://maps.google.com/?q=Catol%C3%A9%2C%20Campina%20Grande%20PB', target: '_blank', note: 'Campina Grande-PB · estacionamento conveniado e acessibilidade.' }
+      ].map((c, i) => ({ ...c, isWa: c.icon === 'chat', notWa: c.icon !== 'chat', border: i ? '1px solid #D5E4DC' : '0' })),
+      form: f, err, periods,
+      tratOptions: ['Avaliação e prevenção', 'Clareamento', 'Ortodontia', 'Implantes', 'Odontopediatria', 'Tratamento de canal', 'Ainda não sei'],
+      tratColor: f.trat ? '#0E3B2D' : '#56675F',
+      setNome: e => this.setField('nome', e.target.value), blurNome: this.touch('nome'),
+      setWhats: e => this.setField('whats', this.mask(e.target.value)), blurWhats: this.touch('whats'),
+      setTrat: e => this.setState(st => ({ form: { ...st.form, trat: e.target.value }, touched: { ...st.touched, trat: true } })),
+      hasErrors: s.tried && visible > 0,
+      errorSummary: visible === 1 ? 'Revise o campo destacado para continuar.' : 'Revise os ' + visible + ' campos destacados para continuar.',
+      submit: e => {
+        e.preventDefault();
+        if (Object.keys(this.validate(this.state.form)).length) { this.setState({ tried: true }); return; }
+        this.setState({ sent: true, tried: false });
+      },
+      formOpen: !s.sent, sent: s.sent, editForm: () => this.setState({ sent: false }),
+      firstName: f.nome.trim().split(/\s+/)[0] || '', previewMsg: fullMsg, waForm: msg(fullMsg),
+      footerPad: isMobile ? '76px' : '0px',
+      screens, checks, checkSummary: nOk + ' de ' + checks.length + ' itens atendidos · ' + (checks.length - nOk) + ' pontos de atenção',
+      checkCols: isMobile ? 'minmax(0,1fr)' : '120px minmax(0,4fr) minmax(0,5fr)',
+      mobileFrames: [{ l: 'Equipe', src: location.pathname + '?view=equipe&embed=1' }, { l: 'Contato + formulário', src: location.pathname + '?view=equipe&embed=1#contato' }],
+      views, showSwitcher: !s.embed && (this.props.showViewSwitcher ?? true),
+      switcherBottom: isMobile ? '88px' : '16px'
+    };
+  }
+}
+</script>
+</body>
+</html>

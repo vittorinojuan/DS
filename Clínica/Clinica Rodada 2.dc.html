@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=block">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F6FAF8;color:#56675F;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+*{box-sizing:border-box}
+a{color:#145440}
+a:hover{color:#0E3B2D}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none !important}}
+</style>
+</helmet>
+
+<sc-if value="{{ showPage }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;background:#F6FAF8">
+
+  <!-- TOPO VERDE (comum) -->
+  <section id="topo" data-screen-label="{{ topLabel }}" style="background:#3F7A62;color:#FFFFFF">
+    <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,2.2vw,32px) clamp(20px,2.6vw,36px)">
+      <header style="display:flex;align-items:center;gap:16px;padding:20px 0 0">
+        <a href="{{ homeHref }}" style="flex:none;display:flex;align-items:center;height:52px;padding:0 22px;border-radius:12px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#FFFFFF;text-decoration:none;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:0.08em">CLÍNICA</a>
+        <sc-if value="{{ fullNav }}" hint-placeholder-val="{{ true }}">
+          <nav style="flex:1;display:flex;justify-content:space-around;align-items:center;height:52px;padding:0 6px;border-radius:12px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)">
+            <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+              <a href="{{ n.href }}" onClick="{{ n.go }}" style="display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;transition:background 200ms" style-hover="background:#145440;color:#FFFFFF">
+                <sc-if value="{{ n.active }}"><span style="width:6px;height:6px;border-radius:50%;background:#F2C14E"></span></sc-if>
+                <span>{{ n.label }}</span>
+              </a>
+            </sc-for>
+          </nav>
+          <a href="{{ wa }}" target="_blank" rel="noopener" style="flex:none;display:flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;transition:background 200ms" style-hover="background:#F6FAF8;color:#0E3B2D"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>Agendar pelo WhatsApp</a>
+        </sc-if>
+        <sc-if value="{{ compactNav }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1"></div>
+          <sc-if value="{{ tablet }}">
+            <a href="{{ wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;height:48px;padding:0 22px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px">Agendar pelo WhatsApp</a>
+          </sc-if>
+          <button onClick="{{ toggleMenu }}" style="display:flex;align-items:center;gap:8px;height:48px;padding:0 20px;border:0;border-radius:999px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#FFFFFF;font-family:'Inter',sans-serif;font-weight:500;font-size:15px;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">menu</span>Menu</button>
+        </sc-if>
+      </header>
+
+      <!-- Topo: LISTA -->
+      <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px 40px;padding:clamp(40px,6vw,96px) 0 clamp(24px,3vw,48px)">
+          <h1 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(52px,8.9vw,128px);line-height:0.92;letter-spacing:-0.05em;color:#FFFFFF">
+            <span style="display:block;overflow:hidden;padding:0.06em 0.04em 0.05em 0"><span data-line="1" style="display:block">Tratamentos</span></span>
+          </h1>
+          <div data-hero-fade="1" style="width:min(100%,380px);display:flex;flex-direction:column;gap:16px;padding-bottom:8px">
+            <p style="margin:0;font-family:'Inter',sans-serif;font-size:18px;line-height:1.55;color:#FFFFFF">Seis especialidades em um só lugar. Todo tratamento começa por uma avaliação e um plano explicado.</p>
+            <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;background:#336650;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#FFFFFF;font-variant-numeric:tabular-nums"><span style="width:8px;height:8px;border-radius:50%;background:{{ statusDot }}"></span>{{ statusText }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- Topo: DETALHE -->
+      <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px;padding-top:clamp(28px,3.4vw,48px)">
+          <nav aria-label="Você está em" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#FFFFFF">
+            <a href="#topo" onClick="{{ toList }}" style="color:#FFFFFF;text-decoration:underline;text-underline-offset:3px" style-hover="color:#FFFFFF">Tratamentos</a>
+            <span style="font-family:'Material Symbols Rounded';font-size:16px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">chevron_right</span>
+            <span>Implantes</span>
+          </nav>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px 40px;padding:clamp(16px,2vw,24px) 0 clamp(24px,2.8vw,40px)">
+          <h1 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(52px,8.9vw,128px);line-height:0.92;letter-spacing:-0.05em;color:#FFFFFF">
+            <span style="display:block;overflow:hidden;padding:0.06em 0.04em 0.05em 0"><span data-line="1" style="display:block">Implantes</span></span>
+          </h1>
+          <div data-hero-fade="1" style="width:min(100%,380px);display:flex;flex-direction:column;gap:14px;padding-bottom:8px">
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#FFFFFF;font-variant-numeric:tabular-nums">T04 · Reabilitação</span>
+            <p style="margin:0;font-family:'Inter',sans-serif;font-size:18px;line-height:1.55;color:#FFFFFF">Reposição de dentes com planejamento digital, feita pelo Dr. Rafael Nóbrega, implantodontista.</p>
+          </div>
+        </div>
+        <div data-photo="1" style="position:relative;border-radius:28px;overflow:hidden;background:#EAF3EE;aspect-ratio:{{ heroRatio }}">
+          <img data-blur="1" src="https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&amp;fit=crop&amp;w=2200&amp;q=80" alt="Consultório claro com cadeira odontológica e luz natural" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transition:filter 700ms ease-out">
+          <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;left:clamp(12px,1.8vw,24px);right:clamp(12px,1.8vw,24px);bottom:clamp(12px,1.8vw,24px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.2vw,16px)">
+              <sc-for list="{{ glass }}" as="g" hint-placeholder-count="3">
+                <a data-glass="1" href="{{ g.href }}" onClick="{{ g.go }}" onMouseEnter="{{ g.enter }}" onMouseLeave="{{ g.leave }}" style="display:flex;flex-direction:column;gap:8px;padding:18px 20px;border-radius:16px;background:{{ g.bg }};backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);text-decoration:none;transition:background 300ms ease">
+                  <span style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px"><span style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;line-height:1.3;color:#0E3B2D">{{ g.t }}</span><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga';color:#0E3B2D;transform:{{ g.arrowT }};transition:transform 300ms ease">arrow_outward</span></span>
+                  <span style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.45;color:#2A3832;max-width:36ch">{{ g.d }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:14px -16px 0;padding:0 16px 4px;scrollbar-width:none">
+            <sc-for list="{{ glass }}" as="g" hint-placeholder-count="3">
+              <a data-glass="1" href="{{ g.href }}" onClick="{{ g.go }}" style="flex:0 0 84%;scroll-snap-align:start;display:flex;flex-direction:column;gap:8px;padding:18px;border-radius:16px;background:#FFFFFF;text-decoration:none">
+                <span style="display:flex;justify-content:space-between;gap:12px"><span style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;color:#0E3B2D">{{ g.t }}</span><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga';color:#0E3B2D">arrow_outward</span></span>
+                <span style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.45;color:#2A3832">{{ g.d }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ===== LISTA ===== -->
+  <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Tratamentos · Lista" style="background:#FFFFFF">
+      <div style="max-width:1440px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(16px,2.2vw,32px) clamp(72px,9vw,128px)">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-bottom:clamp(24px,3vw,40px)">
+          <div role="tablist" aria-label="Filtrar tratamentos" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;max-width:100%;margin:0 -16px;padding:0 16px">
+            <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+              <button role="tab" aria-selected="{{ c.on }}" onClick="{{ c.pick }}" style="flex:none;height:44px;padding:0 20px;border-radius:999px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.color }};font-family:'Inter',sans-serif;font-weight:500;font-size:14px;cursor:pointer;transition:background 200ms, color 200ms, border-color 200ms">{{ c.l }}</button>
+            </sc-for>
+          </div>
+          <span aria-live="polite" style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#56675F;font-variant-numeric:tabular-nums">{{ countText }}</span>
+        </div>
+        <div data-grid="1" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px">
+          <sc-for list="{{ filtered }}" as="t" hint-placeholder-count="6">
+            <article data-reveal="1" data-card="1" onMouseEnter="{{ t.enter }}" onMouseLeave="{{ t.leave }}" style="display:flex;flex-direction:column;gap:14px;padding:28px;border-radius:16px;background:{{ t.bg }};border:1px solid #D5E4DC;transform:{{ t.lift }};box-shadow:{{ t.shadow }};transition:transform 400ms ease, box-shadow 400ms ease, background 400ms ease">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
+                <span style="width:52px;height:52px;border-radius:50%;background:#DDF0E6;color:#145440;display:flex;align-items:center;justify-content:center;transform:{{ t.rot }};transition:transform 400ms ease"><span style="font-family:'Material Symbols Rounded';font-size:26px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">{{ t.icon }}</span></span>
+                <span style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+                  <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:#56675F;font-variant-numeric:tabular-nums">{{ t.code }}</span>
+                  <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:12px;color:#2A3832">{{ t.cats }}</span>
+                </span>
+              </div>
+              <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(19px,1.6vw,22px);line-height:1.25;color:#0E3B2D">{{ t.name }}</h3>
+              <p style="margin:0;flex:1;font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:#56675F">{{ t.desc }}</p>
+              <a href="#topo" onClick="{{ t.open }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding-bottom:3px;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#145440;text-decoration:none;background-image:linear-gradient(#145440,#145440);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1px;transition:background-size 300ms ease" style-hover="background-size:100% 1px;color:#145440">Ver detalhes<span style="font-family:'Material Symbols Rounded';font-size:18px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">arrow_forward</span></a>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Tratamentos · Faixa avaliação" style="background:#F6FAF8">
+      <div style="max-width:1440px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(16px,2.2vw,32px)">
+        <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px 40px;padding:clamp(28px,4vw,56px);border-radius:16px;background:#3F7A62">
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#FFFFFF">T01 · Avaliação e prevenção</span>
+            <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(30px,3.6vw,48px);line-height:1.08;letter-spacing:-0.03em;color:#FFFFFF;text-wrap:balance">Não sabe por onde começar? Comece pela avaliação.</h2>
+          </div>
+          <a href="{{ wa }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:16px;transition:background 200ms" style-hover="background:#F6FAF8;color:#0E3B2D"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>Agendar avaliação pelo WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ===== DETALHE T04 ===== -->
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Implantes · Conteúdo" style="background:#FFFFFF">
+      <div style="max-width:1440px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(16px,2.2vw,32px);display:grid;grid-template-columns:{{ detailCols }};gap:clamp(40px,5vw,80px);align-items:start">
+        <div style="display:flex;flex-direction:column;gap:clamp(64px,8vw,112px);min-width:0">
+
+          <div id="o-que-e" style="display:flex;flex-direction:column;gap:20px">
+            <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px">
+              <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">O que é</span>
+              <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D;text-wrap:balance">Uma nova raiz para o dente que faltava</h2>
+            </div>
+            <p data-reveal="1" style="margin:0;max-width:64ch;font-family:'Inter',sans-serif;font-size:18px;line-height:1.65;color:#56675F;text-wrap:pretty">O implante é uma peça de titânio colocada no osso para substituir a raiz de um dente perdido. Sobre ele é fixada uma prótese, que devolve a função de mastigar e a aparência do sorriso.</p>
+            <div data-reveal="1" style="position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#EAF3EE;margin-top:12px">
+              <img data-blur="1" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="Consultório da CLÍNICA com luz natural" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter 700ms ease-out">
+              <span style="position:absolute;left:16px;bottom:16px;display:flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;background:#FFFFFF;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#0E3B2D">Consultório de implantodontia</span>
+            </div>
+          </div>
+
+          <div id="indicacao" style="display:flex;flex-direction:column;gap:24px">
+            <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px">
+              <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">Para quem é indicado</span>
+              <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D;text-wrap:balance">Indicado após avaliação</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px">
+              <sc-for list="{{ indications }}" as="i" hint-placeholder-count="4">
+                <div data-reveal="1" style="display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:12px;background:#F6FAF8;border:1px solid #D5E4DC">
+                  <span style="flex:none;width:32px;height:32px;border-radius:50%;background:#DDF0E6;color:#145440;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:18px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">check</span></span>
+                  <span style="font-family:'Inter',sans-serif;font-size:16px;line-height:1.5;color:#2A3832">{{ i }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p data-reveal="1" style="margin:0;font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#56675F">A indicação só é feita depois do exame clínico e dos exames de imagem.</p>
+          </div>
+
+          <div id="como-funciona" style="display:flex;flex-direction:column;gap:24px">
+            <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px">
+              <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">Como funciona</span>
+              <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D;text-wrap:balance">Quatro etapas, explicadas antes</h2>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ howSteps }}" as="s" hint-placeholder-count="4">
+                <div data-reveal="1" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;padding:24px 0;border-top:1px solid #D5E4DC">
+                  <span style="font-family:'Inter Tight',sans-serif;font-weight:500;font-size:clamp(28px,3vw,40px);line-height:1;letter-spacing:-0.03em;color:#145440;font-variant-numeric:tabular-nums">{{ s.n }}</span>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(19px,1.6vw,22px);line-height:1.25;color:#0E3B2D">{{ s.t }}</h3>
+                    <p style="margin:0;max-width:60ch;font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:#56675F">{{ s.d }}</p>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div id="ficha" data-reveal="1" style="display:flex;flex-direction:column;gap:24px;padding:clamp(24px,3vw,40px);border-radius:16px;background:#EAF3EE">
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">Ficha do tratamento</span>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:24px">
+              <sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid #D5E4DC">
+                  <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#56675F">{{ f.l }}</span>
+                  <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:18px;line-height:1.35;color:#0E3B2D">{{ f.v }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div id="profissional" style="display:flex;flex-direction:column;gap:24px">
+            <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px">
+              <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">Profissional responsável</span>
+            </div>
+            <article data-reveal="1" style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;padding:12px;border-radius:16px;background:#FFFFFF;border:1px solid #D5E4DC">
+              <div style="flex:0 0 clamp(140px,22vw,220px);position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#EAF3EE">
+                <img data-blur="1" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Dr. Rafael Nóbrega" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:filter 700ms ease-out">
+              </div>
+              <div style="flex:1 1 260px;display:flex;flex-direction:column;gap:8px;padding:8px 12px">
+                <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(22px,2vw,28px);line-height:1.2;letter-spacing:-0.02em;color:#0E3B2D">Dr. Rafael Nóbrega</h3>
+                <span style="font-family:'Inter',sans-serif;font-size:16px;color:#56675F">Implantodontia</span>
+                <p style="margin:4px 0 0;max-width:52ch;font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;color:#56675F">Conduz a avaliação, o planejamento digital e a instalação dos implantes na CLÍNICA.</p>
+                <span style="align-self:flex-start;display:inline-flex;align-items:center;height:28px;margin-top:8px;padding:0 12px;border-radius:999px;background:#DDF0E6;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:#0E3B2D;font-variant-numeric:tabular-nums">CRO-PB 00002</span>
+              </div>
+            </article>
+          </div>
+
+          <div id="duvidas" style="display:flex;flex-direction:column;gap:24px">
+            <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px">
+              <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">Dúvidas sobre implantes</span>
+              <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D">Perguntas frequentes</h2>
+            </div>
+            <div data-reveal="1" style="border-bottom:1px solid #D5E4DC">
+              <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="5">
+                <div style="border-top:1px solid #D5E4DC">
+                  <button onClick="{{ q.toggle }}" aria-expanded="{{ q.open }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;border:0;background:transparent;cursor:pointer;text-align:left;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(17px,1.4vw,20px);line-height:1.3;color:#0E3B2D">
+                    <span>{{ q.q }}</span>
+                    <span style="flex:none;width:36px;height:36px;border-radius:50%;background:{{ q.iconBg }};color:#145440;display:flex;align-items:center;justify-content:center;transform:{{ q.rot }};transition:transform 300ms ease, background 300ms"><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">add</span></span>
+                  </button>
+                  <div style="display:grid;grid-template-rows:{{ q.rows }};transition:grid-template-rows 350ms ease"><div style="overflow:hidden"><p style="margin:0;padding:0 56px 24px 0;font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:#56675F">{{ q.a }}</p></div></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ showAside }}" hint-placeholder-val="{{ true }}">
+          <aside style="position:sticky;top:24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:20px;padding:28px;border-radius:16px;background:#3F7A62;color:#FFFFFF">
+              <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#FFFFFF;font-variant-numeric:tabular-nums">T04 · Implantes</span>
+              <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:28px;line-height:1.15;letter-spacing:-0.02em;color:#FFFFFF">Comece pela avaliação</h3>
+              <p style="margin:0;font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;color:#FFFFFF">Na primeira consulta examinamos, pedimos os exames necessários e explicamos o plano antes de qualquer decisão.</p>
+              <a href="{{ waT }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 20px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;text-align:center;transition:background 200ms" style-hover="background:#F6FAF8;color:#0E3B2D"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>Agendar avaliação pelo WhatsApp</a>
+              <div style="display:flex;align-items:center;gap:8px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.24);font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#FFFFFF;font-variant-numeric:tabular-nums"><span style="width:8px;height:8px;border-radius:50%;background:{{ statusDot }}"></span>{{ statusText }}</div>
+            </div>
+            <nav aria-label="Nesta página" style="display:flex;flex-direction:column;padding:8px;border-radius:16px;background:#F6FAF8;border:1px solid #D5E4DC">
+              <sc-for list="{{ toc }}" as="x" hint-placeholder-count="6">
+                <a href="{{ x.href }}" onClick="{{ x.go }}" style="display:flex;align-items:center;gap:10px;min-height:40px;padding:0 12px;border-radius:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#2A3832;text-decoration:none;transition:background 200ms" style-hover="background:#EAF3EE;color:#0E3B2D"><span style="font-variant-numeric:tabular-nums;color:#145440">{{ x.n }}</span>{{ x.l }}</a>
+              </sc-for>
+            </nav>
+          </aside>
+        </sc-if>
+      </div>
+    </section>
+
+    <section data-screen-label="Implantes · Outros tratamentos" style="background:#F6FAF8">
+      <div style="max-width:1440px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,2.2vw,32px)">
+        <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:clamp(28px,3.4vw,48px)">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">Outros tratamentos</span>
+            <h2 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-0.03em;color:#0E3B2D">Veja também</h2>
+          </div>
+          <a href="#topo" onClick="{{ toList }}" style="display:inline-flex;align-items:center;height:48px;padding:0 24px;border-radius:999px;border:1px solid #145440;color:#145440;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;transition:background 200ms" style-hover="background:#DDF0E6;color:#145440">Todos os tratamentos</a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px">
+          <sc-for list="{{ others }}" as="t" hint-placeholder-count="3">
+            <article data-reveal="1" onMouseEnter="{{ t.enter }}" onMouseLeave="{{ t.leave }}" style="display:flex;flex-direction:column;gap:14px;padding:28px;border-radius:16px;background:{{ t.bgAlt }};border:1px solid #D5E4DC;transform:{{ t.lift }};box-shadow:{{ t.shadow }};transition:transform 400ms ease, box-shadow 400ms ease">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+                <span style="width:52px;height:52px;border-radius:50%;background:#DDF0E6;color:#145440;display:flex;align-items:center;justify-content:center;transform:{{ t.rot }};transition:transform 400ms ease"><span style="font-family:'Material Symbols Rounded';font-size:26px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">{{ t.icon }}</span></span>
+                <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:#56675F;font-variant-numeric:tabular-nums">{{ t.code }}</span>
+              </div>
+              <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(19px,1.6vw,22px);line-height:1.25;color:#0E3B2D">{{ t.name }}</h3>
+              <p style="margin:0;flex:1;font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:#56675F">{{ t.desc }}</p>
+              <a href="#topo" onClick="{{ t.open }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding-bottom:3px;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#145440;text-decoration:none;background-image:linear-gradient(#145440,#145440);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1px;transition:background-size 300ms ease" style-hover="background-size:100% 1px;color:#145440">Ver detalhes<span style="font-family:'Material Symbols Rounded';font-size:18px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">arrow_forward</span></a>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- RODAPÉ -->
+  <footer data-screen-label="Rodapé" style="background:#0E3B2D;color:#F6FAF8;padding-bottom:{{ footerPad }}">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(56px,6vw,80px) clamp(16px,2.2vw,32px) 32px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px 32px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.16)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;letter-spacing:0.08em;color:#FFFFFF">CLÍNICA</span>
+          <span style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#F6FAF8">Clínica Odontológica Exemplo Ltda.<br>CNPJ <span style="font-variant-numeric:tabular-nums">00.000.000/0001-00</span></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#F6FAF8;margin-bottom:4px">Navegação</span>
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+            <a href="{{ n.href }}" onClick="{{ n.go }}" style="align-self:flex-start;padding-bottom:2px;font-family:'Inter',sans-serif;font-size:14px;color:#F6FAF8;text-decoration:none;background-image:linear-gradient(#F6FAF8,#F6FAF8);background-repeat:no-repeat;background-position:0 100%;background-size:0% 1px;transition:background-size 300ms ease" style-hover="background-size:100% 1px;color:#FFFFFF">{{ n.label }}</a>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#F6FAF8">
+          <span style="font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px">Contato</span>
+          <span>Rua Exemplo, 250 · Catolé<br>Campina Grande-PB</span>
+          <a href="{{ wa }}" target="_blank" rel="noopener" style="align-self:flex-start;color:#F6FAF8;font-variant-numeric:tabular-nums" style-hover="color:#FFFFFF">WhatsApp (83) 90000-0000</a>
+          <span style="font-variant-numeric:tabular-nums">Seg a sex 8h–19h · Sáb 8h–12h</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#F6FAF8;margin-bottom:4px">Legal</span>
+          <a href="#topo" style="align-self:flex-start;font-family:'Inter',sans-serif;font-size:14px;color:#F6FAF8;text-decoration:none" style-hover="color:#FFFFFF;text-decoration:underline">Política de privacidade</a>
+          <a href="#topo" style="align-self:flex-start;font-family:'Inter',sans-serif;font-size:14px;color:#F6FAF8;text-decoration:none" style-hover="color:#FFFFFF;text-decoration:underline">Termos de uso</a>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;padding-top:24px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:#F6FAF8;font-variant-numeric:tabular-nums">
+        <span>CRO-PB 0000 (EPAO) · Responsável técnica: Dra. Helena Martins · CRO-PB 00001</span>
+        <span>© 2026 CLÍNICA · Campina Grande-PB</span>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}">
+    <a href="{{ wa }}" target="_blank" rel="noopener" aria-label="Agendar pelo WhatsApp" style="position:fixed;right:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:10px;height:56px;padding:0 22px;border-radius:999px;background:#145440;color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;box-shadow:0 4px 16px rgba(14,59,45,0.16);transition:background 200ms" style-hover="background:#0E3B2D;color:#FFFFFF"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>WhatsApp</a>
+  </sc-if>
+  <sc-if value="{{ showBar }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:#FFFFFF;border-top:1px solid #D5E4DC">
+      <sc-if value="{{ barLabel }}">
+        <span style="flex:none;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#56675F">T04</span><span style="font-family:'Inter Tight',sans-serif;font-weight:600;font-size:16px;color:#0E3B2D">Implantes</span></span>
+      </sc-if>
+      <a href="{{ barHref }}" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 16px;border-radius:999px;background:#145440;color:#FFFFFF;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;text-align:center"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="flex:none;display:block"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>{{ barText }}</a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;background:#3F7A62;padding:20px 16px;display:flex;flex-direction:column;gap:16px;overflow-y:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="display:flex;align-items:center;height:52px;padding:0 22px;border-radius:12px;background:#336650;color:#FFFFFF;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:0.08em">CLÍNICA</span>
+        <button onClick="{{ toggleMenu }}" style="display:flex;align-items:center;gap:8px;height:48px;padding:0 20px;border:0;border-radius:999px;background:#336650;color:#FFFFFF;font-family:'Inter',sans-serif;font-weight:500;font-size:15px;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;line-height:1;width:1em;overflow:hidden;display:inline-block;font-feature-settings:'liga'">close</span>Fechar</button>
+      </div>
+      <nav style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:16px;border-radius:16px;background:#336650;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+          <a href="{{ n.href }}" onClick="{{ n.go }}" style="display:flex;align-items:center;gap:12px;min-height:60px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none;font-family:'Inter Tight',sans-serif;font-weight:500;font-size:32px;letter-spacing:-0.03em" style-hover="background:#145440;color:#FFFFFF"><sc-if value="{{ n.active }}"><span style="width:8px;height:8px;border-radius:50%;background:#F2C14E"></span></sc-if>{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <a href="{{ wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;height:56px;border-radius:999px;background:#FFFFFF;color:#0E3B2D;text-decoration:none;font-family:'Inter',sans-serif;font-weight:600;font-size:16px">Agendar pelo WhatsApp</a>
+      <span style="text-align:center;font-family:'Inter',sans-serif;font-size:14px;color:#FFFFFF;font-variant-numeric:tabular-nums">{{ statusText }}</span>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ showMobile }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Mobile 390" style="min-height:100vh;background:#EAF3EE;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:40px;padding:40px 16px 96px">
+    <sc-for list="{{ mobileFrames }}" as="f" hint-placeholder-count="2">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+        <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#145440">{{ f.l }} · 390 × 844</span>
+        <iframe src="{{ f.src }}" title="{{ f.l }}" style="width:390px;height:844px;max-width:100%;border:1px solid #D5E4DC;border-radius:28px;background:#FFFFFF"></iframe>
+      </div>
+    </sc-for>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showSwitcher }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;left:16px;bottom:{{ switcherBottom }};z-index:90;display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:24px;background:#0E3B2D;box-shadow:0 4px 16px rgba(14,59,45,0.16);max-width:calc(100vw - 32px)">
+    <sc-for list="{{ views }}" as="v" hint-placeholder-count="3">
+      <button onClick="{{ v.pick }}" style="height:36px;padding:0 14px;border:0;border-radius:999px;background:{{ v.bg }};color:{{ v.color }};font-family:'Inter',sans-serif;font-weight:600;font-size:13px;cursor:pointer">{{ v.l }}</button>
+    </sc-for>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Protótipo&quot;},&quot;showViewSwitcher&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Protótipo&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1440, now: Date.now(), view: 'lista', embed: false, menu: false, faq: 0, chip: 0, gh: -1, th: -1 };
+
+  componentDidMount() {
+    const p = new URLSearchParams(location.search);
+    this.setState({ view: p.get('view') || 'lista', embed: p.has('embed') });
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    const sched = () => { this.to = setTimeout(() => { this.setState({ now: Date.now() }); sched(); }, 60000 - (Date.now() % 60000) + 50); };
+    sched();
+    setTimeout(() => this.fx(), 40);
+  }
+  componentDidUpdate(pp, ps) {
+    if (ps.view !== this.state.view || (ps.w < 768) !== (this.state.w < 768)) setTimeout(() => this.fx(), 40);
+    if (ps.chip !== this.state.chip && !this.reduced()) {
+      requestAnimationFrame(() => document.querySelectorAll('[data-card]').forEach((el, i) => {
+        el.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 450, delay: i * 60, easing: 'ease-out', fill: 'backwards' });
+      }));
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    clearTimeout(this.to);
+    if (this.io) this.io.disconnect();
+  }
+  reduced() { return (this.props.motion === false) || window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+  fx() {
+    const reduce = this.reduced();
+    document.querySelectorAll('img[data-blur]:not([data-fx])').forEach(img => {
+      img.dataset.fx = '1';
+      if (!img.complete || !img.naturalWidth) {
+        if (!reduce) img.style.filter = 'blur(16px)';
+        img.addEventListener('load', () => { img.style.filter = 'blur(0px)'; }, { once: true });
+      }
+    });
+    if (reduce) return;
+    const E = 'cubic-bezier(.2,.7,.2,1)';
+    document.querySelectorAll('[data-line]:not([data-fx])').forEach((el, i) => { el.dataset.fx = '1'; el.animate([{ transform: 'translateY(105%)' }, { transform: 'translateY(0)' }], { duration: 700, delay: 80 + i * 120, easing: E, fill: 'backwards' }); });
+    document.querySelectorAll('[data-hero-fade]:not([data-fx])').forEach(el => { el.dataset.fx = '1'; el.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 380, easing: 'ease-out', fill: 'backwards' }); });
+    document.querySelectorAll('[data-photo]:not([data-fx])').forEach(el => { el.dataset.fx = '1'; el.animate([{ opacity: 0, transform: 'scale(0.96)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 800, delay: 260, easing: 'ease-out', fill: 'backwards' }); });
+    document.querySelectorAll('[data-glass]:not([data-fx])').forEach((el, i) => { el.dataset.fx = '1'; el.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 900 + (i % 3) * 100, easing: 'ease-out', fill: 'backwards' }); });
+    if (!this.io) {
+      this.io = new IntersectionObserver(entries => entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        if (en.target._anim) en.target._anim.play();
+        this.io.unobserve(en.target);
+      }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }
+    document.querySelectorAll('[data-reveal]:not([data-fx])').forEach(el => {
+      el.dataset.fx = '1';
+      const sibs = [...el.parentElement.children].filter(c => c.hasAttribute('data-reveal'));
+      const a = el.animate([{ opacity: 0, transform: 'translateY(24px)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: Math.max(0, sibs.indexOf(el)) * 80, easing: 'ease-out', fill: 'both' });
+      a.pause(); a.onfinish = () => a.cancel(); el._anim = a;
+      this.io.observe(el);
+    });
+  }
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 16, behavior: this.reduced() ? 'auto' : 'smooth' });
+  }
+  go(id) { return e => { if (e) e.preventDefault(); this.setState({ menu: false }); this.scrollTo(id); }; }
+  setView(v) {
+    return e => {
+      if (e) e.preventDefault();
+      this.setState({ view: v, menu: false, gh: -1, th: -1 });
+      window.scrollTo(0, 0);
+      try { const u = new URL(location.href); u.searchParams.set('view', v); history.replaceState(null, '', u); } catch (_) {}
+    };
+  }
+
+  clock() {
+    const d = new Date(this.state.now);
+    const wd = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Recife', weekday: 'short' }).format(d);
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Recife', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(d);
+    const h = +parts.find(p => p.type === 'hour').value, m = +parts.find(p => p.type === 'minute').value;
+    const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(wd);
+    const names = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+    const sched = i => (i === 0 ? null : i === 6 ? [8, 12] : [8, 19]);
+    const mins = h * 60 + m, today = sched(day);
+    let open = false, status;
+    if (today && mins >= today[0] * 60 && mins < today[1] * 60) { open = true; status = 'Aberto agora · até ' + today[1] + 'h'; }
+    else if (today && mins < today[0] * 60) status = 'Fechado · abre hoje às ' + today[0] + 'h';
+    else { let k = 1; while (!sched((day + k) % 7)) k++; const nd = (day + k) % 7; status = 'Fechado · abre ' + (k === 1 ? 'amanhã' : names[nd]) + ' às ' + sched(nd)[0] + 'h'; }
+    return { statusText: status, statusDot: open ? '#BDEBC9' : 'rgba(255,255,255,0.5)' };
+  }
+
+  renderVals() {
+    const s = this.state, w = s.w;
+    const isMobile = w < 768, compactNav = w < 1100, wideAside = w >= 1024;
+    const isList = s.view === 'lista', isDetail = s.view === 'detalhe';
+    const msg = t => 'https://wa.me/5583900000000?text=' + encodeURIComponent(t);
+    const wa = msg('Olá! Gostaria de agendar uma avaliação na CLÍNICA.');
+    const waT = msg('Olá! Gostaria de agendar uma avaliação na CLÍNICA para Implantes.');
+    const home = 'Clinica Rodada 1.dc.html';
+    const navItems = [
+      ['Início', home, null], ['Tratamentos', '#topo', this.setView('lista')], ['Equipe', 'Clinica Rodada 3.dc.html', null],
+      ['Primeira consulta', home + '#primeira-consulta', null], ['Contato', 'Clinica Rodada 3.dc.html#contato', null]
+    ].map(([label, href, go], i) => ({ label, href, go: go || (() => {}), active: i === 1 }));
+
+    const tdata = [
+      ['T01', 'Avaliação e prevenção', 'Consulta, limpeza e plano de cuidado.', 'dentistry', ['Prevenção', 'Infantil']],
+      ['T02', 'Clareamento', 'Clareamento em consultório ou caseiro supervisionado.', 'light_mode', ['Estética']],
+      ['T03', 'Ortodontia', 'Aparelho fixo e alinhadores transparentes.', 'linear_scale', ['Estética']],
+      ['T04', 'Implantes', 'Reposição de dentes com planejamento digital.', 'architecture', ['Reabilitação']],
+      ['T05', 'Odontopediatria', 'Atendimento para crianças, com calma e no tempo delas.', 'child_care', ['Infantil', 'Prevenção']],
+      ['T06', 'Tratamento de canal', 'Endodontia com anestesia e acompanhamento.', 'healing', ['Reabilitação']]
+    ];
+    const card = ([code, name, desc, icon, cats], i) => {
+      const on = s.th === i;
+      return {
+        code, name, desc, icon, cats: cats.join(' · '),
+        open: this.setView('detalhe'),
+        enter: () => this.setState({ th: i }), leave: () => this.setState({ th: -1 }),
+        bg: on ? '#FFFFFF' : '#F6FAF8', bgAlt: '#FFFFFF',
+        lift: on ? 'translateY(-4px)' : 'none', shadow: on ? '0 10px 28px rgba(14,59,45,0.08)' : 'none', rot: on ? 'rotate(8deg)' : 'none'
+      };
+    };
+    const chipLabels = ['Todos', 'Prevenção', 'Estética', 'Reabilitação', 'Infantil'];
+    const sel = chipLabels[s.chip];
+    const filtered = tdata.map((t, i) => [t, i]).filter(([t]) => s.chip === 0 || t[4].includes(sel)).map(([t, i]) => card(t, i));
+    const chips = chipLabels.map((l, i) => {
+      const on = s.chip === i;
+      return { l, on, pick: () => this.setState({ chip: i }), bg: on ? '#145440' : '#FFFFFF', color: on ? '#FFFFFF' : '#0E3B2D', border: on ? '#145440' : '#D5E4DC' };
+    });
+
+    const glass = [
+      ['Planejamento digital', 'A posição do implante é definida no computador a partir dos exames.', 'como-funciona'],
+      ['Anestesia local', 'O procedimento é feito no consultório, com anestesia local.', 'ficha'],
+      ['Retornos programados', 'Acompanhamos a cicatrização e a adaptação da prótese.', 'como-funciona']
+    ].map(([t, d, id], i) => ({
+      t, d, href: '#' + id, go: this.go(id),
+      enter: () => this.setState({ gh: i }), leave: () => this.setState({ gh: -1 }),
+      bg: s.gh === i ? '#FFFFFF' : 'rgba(255,255,255,0.88)', arrowT: s.gh === i ? 'translate(2px,-2px)' : 'none'
+    }));
+
+    const faqData = [
+      ['Como é a anestesia?', 'O procedimento é feito com anestesia local, no consultório. Depois, você recebe as orientações e a medicação prescrita para o pós-operatório.'],
+      ['Quantas consultas são necessárias?', 'Varia por caso. O número de etapas é definido na avaliação e aparece por escrito no seu plano de tratamento.'],
+      ['Qualquer pessoa pode fazer implante?', 'A indicação depende do exame clínico, da quantidade de osso e da saúde geral. Por isso, tudo começa por uma avaliação.'],
+      ['Quanto tempo leva o tratamento?', 'O tempo depende da cicatrização de cada pessoa. O prazo estimado é explicado na consulta de planejamento.'],
+      ['O convênio cobre implante?', 'Atendemos convênios. Consulte o seu. A cobertura de implantes varia conforme o plano, e confirmamos antes de começar.']
+    ];
+    const faqs = faqData.map(([q, a], i) => {
+      const open = s.faq === i;
+      return { q, a, open, toggle: () => this.setState({ faq: open ? -1 : i }), rows: open ? '1fr' : '0fr', rot: open ? 'rotate(45deg)' : 'none', iconBg: open ? '#DDF0E6' : '#F6FAF8' };
+    });
+
+    const base = location.pathname;
+    const views = [['lista', 'Tratamentos'], ['detalhe', 'Implantes'], ['mobile', 'Mobile 390']].map(([k, l]) => ({
+      l, pick: this.setView(k), bg: s.view === k ? '#FFFFFF' : 'transparent', color: s.view === k ? '#0E3B2D' : '#FFFFFF'
+    }));
+
+    return {
+      wa, waT, homeHref: home, navItems,
+      isMobile, notMobile: !isMobile, compactNav, fullNav: !compactNav, tablet: !isMobile && compactNav,
+      isList, isDetail, showPage: isList || isDetail, showMobile: s.view === 'mobile',
+      topLabel: isDetail ? 'Implantes · Topo' : 'Tratamentos · Topo',
+      menuOpen: s.menu, toggleMenu: () => this.setState({ menu: !s.menu }),
+      toList: this.setView('lista'),
+      ...this.clock(),
+      chips, filtered, countText: filtered.length + (filtered.length === 1 ? ' tratamento' : ' tratamentos'),
+      glass, heroRatio: isMobile ? '4 / 5' : '2.3 / 1',
+      detailCols: wideAside ? 'minmax(0,1fr) 360px' : 'minmax(0,1fr)',
+      showAside: isDetail && wideAside,
+      indications: [
+        'Quem perdeu um ou mais dentes',
+        'Quem usa prótese removível e busca mais estabilidade',
+        'Quem tem osso suficiente, ou pode recuperá-lo com enxerto',
+        'Quem tem saúde geral compatível com um pequeno procedimento cirúrgico'
+      ],
+      howSteps: [
+        { n: '01', t: 'Avaliação e exames', d: 'Consulta, exame clínico e tomografia para entender o osso e a gengiva.' },
+        { n: '02', t: 'Planejamento digital', d: 'A posição do implante é planejada no computador a partir dos exames. Você vê e entende o plano antes de decidir.' },
+        { n: '03', t: 'Instalação do implante', d: 'Procedimento no consultório, com anestesia local. Você recebe as orientações de cuidado por escrito.' },
+        { n: '04', t: 'Prótese e retornos', d: 'Após a cicatrização, a prótese é instalada e os retornos são programados para acompanhar a adaptação.' }
+      ],
+      facts: [
+        { l: 'Número de consultas', v: 'Varia por caso' }, { l: 'Anestesia', v: 'Local' },
+        { l: 'Acompanhamento', v: 'Retornos programados' }, { l: 'Exames', v: 'Tomografia e raio-x' }
+      ],
+      toc: [['01', 'O que é', 'o-que-e'], ['02', 'Para quem é indicado', 'indicacao'], ['03', 'Como funciona', 'como-funciona'], ['04', 'Ficha do tratamento', 'ficha'], ['05', 'Profissional responsável', 'profissional'], ['06', 'Dúvidas', 'duvidas']]
+        .map(([n, l, id]) => ({ n, l, href: '#' + id, go: this.go(id) })),
+      faqs,
+      others: [0, 5, 2].map(i => card(tdata[i], i)),
+      showFloat: isList && !isMobile,
+      showBar: (isDetail && !wideAside) || (isList && isMobile),
+      barLabel: isDetail && !isMobile,
+      barHref: isDetail ? waT : wa,
+      barText: isDetail ? 'Agendar avaliação pelo WhatsApp' : 'Agendar pelo WhatsApp',
+      footerPad: ((isDetail && !wideAside) || (isList && isMobile)) ? '76px' : '0px',
+      mobileFrames: [{ l: 'Tratamentos', src: base + '?view=lista&embed=1' }, { l: 'Implantes', src: base + '?view=detalhe&embed=1' }],
+      views, showSwitcher: !s.embed && (this.props.showViewSwitcher ?? true),
+      switcherBottom: (isMobile || (isDetail && !wideAside)) ? '88px' : '16px'
+    };
+  }
+}
+</script>
+</body>
+</html>

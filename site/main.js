@@ -64,7 +64,7 @@ document.documentElement.classList.add('js');
     var startHero = function () {
       stopHero();
       if (reduceMotion) return;
-      heroTimer = setInterval(function () { showLayer((current + 1) % layers.length); }, 7000);
+      heroTimer = setInterval(function () { showLayer((current + 1) % layers.length); }, 5000);
     };
     stage.addEventListener('mouseenter', stopHero);
     stage.addEventListener('mouseleave', startHero);

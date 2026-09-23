@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F5F1EC;color:#7D6551;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+a{color:#433224;text-decoration:none}a:hover{color:#2E2118}
+select,input,button{font-family:Inter,system-ui,sans-serif}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;transition-delay:var(--d,0ms)}
+.rv.in{opacity:1;transform:none}
+.ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}.ln>span{display:block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}.ln.in>span{transform:none}
+.bu{filter:blur(14px) saturate(.85) sepia(.12);transform:scale(1.04);opacity:.7;transition:filter .8s ease,opacity .8s ease,transform .8s ease}.bu.ld{filter:saturate(.85) sepia(.12);transform:none;opacity:1}
+.card{transition:transform .4s ease,box-shadow .4s ease}.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(46,33,24,.10)}.card img{transition:transform .4s ease,filter .8s ease,opacity .8s ease}.card:hover img{transform:scale(1.03)}
+.ul{position:relative}.ul::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s ease}.ul:hover::after{transform:scaleX(1)}
+.btn,.nw{white-space:nowrap}.btn{transition:background .25s ease,color .25s ease,border-color .25s ease,transform .25s ease}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}
+.d{display:none!important}.m{display:flex!important}
+.hero{aspect-ratio:4/5}
+@media(min-width:768px){.d{display:flex!important}.m{display:none!important}.hero{aspect-ratio:auto;height:clamp(560px,42vw,760px);width:100%;max-width:100%}.two{grid-template-columns:1fr 1fr!important}.hiw{grid-template-columns:5fr 7fr!important}.foot{grid-template-columns:2fr 1fr 1fr 1fr!important}.brand{grid-column:auto!important}.sell{grid-template-columns:7fr 5fr!important}.stats{grid-template-columns:repeat(3,1fr)!important}.pad-m{padding-bottom:0!important}}
+@media(prefers-reduced-motion:reduce){.rv,.ln>span,.bu,.card,.card img,.btn,.nw{white-space:nowrap}.btn{transition:none!important;transform:none!important;opacity:1!important}.bu{filter:saturate(.85) sepia(.12)!important}}
+input[type=range]{accent-color:#433224}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F5F1EC">
+<!-- Barra de demonstração -->
+<!-- ============ HOME ============ -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div>
+<!-- Header -->
+<header style="position:sticky;top:0;z-index:50;background:rgba(245,241,236,.92);backdrop-filter:blur(10px);border-bottom:1px solid #DDD4C7">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,80px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="#top" style="font:600 22px/1 Fraunces,serif;letter-spacing:-.01em;color:#2E2118">CORRETORA</a>
+    <nav class="d" style="display:flex;gap:32px;font:500 14px/1 Inter,sans-serif">
+      <a class="ul" href="Corretora - Busca.dc.html">Imóveis</a>
+      <a class="ul" href="#cidades">Cidades</a>
+      <a class="ul" href="#como-funciona">Como funciona</a>
+      <a class="ul" href="#vender">Vender</a>
+    </nav>
+    <a class="d btn" href="{{ waGeral }}" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border:1px solid #B89E8A;border-radius:8px;font:600 14px/1 Inter,sans-serif;color:#433224">Falar com corretor</a>
+    <button class="m" onClick="{{ toggleMenu }}" aria-label="Menu" style="display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;background:none;border:0;cursor:pointer;padding:10px">
+      <span style="display:block;height:1.5px;background:#2E2118"></span>
+      <span style="display:block;height:1.5px;background:#2E2118"></span>
+    </button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;padding:8px 20px 24px;border-top:1px solid #DDD4C7;background:#FAF8F6">
+      <a onClick="{{ toggleMenu }}" href="Corretora - Busca.dc.html" style="padding:14px 0;font:500 24px/1.2 Fraunces,serif;color:#2E2118;border-bottom:1px solid #E8E1D8">Imóveis</a>
+      <a onClick="{{ toggleMenu }}" href="#cidades" style="padding:14px 0;font:500 24px/1.2 Fraunces,serif;color:#2E2118;border-bottom:1px solid #E8E1D8">Cidades</a>
+      <a onClick="{{ toggleMenu }}" href="#como-funciona" style="padding:14px 0;font:500 24px/1.2 Fraunces,serif;color:#2E2118;border-bottom:1px solid #E8E1D8">Como funciona</a>
+      <a onClick="{{ toggleMenu }}" href="#vender" style="padding:14px 0;font:500 24px/1.2 Fraunces,serif;color:#2E2118">Vender</a>
+    </nav>
+  </sc-if>
+</header>
+
+<!-- Hero -->
+<section id="top" class="hero" style="position:relative;overflow:hidden;background:#DDD4C7;display:flex;align-items:flex-end">
+  <img class="bu" src="{{ hero.img }}" alt="{{ hero.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background-image:url({{ hero.blur }});background-size:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(46,33,24,.55) 0%,rgba(46,33,24,.3) 45%,rgba(46,33,24,.15) 100%)"></div>
+  <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,80px) clamp(20px,5vw,80px);color:#FAF8F6;display:grid;gap:clamp(24px,3vw,40px)">
+    <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F5F1EC">Destaque da semana · {{ hero.cod }}</div>
+    <h1 style="margin:0;font:600 clamp(40px,5.5vw,72px)/1.05 Fraunces,serif;letter-spacing:-.02em;color:#FAF8F6;max-width:14ch">
+      <span class="ln"><span>Casa em Cabo Branco,</span></span>
+      <span class="ln" style="--d:120ms"><span>frente ao mar.</span></span>
+    </h1>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px">
+      <div class="rv" style="--d:160ms;display:grid;gap:8px">
+        <div style="font:600 clamp(24px,2.4vw,32px)/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#FAF8F6">{{ hero.preco }}</div>
+        <div style="font:400 14px/1.5 Inter,sans-serif;color:#F5F1EC;font-variant-numeric:tabular-nums">{{ hero.specs }} · {{ hero.bairro }}, {{ hero.cidade }}</div>
+      </div>
+      <div class="rv" style="--d:240ms;display:flex;flex-wrap:wrap;gap:12px">
+        <a class="btn" href="Corretora - Busca.dc.html" style="display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;background:#FAF8F6;color:#2E2118;border-radius:8px;font:600 15px/1 Inter,sans-serif">Ver imóveis</a>
+        <a class="btn" href="{{ hero.wa }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 24px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 15px/1 Inter,sans-serif"><span style="width:8px;height:8px;border-radius:50%;background:#2E2118"></span>Falar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Busca rápida -->
+<section style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,80px);transform:translateY(-32px)">
+  <div class="rv" style="background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;padding:clamp(16px,2vw,24px);display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;box-shadow:0 8px 24px rgba(46,33,24,.06)">
+    <label style="display:grid;gap:6px">
+      <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Finalidade</span>
+      <select value="{{ f.finalidade }}" onChange="{{ setFinalidade }}" style="height:48px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:400 15px Inter,sans-serif"><option>Comprar</option><option>Alugar</option></select>
+    </label>
+    <label style="display:grid;gap:6px">
+      <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Cidade</span>
+      <select value="{{ f.cidade }}" onChange="{{ setCidade }}" style="height:48px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:400 15px Inter,sans-serif"><option>Campina Grande</option><option>João Pessoa</option></select>
+    </label>
+    <label style="display:grid;gap:6px">
+      <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Tipo</span>
+      <select value="{{ f.tipo }}" onChange="{{ setTipo }}" style="height:48px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:400 15px Inter,sans-serif"><option>Todos</option><option>Apartamento</option><option>Casa</option></select>
+    </label>
+    <label style="display:grid;gap:6px">
+      <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Faixa de preço</span>
+      <select value="{{ f.faixa }}" onChange="{{ setFaixa }}" style="height:48px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:400 15px Inter,sans-serif"><option>Até R$ 400.000</option><option>R$ 400.000 – R$ 700.000</option><option>R$ 700.000 – R$ 1.000.000</option><option>Acima de R$ 1.000.000</option></select>
+    </label>
+    <a class="btn" href="Corretora - Busca.dc.html" style="align-self:end;display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;background:#433224;color:#FAF8F6;border-radius:8px;font:600 15px/1 Inter,sans-serif"><span>Buscar {{ resultCount }} imóveis</span></a>
+  </div>
+</section>
+
+<!-- Destaques -->
+<section id="destaques" style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(20px,5vw,80px) clamp(64px,9vw,128px);scroll-margin-top:110px">
+  <div class="rv" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(32px,4vw,56px)">
+    <div style="display:grid;gap:16px">
+      <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">01 — Seleção</div>
+      <h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Imóveis em destaque</h2>
+    </div>
+    <a class="ul" href="Corretora - Busca.dc.html" style="font:500 14px/1 Inter,sans-serif;color:#433224">Ver todos os {{ totalImoveis }} imóveis →</a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:clamp(16px,2vw,28px)">
+    <sc-for list="{{ destaques }}" as="im" hint-placeholder-count="6">
+      <a class="rv card" href="{{ im.wa }}" target="{{ im.target }}" style="--d:{{ im.d }};display:grid;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;overflow:hidden;color:inherit">
+        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#DDD4C7">
+          <img class="bu" src="{{ im.img }}" alt="{{ im.alt }}" style="width:100%;height:100%;object-fit:cover;display:block">
+          <sc-if value="{{ im.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:6px;background:{{ im.badgeBg }};color:{{ im.badgeFg }};font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">{{ im.badge }}</span>
+          </sc-if>
+        </div>
+        <div style="padding:20px;display:grid;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <div style="font:600 20px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ im.preco }}</div>
+            <div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#7D6551">{{ im.cod }}</div>
+          </div>
+          <div style="font:500 clamp(20px,1.6vw,24px)/1.2 Fraunces,serif;color:#2E2118">{{ im.tipo }} no {{ im.bairro }}</div>
+          <div style="font:400 14px/1.5 Inter,sans-serif;color:#7D6551">{{ im.cidade }}</div>
+          <div style="display:flex;gap:16px;padding-top:12px;border-top:1px solid #E8E1D8;font:400 14px/1.5 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#5C4635">
+            <span>{{ im.q }} qts</span><span>{{ im.v }} {{ im.vagaLabel }}</span><span>{{ im.a }} m²</span>
+          </div>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<!-- Cidades -->
+<section id="cidades" style="background:#E8E1D8;padding:clamp(64px,9vw,128px) 0;scroll-margin-top:110px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,80px)">
+    <div class="rv" style="display:grid;gap:16px;margin-bottom:clamp(32px,4vw,56px)">
+      <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">02 — Onde atuamos</div>
+      <h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Duas cidades, um só padrão</h2>
+    </div>
+    <div class="two" style="display:grid;grid-template-columns:1fr;gap:clamp(16px,2vw,28px)">
+      <sc-for list="{{ cidades }}" as="c" hint-placeholder-count="2">
+        <a class="rv card" href="Corretora - Busca.dc.html" style="--d:{{ c.d }};position:relative;display:block;aspect-ratio:3/4;max-height:640px;border-radius:12px;overflow:hidden;background:#DDD4C7;color:#FAF8F6">
+          <img class="bu" src="{{ c.img }}" alt="{{ c.nome }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(46,33,24,.6),rgba(46,33,24,.1) 60%)"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(24px,3vw,40px);display:grid;gap:8px">
+            <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F5F1EC">{{ c.uf }}</div>
+            <div style="font:600 clamp(32px,3vw,44px)/1.1 Fraunces,serif;letter-spacing:-.02em">{{ c.nome }}</div>
+            <div style="display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums">
+              <span data-count="{{ c.key }}" style="font:600 clamp(28px,2.4vw,32px)/1 Inter,sans-serif">{{ c.count }}</span>
+              <span style="font:400 14px/1.5 Inter,sans-serif;color:#F5F1EC">imóveis disponíveis</span>
+            </div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- Como funciona -->
+<section id="como-funciona" style="max-width:1280px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px);scroll-margin-top:110px">
+  <div class="hiw" style="display:grid;grid-template-columns:1fr;gap:clamp(32px,5vw,96px);align-items:start">
+    <div style="position:sticky;top:120px;display:grid;gap:24px">
+      <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">03 — Processo</div>
+      <h2 class="rv" style="--d:80ms;margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Como funciona</h2>
+      <div class="rv d" style="--d:160ms;font:600 clamp(96px,12vw,180px)/1 Fraunces,serif;letter-spacing:-.04em;color:#D0C5B5;font-variant-numeric:tabular-nums">{{ stepNum }}</div>
+      <ol class="rv" style="--d:160ms;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;border-top:1px solid #DDD4C7">
+        <sc-for list="{{ passos }}" as="p" hint-placeholder-count="4">
+          <li style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #DDD4C7;font:500 14px/1 Inter,sans-serif;color:{{ p.color }};transition:color .4s ease;font-variant-numeric:tabular-nums">
+            <span style="width:24px">{{ p.num }}</span><span style="font-weight:{{ p.weight }}">{{ p.titulo }}</span>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+    <div style="display:grid;gap:clamp(48px,6vw,96px)">
+      <sc-for list="{{ passos }}" as="p" hint-placeholder-count="4">
+        <article data-step="{{ $index }}" style="display:grid;gap:20px;min-height:min(60vh,520px);padding:clamp(24px,3vw,40px);border-radius:12px;background:{{ p.bg }};transition:background .5s ease">
+          <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">Passo {{ p.num }}</div>
+          <h3 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">{{ p.titulo }}</h3>
+          <p style="margin:0;max-width:44ch;font:400 16px/1.6 Inter,sans-serif;color:#7D6551">{{ p.texto }}</p>
+          <div style="margin-top:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding-top:24px;border-top:1px solid #D0C5B5">
+            <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ p.l1 }}</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ p.v1 }}</span></div>
+            <div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ p.l2 }}</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ p.v2 }}</span></div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- Prova social -->
+<section style="border-top:1px solid #DDD4C7;border-bottom:1px solid #DDD4C7;background:#FAF8F6">
+  <div class="stats" style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,5vw,80px);display:grid;grid-template-columns:1fr;gap:clamp(24px,3vw,40px)">
+    <sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+      <div class="rv" style="--d:{{ s.d }};display:grid;gap:10px;padding-left:20px;border-left:1px solid #D0C5B5">
+        <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ s.label }}</span>
+        <span data-count="{{ s.key }}" style="font:600 clamp(40px,4vw,56px)/1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118;font-variant-numeric:tabular-nums">{{ s.value }}<span style="font-size:.5em;color:#7D6551;letter-spacing:0"> {{ s.sufixo }}</span></span>
+        <span style="font:400 14px/1.5 Inter,sans-serif;color:#7D6551">{{ s.nota }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- Vender -->
+<section id="vender" style="max-width:1280px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(20px,5vw,80px);scroll-margin-top:110px">
+  <div class="sell" style="display:grid;grid-template-columns:1fr;gap:clamp(24px,3vw,40px);background:#E8E1D8;border-radius:12px;overflow:hidden">
+    <div style="padding:clamp(32px,4vw,64px);display:grid;gap:24px;align-content:center">
+      <div class="rv" style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">04 — Proprietários</div>
+      <h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">
+        <span class="ln"><span>Quer vender</span></span>
+        <span class="ln" style="--d:100ms"><span>seu imóvel?</span></span>
+      </h2>
+      <p class="rv" style="--d:160ms;margin:0;max-width:44ch;font:400 16px/1.6 Inter,sans-serif;color:#7D6551">Avaliação gratuita em até 48 horas, fotos profissionais e anúncio nos principais portais. Você acompanha cada visita pelo WhatsApp.</p>
+      <div class="rv" style="--d:240ms;display:flex;flex-wrap:wrap;gap:12px">
+        <a class="btn" href="{{ waVender }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;background:#433224;color:#FAF8F6;border-radius:8px;font:600 15px/1 Inter,sans-serif">Avaliar meu imóvel</a>
+        <a class="btn" href="#como-funciona" style="display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;border:1px solid #B89E8A;color:#433224;border-radius:8px;font:600 15px/1 Inter,sans-serif">Como funciona</a>
+      </div>
+    </div>
+    <div style="position:relative;min-height:320px;background:#DDD4C7">
+      <img class="bu" src="{{ sellImg }}" alt="Casa contemporânea com madeira aparente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    </div>
+  </div>
+</section>
+
+<!-- Rodapé -->
+<footer class="pad-m" style="background:#2E2118;color:#F5F1EC;padding-bottom:88px">
+  <div class="foot" style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(20px,5vw,80px) 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4vw,56px)">
+    <div class="brand" style="display:grid;gap:16px;align-content:start;grid-column:1/-1">
+      <div style="font:600 24px/1 Fraunces,serif;letter-spacing:-.01em">CORRETORA</div>
+      <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D0C5B5">CRECI-PB 00000-J</div>
+      <address style="font:400 14px/1.6 Inter,sans-serif;font-style:normal;color:#DDD4C7;max-width:32ch">Av. Prefeito Severino Cabral, 1200 · Catolé<br>Campina Grande – PB · 58410-000<br>Av. Cabo Branco, 3400 · Cabo Branco<br>João Pessoa – PB · 58045-010</address>
+    </div>
+    <nav style="display:grid;gap:12px;align-content:start;font:400 14px/1.5 Inter,sans-serif">
+      <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D0C5B5;margin-bottom:4px">Navegação</span>
+      <a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Imóveis</a>
+      <a class="ul" href="#cidades" style="color:#F5F1EC;justify-self:start">Cidades</a>
+      <a class="ul" href="#como-funciona" style="color:#F5F1EC;justify-self:start">Como funciona</a>
+      <a class="ul" href="#vender" style="color:#F5F1EC;justify-self:start">Vender</a>
+    </nav>
+    <nav style="display:grid;gap:12px;align-content:start;font:400 14px/1.5 Inter,sans-serif">
+      <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D0C5B5;margin-bottom:4px">Imóveis</span>
+      <a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Campina Grande</a>
+      <a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">João Pessoa</a>
+      <a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Casas</a>
+      <a class="ul" href="Corretora - Busca.dc.html" style="color:#F5F1EC;justify-self:start">Apartamentos</a>
+    </nav>
+    <nav style="display:grid;gap:12px;align-content:start;font:400 14px/1.5 Inter,sans-serif">
+      <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D0C5B5;margin-bottom:4px">Legal</span>
+      <a class="ul" href="#top" style="color:#F5F1EC;justify-self:start">Política de privacidade</a>
+      <a class="ul" href="#top" style="color:#F5F1EC;justify-self:start">Termos de uso</a>
+      <a class="ul" href="#top" style="color:#F5F1EC;justify-self:start">LGPD</a>
+    </nav>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:24px clamp(20px,5vw,80px);border-top:1px solid #5C4635;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font:400 12px/1.5 Inter,sans-serif;color:#D0C5B5">
+    <span>© 2026 CORRETORA · Todos os direitos reservados</span>
+    <span>Atendimento seg–sáb, 8h às 19h</span>
+  </div>
+</footer>
+
+<!-- WhatsApp flutuante (desktop) -->
+<a class="d btn" href="{{ waGeral }}" target="_blank" aria-label="Falar no WhatsApp" style="position:fixed;right:28px;bottom:28px;z-index:55;display:flex;align-items:center;gap:10px;height:56px;padding:0 22px 0 18px;background:#C8912C;color:#2E2118;border-radius:12px;font:600 14px/1 Inter,sans-serif;box-shadow:0 8px 24px rgba(46,33,24,.15)"><span style="width:10px;height:10px;border-radius:50%;background:#2E2118"></span>WhatsApp</a>
+<!-- Barra fixa inferior (mobile) -->
+<div class="m" style="position:fixed;left:0;right:0;bottom:0;z-index:55;display:flex;gap:10px;padding:12px 16px;background:rgba(250,248,246,.95);backdrop-filter:blur(10px);border-top:1px solid #DDD4C7">
+  <a class="btn" href="Corretora - Busca.dc.html" style="flex:1;display:inline-flex;align-items:center;justify-content:center;height:48px;border:1px solid #B89E8A;color:#433224;border-radius:8px;font:600 14px/1 Inter,sans-serif">Ver imóveis</a>
+  <a class="btn" href="{{ waGeral }}" target="_blank" style="flex:1.4;display:inline-flex;align-items:center;justify-content:center;height:48px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 14px/1 Inter,sans-serif">Falar no WhatsApp</a>
+</div>
+</div>
+</sc-if>
+
+<!-- ============ DESIGN SYSTEM ============ -->
+<sc-if value="{{ isSystem }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,80px) clamp(20px,5vw,80px) 160px;display:grid;gap:clamp(64px,8vw,112px)">
+  <div style="display:grid;gap:16px">
+    <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">Design system · CORRETORA</div>
+    <h1 style="margin:0;font:600 clamp(40px,5.5vw,72px)/1.05 Fraunces,serif;letter-spacing:-.02em;color:#2E2118;max-width:18ch">Terroso, editorial, sem ornamento.</h1>
+    <p style="margin:0;max-width:60ch;font:400 16px/1.6 Inter,sans-serif;color:#7D6551">Paleta fechada em 19 tokens, Fraunces para títulos, Inter para dados e interface. Raio máximo 12px. Sombras só na elevação de cards. Contraste mínimo AA em todo texto.</p>
+  </div>
+
+  <!-- 01 Paleta -->
+  <section style="display:grid;gap:32px">
+    <div style="display:grid;gap:12px;padding-bottom:20px;border-bottom:1px solid #DDD4C7"><div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">01 — Paleta</div><h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Tokens de cor</h2></div>
+    <sc-for list="{{ paletteGroups }}" as="g" hint-placeholder-count="3">
+      <div style="display:grid;gap:16px">
+        <div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ g.nome }}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px">
+          <sc-for list="{{ g.cores }}" as="c" hint-placeholder-count="6">
+            <div style="display:grid;gap:10px">
+              <div style="aspect-ratio:3/2;border-radius:8px;background:{{ c.hex }};border:1px solid #DDD4C7"></div>
+              <div style="font:500 13px/1.3 Inter,sans-serif;color:#2E2118">{{ c.nome }}</div>
+              <div style="font:400 12px/1.4 Inter,sans-serif;color:#7D6551;font-variant-numeric:tabular-nums">{{ c.hex }} · {{ c.uso }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <!-- 02 Tipografia -->
+  <section style="display:grid;gap:32px">
+    <div style="display:grid;gap:12px;padding-bottom:20px;border-bottom:1px solid #DDD4C7"><div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">02 — Tipografia</div><h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Fraunces + Inter</h2></div>
+    <div style="display:grid;gap:0">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Hero H1 · Fraunces 600 · 72→40 · lh 1.05 · ls −0.02em</span><span style="font:600 clamp(40px,5.5vw,72px)/1.05 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Casa em Cabo Branco</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">H2 seção · Fraunces 600 · 48→32 · lh 1.1</span><span style="font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Imóveis em destaque</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">H3 card · Fraunces 500 · 24→20 · lh 1.2</span><span style="font:500 clamp(20px,1.6vw,24px)/1.2 Fraunces,serif;color:#2E2118">Apartamento no Catolé</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Preço destaque · Inter 600 · 32→24 · tabular</span><span style="font:600 clamp(24px,2.4vw,32px)/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">R$ 1.150.000</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Preço em card · Inter 600 · 20→18 · tabular</span><span style="font:600 20px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">R$ 480.000</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Corpo · Inter 400 · 16 · lh 1.6</span><span style="font:400 16px/1.6 Inter,sans-serif;color:#7D6551;max-width:60ch">Apartamento de 98 m² com três quartos, varanda integrada e duas vagas de garagem, a cinco minutos do Parque da Criança.</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Apoio / specs · Inter 400 · 14 · lh 1.5</span><span style="font:400 14px/1.5 Inter,sans-serif;color:#5C4635;font-variant-numeric:tabular-nums">3 qts · 2 vagas · 98 m²</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0;border-bottom:1px solid #E8E1D8"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Eyebrow · Inter 500 · 12 · caixa alta · ls 0.14em</span><span style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">Destaque da semana</span></div>
+      <div style="display:grid;gap:8px;padding:24px 0"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Bloco de dado · label 11 caixa alta ls 0.1em / valor Inter 500 18 tabular</span><div style="display:flex;gap:40px"><div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Área útil</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">98 m²</span></div><div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Condomínio</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">R$ 480/mês</span></div><div style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">IPTU</span><span style="font:500 18px/1.2 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">R$ 1.240/ano</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- 03 Espaçamento -->
+  <section style="display:grid;gap:32px">
+    <div style="display:grid;gap:12px;padding-bottom:20px;border-bottom:1px solid #DDD4C7"><div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">03 — Espaçamento</div><h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Escala base 4</h2></div>
+    <div style="display:grid;gap:12px">
+      <sc-for list="{{ spacing }}" as="s" hint-placeholder-count="10">
+        <div style="display:grid;grid-template-columns:72px 1fr;align-items:center;gap:16px">
+          <span style="font:500 13px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ s.px }}px</span>
+          <div style="display:flex;align-items:center;gap:12px"><div style="height:16px;width:{{ s.px }}px;max-width:100%;background:#B89E8A;border-radius:2px"></div><span style="font:400 12px/1 Inter,sans-serif;color:#7D6551">{{ s.uso }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:0;font:400 14px/1.5 Inter,sans-serif;color:#7D6551;max-width:60ch">Raios: 6 (badge) · 8 (botão, input, swatch) · 12 (card, seção). Margem lateral fluida clamp(20px, 5vw, 80px). Container 1280.</p>
+  </section>
+
+  <!-- 04 Componentes -->
+  <section style="display:grid;gap:48px">
+    <div style="display:grid;gap:12px;padding-bottom:20px;border-bottom:1px solid #DDD4C7"><div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">04 — Componentes</div><h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Base</h2></div>
+
+    <div style="display:grid;gap:16px">
+      <div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Botões · primário / secundário / texto / WhatsApp / invertido sobre imagem</div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <a class="btn" href="#" style="display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;background:#433224;color:#FAF8F6;border-radius:8px;font:600 15px/1 Inter,sans-serif">Ver imóveis</a>
+        <a class="btn" href="#" style="display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;border:1px solid #B89E8A;color:#433224;border-radius:8px;font:600 15px/1 Inter,sans-serif">Agendar visita</a>
+        <a class="ul" href="#" style="font:600 15px/1 Inter,sans-serif;color:#433224;margin:0 12px">Ver todas as 14 fotos →</a>
+        <a class="btn" href="#" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 24px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 15px/1 Inter,sans-serif"><span style="width:8px;height:8px;border-radius:50%;background:#2E2118"></span>Falar no WhatsApp</a>
+        <span style="display:inline-flex;padding:12px;background:#433224;border-radius:12px"><a class="btn" href="#" style="display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;background:#FAF8F6;color:#2E2118;border-radius:8px;font:600 15px/1 Inter,sans-serif">Ver imóveis</a></span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+      <label style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Input</span><input placeholder="Buscar por bairro ou código" style="height:48px;padding:0 14px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:400 15px Inter,sans-serif;outline-color:#433224"></label>
+      <label style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Select</span><select style="height:48px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:400 15px Inter,sans-serif"><option>Apartamento</option><option>Casa</option></select></label>
+      <label style="display:grid;gap:6px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Input · erro</span><input value="CRECI inválido" readOnly style="height:48px;padding:0 14px;border:1px solid #B34237;border-radius:8px;background:#F5E2DF;color:#2E2118;font:400 15px Inter,sans-serif"><span style="font:400 12px/1.4 Inter,sans-serif;color:#B34237">Informe um código com 5 dígitos.</span></label>
+      <div style="display:grid;gap:10px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Range slider · preço máximo</span><input type="range" min="300" max="1200" step="10" value="{{ range }}" onChange="{{ setRange }}" onInput="{{ setRange }}" style="width:100%"><div style="display:flex;justify-content:space-between;font:500 14px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums"><span>R$ 300.000</span><span>{{ rangeLabel }}</span></div></div>
+    </div>
+
+    <div style="display:grid;gap:16px">
+      <div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Chips de filtro ativo · badges de status</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <span style="display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 6px 0 14px;white-space:nowrap;border:1px solid #B89E8A;border-radius:8px;background:#FFFFFF;font:500 13px/1 Inter,sans-serif;color:#433224">Catolé <button aria-label="Remover" style="width:24px;height:24px;border:0;border-radius:6px;background:#E8E1D8;color:#433224;font:500 14px/1 Inter,sans-serif;cursor:pointer">×</button></span>
+        <span style="display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 6px 0 14px;white-space:nowrap;border:1px solid #B89E8A;border-radius:8px;background:#FFFFFF;font:500 13px/1 Inter,sans-serif;color:#433224;font-variant-numeric:tabular-nums">3+ quartos <button aria-label="Remover" style="width:24px;height:24px;border:0;border-radius:6px;background:#E8E1D8;color:#433224;font:500 14px/1 Inter,sans-serif;cursor:pointer">×</button></span>
+        <a class="ul" href="#" style="font:500 13px/1 Inter,sans-serif;color:#7D6551;margin:0 12px">Limpar filtros</a>
+        <span style="padding:6px 10px;border-radius:6px;background:#5A7D4E;color:#FAF8F6;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Novo</span>
+        <span style="padding:6px 10px;border-radius:6px;background:#C8912C;color:#2E2118;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Destaque</span>
+        <span style="padding:6px 10px;border-radius:6px;background:#F2E6CF;color:#433224;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Exclusivo</span>
+        <span style="padding:6px 10px;border-radius:6px;background:#E4EBDF;color:#5A7D4E;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Visita confirmada</span>
+        <span style="padding:6px 10px;border-radius:6px;background:#F5E2DF;color:#B34237;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Vendido</span>
+      </div>
+    </div>
+
+    <div style="display:grid;gap:16px;max-width:640px">
+      <div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Accordion</div>
+      <div style="border-top:1px solid #DDD4C7">
+        <sc-for list="{{ faq }}" as="q" hint-placeholder-count="3">
+          <div style="border-bottom:1px solid #DDD4C7">
+            <button onClick="{{ q.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;background:none;border:0;cursor:pointer;text-align:left;font:500 clamp(18px,1.4vw,20px)/1.3 Fraunces,serif;color:#2E2118">{{ q.titulo }}<span style="font:400 24px/1 Inter,sans-serif;color:#7D6551;transition:transform .3s ease;transform:{{ q.rot }}">+</span></button>
+            <div style="display:grid;grid-template-rows:{{ q.rows }};transition:grid-template-rows .35s ease"><p style="margin:0;overflow:hidden;padding-bottom:{{ q.pad }};font:400 15px/1.6 Inter,sans-serif;color:#7D6551">{{ q.texto }}</p></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:grid;gap:16px">
+      <div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Card de imóvel · grid / lista horizontal / popup do mapa</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;align-items:start">
+        <a class="card" href="{{ cardDemo.wa }}" target="_blank" style="display:grid;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;overflow:hidden;color:inherit">
+          <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#DDD4C7"><img class="bu" src="{{ cardDemo.img }}" alt="{{ cardDemo.alt }}" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:6px;background:#C8912C;color:#2E2118;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Destaque</span></div>
+          <div style="padding:20px;display:grid;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:600 20px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ cardDemo.preco }}</div><div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#7D6551">{{ cardDemo.cod }}</div></div>
+            <div style="font:500 clamp(20px,1.6vw,24px)/1.2 Fraunces,serif;color:#2E2118">{{ cardDemo.tipo }} no {{ cardDemo.bairro }}</div>
+            <div style="font:400 14px/1.5 Inter,sans-serif;color:#7D6551">{{ cardDemo.cidade }}</div>
+            <div style="display:flex;gap:16px;padding-top:12px;border-top:1px solid #E8E1D8;font:400 14px/1.5 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#5C4635"><span>{{ cardDemo.q }} qts</span><span>{{ cardDemo.v }} vagas</span><span>{{ cardDemo.a }} m²</span></div>
+          </div>
+        </a>
+        <div style="display:grid;gap:24px">
+          <a class="card" href="{{ cardDemo2.wa }}" target="_blank" style="display:grid;grid-template-columns:132px 1fr;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;overflow:hidden;color:inherit">
+            <div style="position:relative;overflow:hidden;background:#DDD4C7;min-height:132px"><img class="bu" src="{{ cardDemo2.img }}" alt="{{ cardDemo2.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span style="position:absolute;top:10px;left:10px;padding:5px 8px;border-radius:6px;background:#5A7D4E;color:#FAF8F6;font:600 10px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">Novo</span></div>
+            <div style="padding:16px;display:grid;gap:8px;align-content:center">
+              <div style="font:600 18px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ cardDemo2.preco }}</div>
+              <div style="font:500 18px/1.2 Fraunces,serif;color:#2E2118">{{ cardDemo2.tipo }} no {{ cardDemo2.bairro }}</div>
+              <div style="font:400 13px/1.5 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#5C4635">{{ cardDemo2.q }} qts · {{ cardDemo2.v }} vagas · {{ cardDemo2.a }} m² · {{ cardDemo2.cod }}</div>
+            </div>
+          </a>
+          <div style="position:relative;max-width:280px;display:grid;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px rgba(46,33,24,.12)">
+            <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#DDD4C7"><img class="bu" src="{{ cardDemo3.img }}" alt="{{ cardDemo3.alt }}" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <div style="padding:14px 16px;display:grid;gap:6px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 18px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ cardDemo3.preco }}</span><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#7D6551">{{ cardDemo3.cod }}</span></div>
+              <div style="font:400 13px/1.5 Inter,sans-serif;color:#5C4635;font-variant-numeric:tabular-nums">{{ cardDemo3.tipo }} · {{ cardDemo3.bairro }} · {{ cardDemo3.q }} qts · {{ cardDemo3.a }} m²</div>
+              <a class="ul" href="{{ cardDemo3.wa }}" target="_blank" style="justify-self:start;margin-top:4px;font:600 13px/1 Inter,sans-serif;color:#433224">Ver imóvel →</a>
+            </div>
+            <div style="position:absolute;left:50%;bottom:-8px;width:14px;height:14px;background:#FFFFFF;border-right:1px solid #D0C5B5;border-bottom:1px solid #D0C5B5;transform:translateX(-50%) rotate(45deg)"></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;padding-top:8px">
+            <span style="padding:6px 10px;border-radius:8px;background:#433224;color:#FAF8F6;white-space:nowrap;font:600 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(46,33,24,.15)">R$ 1,15 mi</span>
+            <span style="padding:6px 10px;border-radius:8px;background:#FFFFFF;border:1px solid #B89E8A;color:#2E2118;white-space:nowrap;font:600 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums">R$ 480 mil</span>
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#C8912C;color:#2E2118;font:600 13px/1 Inter,sans-serif">+9</span>
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#C8912C;color:#2E2118;font:600 12px/1 Inter,sans-serif">+4</span>
+            <span style="font:400 12px/1 Inter,sans-serif;color:#7D6551">pins e clusters do mapa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;gap:16px">
+      <div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Botão WhatsApp flutuante · card do corretor</div>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+        <a class="btn" href="{{ waGeral }}" target="_blank" style="display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 22px 0 18px;background:#C8912C;color:#2E2118;border-radius:12px;font:600 14px/1 Inter,sans-serif;box-shadow:0 8px 24px rgba(46,33,24,.15)"><span style="width:10px;height:10px;border-radius:50%;background:#2E2118"></span>WhatsApp</a>
+        <div style="display:grid;gap:16px;width:min(100%,320px);padding:20px;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px">
+          <div style="display:flex;gap:14px;align-items:center">
+            <img class="bu" src="{{ corretor.img }}" alt="Corretor" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none">
+            <div style="display:grid;gap:4px"><span style="font:500 18px/1.2 Fraunces,serif;color:#2E2118">{{ corretor.nome }}</span><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ corretor.creci }}</span></div>
+          </div>
+          <a class="btn" href="{{ cardDemo.wa }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 14px/1 Inter,sans-serif"><span style="width:8px;height:8px;border-radius:50%;background:#2E2118"></span>Falar no WhatsApp</a>
+          <a class="btn" href="#" style="display:inline-flex;align-items:center;justify-content:center;height:48px;border:1px solid #B89E8A;color:#433224;border-radius:8px;font:600 14px/1 Inter,sans-serif">Agendar visita</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;system&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;'home' | 'system'&quot;,&quot;section&quot;:&quot;Protótipo&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Protótipo&quot;}}">
+const WA = '5583900000000';
+const U = (id, w) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
+const IMOVEIS = [
+  { cod: 'CG-0482', tipo: 'Apartamento', bairro: 'Catolé', cidade: 'Campina Grande', preco: 480000, q: 3, v: 2, a: 98, badge: 'DESTAQUE', img: 'photo-1502672260266-1c1ef2d93688', alt: 'Sala integrada com luz natural' },
+  { cod: 'CG-0690', tipo: 'Casa', bairro: 'Mirante', cidade: 'Campina Grande', preco: 690000, q: 3, v: 2, a: 140, badge: 'NOVO', img: 'photo-1600585154340-be6161a56a0c', alt: 'Casa contemporânea com fachada clara' },
+  { cod: 'CG-0355', tipo: 'Apartamento', bairro: 'Alto Branco', cidade: 'Campina Grande', preco: 355000, q: 2, v: 1, a: 72, badge: 'NOVO', img: 'photo-1560448204-e02f11c3d0e2', alt: 'Apartamento com janelas amplas' },
+  { cod: 'CG-0410', tipo: 'Apartamento', bairro: 'Catolé', cidade: 'Campina Grande', preco: 410000, q: 3, v: 1, a: 84, badge: '', img: 'photo-1484154218962-a197022b5858', alt: 'Cozinha integrada' },
+  { cod: 'JP-1150', tipo: 'Casa', bairro: 'Cabo Branco', cidade: 'João Pessoa', preco: 1150000, q: 4, v: 3, a: 210, badge: 'DESTAQUE', img: 'photo-1600596542815-ffad4c1539a9', alt: 'Casa moderna com piscina e vegetação tropical' },
+  { cod: 'JP-0320', tipo: 'Apartamento', bairro: 'Bessa', cidade: 'João Pessoa', preco: 320000, q: 2, v: 1, a: 64, badge: '', img: 'photo-1567496898669-ee935f5f647a', alt: 'Quarto com madeira aparente' },
+  { cod: 'JP-0720', tipo: 'Apartamento', bairro: 'Manaíra', cidade: 'João Pessoa', preco: 720000, q: 3, v: 2, a: 110, badge: 'DESTAQUE', img: 'photo-1522708323590-d24dbb6b0267', alt: 'Living amplo com madeira e concreto' },
+  { cod: 'JP-0540', tipo: 'Apartamento', bairro: 'Tambaú', cidade: 'João Pessoa', preco: 540000, q: 3, v: 1, a: 92, badge: '', img: 'photo-1493809842364-78817add7ffb', alt: 'Sala com luz de fim de tarde' },
+  { cod: 'JP-0890', tipo: 'Casa', bairro: 'Altiplano', cidade: 'João Pessoa', preco: 890000, q: 4, v: 2, a: 180, badge: 'NOVO', img: 'photo-1600607687939-ce8a6c25118c', alt: 'Casa com pé-direito alto e madeira' },
+];
+const fmt = n => 'R$ ' + n.toLocaleString('pt-BR');
+const wa = (im) => `https://wa.me/${WA}?text=${encodeURIComponent(`Olá! Tenho interesse no imóvel ${im.cod} (${im.tipo} em ${im.bairro}, ${im.cidade} – ${fmt(im.preco)}). Podemos conversar?`)}`;
+const enrich = (im, i) => ({ ...im, preco: fmt(im.preco), img: U(im.img, 1200), blur: U(im.img, 24), wa: im.cod === 'CG-0482' ? 'Corretora - Imovel CG-0482.dc.html' : wa(im), target: im.cod === 'CG-0482' ? '_self' : '_blank', d: (i * 80) + 'ms', vagaLabel: im.v === 1 ? 'vaga' : 'vagas', specs: `${im.q} quartos · ${im.v} vagas · ${im.a} m²`, badgeBg: im.badge === 'NOVO' ? '#5A7D4E' : '#C8912C', badgeFg: im.badge === 'NOVO' ? '#FAF8F6' : '#2E2118' });
+const PASSOS = [
+  { titulo: 'Busque', texto: 'Filtre por cidade, bairro, tipo e faixa de preço. Salve favoritos e receba alertas quando entrar um imóvel com o seu perfil.', l1: 'Imóveis na carteira', v1: '342', l2: 'Bairros atendidos', v2: '38' },
+  { titulo: 'Agende', texto: 'Escolha dia e horário direto pelo WhatsApp. Confirmamos em até 2 horas, sem cadastro e sem ligação de call center.', l1: 'Tempo de resposta', v1: 'até 2h', l2: 'Horários', v2: 'seg–sáb, 8h–19h' },
+  { titulo: 'Visite', texto: 'Um corretor credenciado acompanha a visita, apresenta a documentação do imóvel e responde tudo no local.', l1: 'Corretores', v1: '14 CRECI ativos', l2: 'Visitas por mês', v2: '260' },
+  { titulo: 'Feche', texto: 'Cuidamos de proposta, financiamento, escritura e registro. Você acompanha cada etapa e recebe as chaves com tudo assinado.', l1: 'Prazo médio', v1: '45 dias', l2: 'Bancos parceiros', v2: '5' },
+];
+const TARGETS = { cg: 128, jp: 214, imoveis: 342, anos: 12, nota: 49 };
+const ease = t => 1 - Math.pow(1 - t, 3);
+
+class Component extends DCLogic {
+  state = { view: null, menu: false, step: 0, counts: {}, f: { finalidade: 'Comprar', cidade: 'João Pessoa', tipo: 'Todos', faixa: 'R$ 400.000 – R$ 700.000' }, range: 700, acc: 0 };
+  view() { return this.state.view || this.props.view || 'home'; }
+  componentDidMount() { this.setup(); }
+  componentDidUpdate(pp, ps) { if (ps.view !== this.state.view || pp.view !== this.props.view) this.setup(); }
+  componentWillUnmount() { this.teardown(); }
+  teardown() { (this.obs || []).forEach(o => o.disconnect()); this.obs = []; clearInterval(this.iv); }
+  setup() {
+    this.teardown();
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || this.props.motion === false;
+    const attach = () => {
+      const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } }), { threshold: 0.12 });
+      document.querySelectorAll('.rv:not(.in),.ln:not(.in)').forEach(el => reduced ? el.classList.add('in') : rv.observe(el));
+      document.querySelectorAll('img.bu:not(.ld)').forEach(img => { if (img.dataset.bu) return; img.dataset.bu = 1; const done = () => img.classList.add('ld'); if (img.complete && img.naturalWidth) done(); else { img.addEventListener('load', done, { once: true }); img.addEventListener('error', done, { once: true }); } });
+      const ct = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { this.count(e.target.dataset.count, reduced); ct.unobserve(e.target); } }), { threshold: 0.5 });
+      document.querySelectorAll('[data-count]').forEach(el => ct.observe(el));
+      const st = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) this.setState({ step: +e.target.dataset.step }); }), { rootMargin: '-40% 0px -40% 0px' });
+      document.querySelectorAll('[data-step]').forEach(el => st.observe(el));
+      this.obs = [rv, ct, st];
+      clearInterval(this.iv); let n = 0; this.iv = setInterval(() => { document.querySelectorAll('img.bu:not(.ld)').forEach(img => { if (img.complete && img.naturalWidth) img.classList.add('ld'); }); if (++n > 40) clearInterval(this.iv); }, 250);
+    };
+    requestAnimationFrame(() => requestAnimationFrame(attach));
+  }
+  count(key, reduced) {
+    const target = TARGETS[key]; if (target == null || this.state.counts[key] != null) return;
+    if (reduced) return this.setState(s => ({ counts: { ...s.counts, [key]: target } }));
+    const t0 = performance.now(), dur = 1400;
+    const tick = now => { const p = Math.min(1, (now - t0) / dur); this.setState(s => ({ counts: { ...s.counts, [key]: Math.round(ease(p) * target) } })); if (p < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
+  renderVals() {
+    const v = this.view(), c = this.state.counts, f = this.state.f;
+    const tab = on => `background:${on ? '#F5F1EC' : 'transparent'};color:${on ? '#2E2118' : '#F5F1EC'};border:1px solid ${on ? '#F5F1EC' : '#7D6551'};border-radius:6px;padding:7px 12px;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer`;
+    const styleObj = s => Object.fromEntries(s.split(';').filter(Boolean).map(kv => { const i = kv.indexOf(':'); const k = kv.slice(0, i).trim().replace(/-([a-z])/g, (_, ch) => ch.toUpperCase()); return [k, kv.slice(i + 1).trim()]; }));
+    const byCod = cod => enrich(IMOVEIS.find(i => i.cod === cod), 0);
+    const destaques = ['CG-0482', 'CG-0690', 'JP-0720', 'CG-0355', 'JP-0540', 'JP-0890'].map((cod, i) => enrich(IMOVEIS.find(x => x.cod === cod), i));
+    const matches = IMOVEIS.filter(i => i.cidade === f.cidade && (f.tipo === 'Todos' || i.tipo === f.tipo)).length;
+    const scale = f.cidade === 'João Pessoa' ? 214 / 5 : 128 / 4;
+    const faixaFactor = f.faixa.startsWith('Até') ? .35 : f.faixa.startsWith('Acima') ? .1 : f.faixa.startsWith('R$ 700') ? .2 : .35;
+    const cnt = k => c[k] == null ? (k === 'nota' ? '4,9' : k === 'cg' ? '128' : k === 'jp' ? '214' : String(TARGETS[k])) : k === 'nota' ? (c[k] / 10).toFixed(1).replace('.', ',') : String(c[k]);
+    const setF = key => e => this.setState(s => ({ f: { ...s.f, [key]: e.target.value } }));
+    return {
+      isHome: v === 'home', isSystem: v === 'system',
+      goHome: () => this.setState({ view: 'home', menu: false }), goSystem: () => this.setState({ view: 'system', menu: false }),
+      tabHome: styleObj(tab(v === 'home')), tabSystem: styleObj(tab(v === 'system')),
+      menuOpen: this.state.menu, toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      waGeral: `https://wa.me/${WA}?text=${encodeURIComponent('Olá! Vim pelo site da CORRETORA e gostaria de falar com um corretor.')}`,
+      waVender: `https://wa.me/${WA}?text=${encodeURIComponent('Olá! Quero avaliar meu imóvel para venda.')}`,
+      hero: byCod('JP-1150'), sellImg: U('photo-1512917774080-9991f1c4c750', 1200),
+      f, setFinalidade: setF('finalidade'), setCidade: setF('cidade'), setTipo: setF('tipo'), setFaixa: setF('faixa'),
+      resultCount: Math.max(3, Math.round(matches * scale * faixaFactor * 2)),
+      totalImoveis: 342, destaques,
+      cidades: [
+        { key: 'cg', nome: 'Campina Grande', uf: 'Paraíba · Agreste', count: cnt('cg'), img: U('photo-1449824913935-59a10b8d2000', 1200), d: '0ms' },
+        { key: 'jp', nome: 'João Pessoa', uf: 'Paraíba · Litoral', count: cnt('jp'), img: U('photo-1507525428034-b723cf961d3e', 1200), d: '80ms' },
+      ],
+      stepNum: '0' + (this.state.step + 1),
+      passos: PASSOS.map((p, i) => ({ ...p, num: '0' + (i + 1), color: i === this.state.step ? '#2E2118' : '#B89E8A', weight: i === this.state.step ? 600 : 500, bg: i === this.state.step ? '#FAF8F6' : '#E8E1D8' })),
+      stats: [
+        { key: 'imoveis', label: 'Imóveis na carteira', value: cnt('imoveis'), sufixo: '', nota: 'Entre Campina Grande e João Pessoa', d: '0ms' },
+        { key: 'anos', label: 'Anos de atuação', value: cnt('anos'), sufixo: 'anos', nota: 'Desde 2014 na Paraíba', d: '80ms' },
+        { key: 'nota', label: 'Avaliação Google', value: cnt('nota'), sufixo: '/ 5', nota: '186 avaliações verificadas', d: '160ms' },
+      ],
+      // Design system
+      paletteGroups: [
+        { nome: 'Neutros areia', cores: [['white', '#FFFFFF', 'cards'], ['cream-0', '#FAF8F6', 'superfície elevada'], ['cream-50', '#F5F1EC', 'fundo de página'], ['sand-100', '#E8E1D8', 'seções recuadas'], ['sand-200', '#DDD4C7', 'placeholders'], ['tan-300', '#D0C5B5', 'bordas'], ['tan-400', '#B89E8A', 'divisores fortes']].map(([nome, hex, uso]) => ({ nome, hex, uso })) },
+        { nome: 'Marrons primários', cores: [['brown-900', '#2E2118', 'tinta de título'], ['brown-800', '#433224', 'ações primárias'], ['brown-700', '#5C4635', 'apoio forte'], ['brown-600', '#7D6551', 'texto secundário'], ['tan-500', '#A68A74', 'acento suave']].map(([nome, hex, uso]) => ({ nome, hex, uso })) },
+        { nome: 'Status e acento — com parcimônia', cores: [['ochre-500', '#C8912C', 'CTA WhatsApp, DESTAQUE'], ['ochre-100', '#F2E6CF', 'fundo de badge'], ['green-600', '#5A7D4E', 'sucesso, NOVO'], ['green-100', '#E4EBDF', 'fundo de sucesso'], ['red-600', '#B34237', 'erro, alerta'], ['red-100', '#F5E2DF', 'fundo de erro']].map(([nome, hex, uso]) => ({ nome, hex, uso })) },
+      ],
+      spacing: [[4, 'micro-gap'], [8, 'gap interno de badge, ícone–texto'], [12, 'gap entre linhas de card'], [16, 'padding de input, gap de grid mobile'], [24, 'padding de card, gap de grid desktop'], [32, 'entre título e conteúdo'], [48, 'entre blocos'], [64, 'padding de seção mobile'], [96, 'padding de seção desktop'], [128, 'seções de respiro']].map(([px, uso]) => ({ px, uso })),
+      range: this.state.range, setRange: e => this.setState({ range: +e.target.value }), rangeLabel: fmt(this.state.range * 1000),
+      faq: [
+        { titulo: 'Quais documentos preciso para financiar?', texto: 'RG, CPF, comprovante de renda dos últimos 3 meses e comprovante de residência. Cuidamos do envio ao banco.' },
+        { titulo: 'O condomínio está incluso no preço?', texto: 'Não. O valor do condomínio e do IPTU aparecem separados na ficha técnica de cada imóvel.' },
+        { titulo: 'Posso visitar aos sábados?', texto: 'Sim. Atendemos de segunda a sábado, das 8h às 19h, com agendamento pelo WhatsApp.' },
+      ].map((q, i) => ({ ...q, toggle: () => this.setState(s => ({ acc: s.acc === i ? -1 : i })), rot: this.state.acc === i ? 'rotate(45deg)' : 'none', rows: this.state.acc === i ? '1fr' : '0fr', pad: this.state.acc === i ? '18px' : '0px' })),
+      cardDemo: byCod('CG-0482'), cardDemo2: byCod('CG-0690'), cardDemo3: byCod('JP-1150'),
+      corretor: { nome: 'Rafael Nóbrega', creci: 'CRECI-PB 00000-J', img: U('photo-1560250097-0b93528c311a', 200) },
+    };
+  }
+}
+</script>
+</body>
+</html>

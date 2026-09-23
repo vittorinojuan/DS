@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F5F1EC;color:#7D6551;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+a{color:#433224;text-decoration:none}a:hover{color:#2E2118}
+select,input,button{font-family:Inter,system-ui,sans-serif}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out;transition-delay:var(--d,0ms)}.rv.in{opacity:1;transform:none}
+.bu{filter:blur(14px) saturate(.85) sepia(.12);transform:scale(1.04);opacity:.7;transition:filter .8s ease,opacity .8s ease,transform .8s ease}.bu.ld{filter:saturate(.85) sepia(.12);transform:none;opacity:1}
+.card{transition:transform .4s ease,box-shadow .4s ease,border-color .3s ease}.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(46,33,24,.10)}.card img{transition:transform .4s ease,filter .8s ease,opacity .8s ease}.card:hover img{transform:scale(1.03)}
+.ul{position:relative}.ul::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s ease}.ul:hover::after{transform:scaleX(1)}
+.btn,.nw{white-space:nowrap}.btn{transition:background .25s ease,color .25s ease,border-color .25s ease,transform .25s ease;cursor:pointer}.btn:hover{transform:translateY(-1px)}
+.pin{transition:transform .25s ease,background .25s ease,color .25s ease;cursor:pointer}.pin:hover{transform:translate(-50%,-100%) scale(1.06)!important}
+.d{display:none!important}.m{display:flex!important}
+@media(min-width:1024px){.d{display:flex!important}.m{display:none!important}.lay{grid-template-columns:280px minmax(0,1fr)!important}.split{grid-template-columns:5fr 7fr!important}.mapbox{position:sticky;top:104px;height:calc(100vh - 128px)!important}.side{display:block!important}}
+@media(prefers-reduced-motion:reduce){.rv,.bu,.card,.card img,.btn,.pin{transition:none!important;transform:none!important;opacity:1!important}.bu{filter:saturate(.85) sepia(.12)!important}}
+input[type=range]{accent-color:#433224}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F5F1EC;padding-bottom:88px">
+<div style="position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:8px;padding:8px 16px;background:#2E2118;color:#F5F1EC;font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">
+  <span style="opacity:.6">Rodada 2</span>
+  <button class="nw" onClick="{{ goLista }}" style="{{ tabLista }}">Busca · Lista</button>
+  <button class="nw" onClick="{{ goMapa }}" style="{{ tabMapa }}">Busca · Mapa</button>
+  <button class="nw" onClick="{{ goVazio }}" style="{{ tabVazio }}">Estado vazio</button>
+  <a class="d" href="Corretora - Rodada 1.dc.html" style="margin-left:auto;color:#D0C5B5;font:inherit;letter-spacing:inherit">← Rodada 1</a>
+</div>
+
+<header style="position:sticky;top:31px;z-index:50;background:rgba(245,241,236,.92);backdrop-filter:blur(10px);border-bottom:1px solid #DDD4C7">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(16px,3vw,48px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="Corretora - Rodada 1.dc.html" style="font:600 22px/1 Fraunces,serif;letter-spacing:-.01em;color:#2E2118">CORRETORA</a>
+    <nav class="d" style="display:flex;gap:32px;font:500 14px/1 Inter,sans-serif">
+      <a class="ul" href="#" style="color:#2E2118;font-weight:600">Imóveis</a>
+      <a class="ul" href="Corretora - Rodada 1.dc.html#cidades">Cidades</a>
+      <a class="ul" href="Corretora - Rodada 1.dc.html#como-funciona">Como funciona</a>
+      <a class="ul" href="Corretora - Rodada 1.dc.html#vender">Vender</a>
+    </nav>
+    <a class="d btn" href="{{ waGeral }}" target="_blank" style="display:inline-flex;align-items:center;height:44px;padding:0 20px;border:1px solid #B89E8A;border-radius:8px;font:600 14px/1 Inter,sans-serif;color:#433224">Falar com corretor</a>
+  </div>
+</header>
+
+<main style="max-width:1440px;margin:0 auto;padding:clamp(20px,3vw,40px) clamp(16px,3vw,48px) 0;display:grid;gap:24px">
+  <!-- Título + barra de controle -->
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px">
+    <div style="display:grid;gap:10px">
+      <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">Imóveis à venda · Paraíba</div>
+      <h1 style="margin:0;font:600 clamp(28px,3vw,40px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118;font-variant-numeric:tabular-nums">{{ countLabel }}</h1>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+      <label style="display:flex;align-items:center;gap:10px;font:400 14px/1 Inter,sans-serif;color:#7D6551">Ordenar
+        <select value="{{ sort }}" onChange="{{ setSort }}" style="height:44px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:500 14px Inter,sans-serif"><option>Relevância</option><option>Menor preço</option><option>Maior preço</option><option>Maior área</option><option>Mais recentes</option></select>
+      </label>
+      <div style="display:inline-flex;padding:4px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6">
+        <button class="btn nw" onClick="{{ goLista }}" style="{{ segLista }}">Lista</button>
+        <button class="btn nw" onClick="{{ goMapa }}" style="{{ segMapa }}">Mapa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chips ativos -->
+  <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+    <sc-for list="{{ chips }}" as="ch" hint-placeholder-count="3">
+      <span style="display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 6px 0 14px;white-space:nowrap;border:1px solid #B89E8A;border-radius:8px;background:#FFFFFF;font:500 13px/1 Inter,sans-serif;color:#433224;font-variant-numeric:tabular-nums">{{ ch.label }}<button onClick="{{ ch.remove }}" aria-label="Remover filtro" style="width:24px;height:24px;border:0;border-radius:6px;background:#E8E1D8;color:#433224;font:500 14px/1 Inter,sans-serif;cursor:pointer">×</button></span>
+    </sc-for>
+    <button class="ul" onClick="{{ clearAll }}" style="background:none;border:0;padding:0;margin:0 8px;font:500 13px/1 Inter,sans-serif;color:#7D6551;cursor:pointer">Limpar filtros</button>
+  </div>
+  </sc-if>
+
+  <div class="lay" style="display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(24px,3vw,40px);align-items:start">
+    <!-- Sidebar (desktop) -->
+    <aside class="side" style="display:none;position:sticky;top:104px;max-height:calc(100vh - 128px);overflow:auto;padding-right:8px">
+      <div style="display:grid;gap:28px">
+        <div style="display:grid;gap:10px">
+          <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Finalidade</span>
+          <div style="display:inline-flex;padding:4px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6"><button class="btn" onClick="{{ setComprar }}" style="{{ segComprar }}">Comprar</button><button class="btn" onClick="{{ setAlugar }}" style="{{ segAlugar }}">Alugar</button></div>
+        </div>
+        <div style="display:grid;gap:10px">
+          <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Cidade</span>
+          <select value="{{ f.cidade }}" onChange="{{ setCidade }}" style="height:44px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#2E2118;font:400 14px Inter,sans-serif"><option>Todas</option><option>Campina Grande</option><option>João Pessoa</option></select>
+        </div>
+        <div style="display:grid;gap:10px">
+          <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Tipo</span>
+          <div style="display:flex;gap:8px"><sc-for list="{{ tipos }}" as="t" hint-placeholder-count="3"><button class="btn" onClick="{{ t.set }}" style="{{ t.style }}">{{ t.label }}</button></sc-for></div>
+        </div>
+        <div style="display:grid;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Preço máximo</span><span style="font:500 14px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ precoLabel }}</span></div>
+          <input type="range" min="300" max="1200" step="10" value="{{ f.precoMax }}" onInput="{{ setPreco }}" onChange="{{ setPreco }}" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font:400 12px/1 Inter,sans-serif;color:#7D6551;font-variant-numeric:tabular-nums"><span>R$ 300 mil</span><span>R$ 1,2 mi</span></div>
+        </div>
+        <div style="display:grid;gap:10px">
+          <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Quartos</span>
+          <div style="display:flex;gap:8px"><sc-for list="{{ quartos }}" as="q" hint-placeholder-count="4"><button class="btn" onClick="{{ q.set }}" style="{{ q.style }}">{{ q.label }}</button></sc-for></div>
+        </div>
+        <div style="display:grid;gap:10px">
+          <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Vagas</span>
+          <div style="display:flex;gap:8px"><sc-for list="{{ vagas }}" as="q" hint-placeholder-count="4"><button class="btn" onClick="{{ q.set }}" style="{{ q.style }}">{{ q.label }}</button></sc-for></div>
+        </div>
+        <div style="display:grid;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Área mínima</span><span style="font:500 14px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ areaLabel }}</span></div>
+          <input type="range" min="0" max="220" step="10" value="{{ f.areaMin }}" onInput="{{ setArea }}" onChange="{{ setArea }}" style="width:100%">
+        </div>
+        <div style="display:grid;gap:10px">
+          <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Bairros</span>
+          <div style="display:grid;gap:4px">
+            <sc-for list="{{ bairrosList }}" as="b" hint-placeholder-count="6">
+              <label style="display:flex;align-items:center;gap:10px;min-height:36px;font:400 14px/1.4 Inter,sans-serif;color:{{ b.color }};cursor:pointer">
+                <input type="checkbox" checked="{{ b.on }}" onChange="{{ b.toggle }}" style="width:18px;height:18px;accent-color:#433224;margin:0">
+                <span style="flex:1">{{ b.nome }}</span><span style="font:400 12px/1 Inter,sans-serif;color:#7D6551;font-variant-numeric:tabular-nums">{{ b.n }}</span>
+              </label>
+            </sc-for>
+          </div>
+          <button class="ul" onClick="{{ toggleMoreBairros }}" style="justify-self:start;background:none;border:0;padding:0;font:500 13px/1 Inter,sans-serif;color:#433224;cursor:pointer">{{ moreBairrosLabel }}</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Conteúdo -->
+    <div style="display:grid;gap:24px;min-width:0">
+      <!-- VISÃO LISTA -->
+      <sc-if value="{{ isLista }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;gap:32px">
+        <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:clamp(16px,2vw,24px)">
+          <sc-for list="{{ pageItems }}" as="im" hint-placeholder-count="6">
+            <a class="card rv in" href="{{ im.wa }}" target="_blank" onMouseEnter="{{ im.hover }}" onMouseLeave="{{ unhover }}" style="display:grid;background:#FFFFFF;border:1px solid {{ im.border }};border-radius:12px;overflow:hidden;color:inherit">
+              <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#DDD4C7">
+                <img class="bu" src="{{ im.img }}" alt="{{ im.alt }}" style="width:100%;height:100%;object-fit:cover;display:block">
+                <sc-if value="{{ im.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:6px;background:{{ im.badgeBg }};color:{{ im.badgeFg }};font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">{{ im.badge }}</span></sc-if>
+                <button onClick="{{ im.fav }}" aria-label="Favoritar" style="position:absolute;top:10px;right:10px;width:36px;height:36px;border:0;border-radius:8px;background:rgba(250,248,246,.92);color:{{ im.favColor }};font:500 16px/1 Inter,sans-serif;cursor:pointer">{{ im.favIcon }}</button>
+              </div>
+              <div style="padding:20px;display:grid;gap:12px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><div style="font:600 20px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ im.preco }}</div><div style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#7D6551">{{ im.cod }}</div></div>
+                <div style="font:500 clamp(20px,1.6vw,24px)/1.2 Fraunces,serif;color:#2E2118">{{ im.tipo }} no {{ im.bairro }}</div>
+                <div style="font:400 14px/1.5 Inter,sans-serif;color:#7D6551">{{ im.cidade }}</div>
+                <div style="display:flex;gap:16px;padding-top:12px;border-top:1px solid #E8E1D8;font:400 14px/1.5 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#5C4635"><span>{{ im.q }} qts</span><span>{{ im.v }} {{ im.vagaLabel }}</span><span>{{ im.a }} m²</span></div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+        <!-- Paginação -->
+        <nav style="display:flex;align-items:center;justify-content:center;gap:6px;padding-top:8px;font-variant-numeric:tabular-nums">
+          <button class="btn" onClick="{{ prevPage }}" style="height:44px;padding:0 16px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#433224;font:500 14px/1 Inter,sans-serif">← Anterior</button>
+          <sc-for list="{{ pages }}" as="p" hint-placeholder-count="2"><button class="btn" onClick="{{ p.go }}" style="{{ p.style }}">{{ p.n }}</button></sc-for>
+          <button class="btn" onClick="{{ nextPage }}" style="height:44px;padding:0 16px;border:1px solid #D0C5B5;border-radius:8px;background:#FAF8F6;color:#433224;font:500 14px/1 Inter,sans-serif">Próxima →</button>
+        </nav>
+        </sc-if>
+        <!-- ESTADO VAZIO -->
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;gap:40px;padding:clamp(40px,6vw,80px) clamp(20px,4vw,64px);background:#E8E1D8;border-radius:12px">
+          <div style="display:grid;gap:16px;max-width:52ch">
+            <div style="font:500 12px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551">0 resultados</div>
+            <h2 style="margin:0;font:600 clamp(32px,3.6vw,48px)/1.1 Fraunces,serif;letter-spacing:-.02em;color:#2E2118">Nenhum imóvel com esses filtros.</h2>
+            <p style="margin:0;font:400 16px/1.6 Inter,sans-serif;color:#7D6551">Temos {{ totalCarteira }} imóveis na carteira. Afrouxe um dos filtros abaixo ou fale com um corretor: a maior parte dos lançamentos ainda não está publicada.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+            <sc-for list="{{ sugestoes }}" as="s" hint-placeholder-count="3">
+              <button class="btn" onClick="{{ s.go }}" style="display:grid;gap:8px;text-align:left;padding:20px;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;cursor:pointer;white-space:normal">
+                <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">{{ s.eyebrow }}</span>
+                <span style="font:500 18px/1.2 Fraunces,serif;color:#2E2118">{{ s.titulo }}</span>
+                <span style="font:400 13px/1.5 Inter,sans-serif;color:#7D6551;font-variant-numeric:tabular-nums">{{ s.desc }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <button class="btn" onClick="{{ clearAll }}" style="display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;background:#433224;color:#FAF8F6;border:0;border-radius:8px;font:600 15px/1 Inter,sans-serif">Limpar todos os filtros</button>
+            <a class="btn" href="{{ waBusca }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 24px;background:#C8912C;color:#2E2118;border-radius:8px;font:600 15px/1 Inter,sans-serif"><span style="width:8px;height:8px;border-radius:50%;background:#2E2118"></span>Pedir busca personalizada</a>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <!-- VISÃO MAPA -->
+      <sc-if value="{{ isMapa }}" hint-placeholder-val="{{ false }}">
+      <div class="split" style="display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:start">
+        <!-- Lista horizontal -->
+        <div style="display:grid;gap:12px;order:2">
+          <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:32px;background:#E8E1D8;border-radius:12px;display:grid;gap:12px"><span style="font:500 18px/1.2 Fraunces,serif;color:#2E2118">Nenhum imóvel nesta área.</span><button class="ul" onClick="{{ clearAll }}" style="justify-self:start;background:none;border:0;padding:0;font:500 14px/1 Inter,sans-serif;color:#433224;cursor:pointer">Limpar filtros</button></div>
+          </sc-if>
+          <sc-for list="{{ results }}" as="im" hint-placeholder-count="5">
+            <a class="card" href="{{ im.wa }}" target="_blank" onMouseEnter="{{ im.hover }}" onMouseLeave="{{ unhover }}" style="display:grid;grid-template-columns:minmax(120px,38%) 1fr;background:{{ im.bg }};border:1px solid {{ im.border }};border-radius:12px;overflow:hidden;color:inherit">
+              <div style="position:relative;overflow:hidden;background:#DDD4C7;min-height:140px"><img class="bu" src="{{ im.img }}" alt="{{ im.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><sc-if value="{{ im.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;left:10px;padding:5px 8px;border-radius:6px;background:{{ im.badgeBg }};color:{{ im.badgeFg }};font:600 10px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase">{{ im.badge }}</span></sc-if></div>
+              <div style="padding:16px;display:grid;gap:8px;align-content:center;min-width:0">
+                <div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font:600 18px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ im.preco }}</span><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#7D6551">{{ im.cod }}</span></div>
+                <div style="font:500 18px/1.2 Fraunces,serif;color:#2E2118">{{ im.tipo }} no {{ im.bairro }}</div>
+                <div style="font:400 13px/1.5 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#5C4635">{{ im.cidade }} · {{ im.q }} qts · {{ im.v }} {{ im.vagaLabel }} · {{ im.a }} m²</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+        <!-- Mapa -->
+        <div class="mapbox" style="position:relative;height:clamp(420px,70vh,640px);border-radius:12px;overflow:hidden;background:#E8E1D8;border:1px solid #D0C5B5;order:1">
+          <!-- Terreno estilizado -->
+          <div style="position:absolute;inset:0;background-image:linear-gradient(#DDD4C7 1px,transparent 1px),linear-gradient(90deg,#DDD4C7 1px,transparent 1px);background-size:48px 48px;opacity:.6"></div>
+          <div style="position:absolute;top:0;bottom:0;right:0;width:9%;background:#D0C5B5"></div>
+          <div style="position:absolute;left:0;right:0;top:44%;height:3px;background:#D0C5B5;transform:rotate(-6deg)"></div>
+          <div style="position:absolute;left:0;right:0;top:66%;height:2px;background:#D0C5B5;transform:rotate(3deg)"></div>
+          <div style="position:absolute;top:0;bottom:0;left:38%;width:2px;background:#D0C5B5;transform:rotate(8deg)"></div>
+          <div style="position:absolute;top:0;bottom:0;left:72%;width:3px;background:#D0C5B5;transform:rotate(-4deg)"></div>
+          <div style="position:absolute;left:20%;top:38%;width:14%;aspect-ratio:1;border-radius:50%;background:#DDD4C7"></div>
+          <div style="position:absolute;left:12%;top:16%;font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Campina Grande</div>
+          <div style="position:absolute;left:58%;top:10%;font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">João Pessoa</div>
+          <div style="position:absolute;right:2%;top:50%;transform:rotate(90deg);font:500 10px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#7D6551;white-space:nowrap">Oceano Atlântico</div>
+          <sc-for list="{{ mapLabels }}" as="l" hint-placeholder-count="6"><div style="position:absolute;left:{{ l.x }}%;top:{{ l.y }}%;font:400 11px/1 Inter,sans-serif;color:#A68A74;white-space:nowrap">{{ l.nome }}</div></sc-for>
+          <!-- Clusters -->
+          <sc-for list="{{ clusters }}" as="c" hint-placeholder-count="2">
+            <button class="pin" onClick="{{ c.go }}" style="position:absolute;left:{{ c.x }}%;top:{{ c.y }}%;transform:translate(-50%,-100%);width:{{ c.size }};height:{{ c.size }};border-radius:50%;border:0;background:#C8912C;color:#2E2118;font:600 13px/1 Inter,sans-serif;box-shadow:0 4px 12px rgba(46,33,24,.15);font-variant-numeric:tabular-nums">{{ c.label }}</button>
+          </sc-for>
+          <!-- Pins -->
+          <sc-for list="{{ pins }}" as="p" hint-placeholder-count="5">
+            <button class="pin" onClick="{{ p.select }}" onMouseEnter="{{ p.hover }}" onMouseLeave="{{ unhover }}" style="position:absolute;left:{{ p.x }}%;top:{{ p.y }}%;transform:translate(-50%,-100%);z-index:{{ p.z }};padding:6px 10px;border-radius:8px;border:1px solid {{ p.borderColor }};background:{{ p.bg }};color:{{ p.fg }};white-space:nowrap;font:600 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(46,33,24,.15)">{{ p.label }}</button>
+          </sc-for>
+          <!-- Card flutuante -->
+          <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;left:{{ sel.cardX }};right:{{ sel.cardR }};top:{{ sel.cardY }};bottom:{{ sel.cardB }};z-index:20;width:min(280px,80%);display:grid;background:#FFFFFF;border:1px solid #D0C5B5;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px rgba(46,33,24,.14)">
+              <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#DDD4C7"><img class="bu" src="{{ sel.img }}" alt="{{ sel.alt }}" style="width:100%;height:100%;object-fit:cover;display:block"><button onClick="{{ closeSel }}" aria-label="Fechar" style="position:absolute;top:8px;right:8px;width:32px;height:32px;border:0;border-radius:8px;background:rgba(250,248,246,.92);color:#2E2118;font:500 16px/1 Inter,sans-serif;cursor:pointer">×</button></div>
+              <div style="padding:14px 16px;display:grid;gap:6px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 18px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:#2E2118">{{ sel.preco }}</span><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#7D6551">{{ sel.cod }}</span></div>
+                <div style="font:400 13px/1.5 Inter,sans-serif;color:#5C4635;font-variant-numeric:tabular-nums">{{ sel.tipo }} · {{ sel.bairro }} · {{ sel.q }} qts · {{ sel.a }} m²</div>
+                <a class="ul" href="{{ sel.wa }}" target="_blank" style="justify-self:start;margin-top:4px;font:600 13px/1 Inter,sans-serif;color:#433224">Falar sobre este imóvel →</a>
+              </div>
+            </div>
+          </sc-if>
+          <!-- Controles -->
+          <label style="position:absolute;left:12px;top:12px;z-index:25;display:flex;align-items:center;gap:10px;height:40px;padding:0 14px;background:rgba(250,248,246,.95);border:1px solid #D0C5B5;border-radius:8px;font:500 13px/1 Inter,sans-serif;color:#2E2118;cursor:pointer;white-space:nowrap">
+            <input type="checkbox" checked="{{ autoSearch }}" onChange="{{ toggleAuto }}" style="width:16px;height:16px;accent-color:#433224;margin:0">Buscar ao mover o mapa
+          </label>
+          <sc-if value="{{ showRedo }}" hint-placeholder-val="{{ false }}"><button class="btn" onClick="{{ redo }}" style="position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:25;height:40px;padding:0 16px;background:#433224;color:#FAF8F6;border:0;border-radius:8px;font:600 13px/1 Inter,sans-serif">Buscar nesta área</button></sc-if>
+          <div style="position:absolute;right:12px;top:12px;z-index:25;display:grid;gap:4px">
+            <button class="btn" onClick="{{ zoomIn }}" aria-label="Aproximar" style="width:40px;height:40px;background:rgba(250,248,246,.95);border:1px solid #D0C5B5;border-radius:8px;color:#2E2118;font:500 18px/1 Inter,sans-serif">+</button>
+            <button class="btn" onClick="{{ zoomOut }}" aria-label="Afastar" style="width:40px;height:40px;background:rgba(250,248,246,.95);border:1px solid #D0C5B5;border-radius:8px;color:#2E2118;font:500 18px/1 Inter,sans-serif">−</button>
+          </div>
+          <div style="position:absolute;left:12px;bottom:12px;z-index:25;padding:6px 10px;background:rgba(250,248,246,.9);border-radius:6px;font:400 11px/1 Inter,sans-serif;color:#7D6551;font-variant-numeric:tabular-nums">{{ pinCount }} no mapa · zoom {{ zoom }}</div>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+</main>
+
+<!-- Barra fixa inferior (mobile) -->
+<div class="m" style="position:fixed;left:0;right:0;bottom:0;z-index:55;display:flex;gap:10px;padding:12px 16px;background:rgba(250,248,246,.95);backdrop-filter:blur(10px);border-top:1px solid #DDD4C7">
+  <button class="btn" onClick="{{ openSheet }}" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;border:1px solid #B89E8A;background:transparent;color:#433224;border-radius:8px;font:600 14px/1 Inter,sans-serif">Filtros<span style="display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:6px;background:#433224;color:#FAF8F6;font:600 12px/1 Inter,sans-serif;font-variant-numeric:tabular-nums">{{ chipCount }}</span></button>
+  <button class="btn" onClick="{{ toggleView }}" style="flex:1;display:inline-flex;align-items:center;justify-content:center;height:48px;background:#433224;color:#FAF8F6;border:0;border-radius:8px;font:600 14px/1 Inter,sans-serif">{{ toggleLabel }}</button>
+</div>
+
+<!-- Bottom sheet de filtros (mobile) -->
+<sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeSheet }}" style="position:fixed;inset:0;z-index:70;background:rgba(46,33,24,.4)"></div>
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:71;max-height:86vh;display:grid;grid-template-rows:auto 1fr auto;background:#FAF8F6;border-radius:12px 12px 0 0;border-top:1px solid #D0C5B5">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;border-bottom:1px solid #E8E1D8">
+    <span style="font:500 20px/1.2 Fraunces,serif;color:#2E2118">Filtros</span>
+    <button onClick="{{ closeSheet }}" aria-label="Fechar" style="width:40px;height:40px;border:0;border-radius:8px;background:#E8E1D8;color:#2E2118;font:500 18px/1 Inter,sans-serif;cursor:pointer">×</button>
+  </div>
+  <div style="overflow:auto;padding:20px;display:grid;gap:24px">
+    <div style="display:grid;gap:10px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Finalidade</span><div style="display:inline-flex;padding:4px;border:1px solid #D0C5B5;border-radius:8px;background:#FFFFFF"><button class="btn" onClick="{{ setComprar }}" style="{{ segComprar }}">Comprar</button><button class="btn" onClick="{{ setAlugar }}" style="{{ segAlugar }}">Alugar</button></div></div>
+    <div style="display:grid;gap:10px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Cidade</span><select value="{{ f.cidade }}" onChange="{{ setCidade }}" style="height:48px;padding:0 12px;border:1px solid #D0C5B5;border-radius:8px;background:#FFFFFF;color:#2E2118;font:400 15px Inter,sans-serif"><option>Todas</option><option>Campina Grande</option><option>João Pessoa</option></select></div>
+    <div style="display:grid;gap:10px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Tipo</span><div style="display:flex;gap:8px"><sc-for list="{{ tipos }}" as="t" hint-placeholder-count="3"><button class="btn" onClick="{{ t.set }}" style="{{ t.style }}">{{ t.label }}</button></sc-for></div></div>
+    <div style="display:grid;gap:10px"><div style="display:flex;justify-content:space-between"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Preço máximo</span><span style="font:500 14px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ precoLabel }}</span></div><input type="range" min="300" max="1200" step="10" value="{{ f.precoMax }}" onInput="{{ setPreco }}" onChange="{{ setPreco }}" style="width:100%"></div>
+    <div style="display:grid;gap:10px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Quartos</span><div style="display:flex;gap:8px"><sc-for list="{{ quartos }}" as="q" hint-placeholder-count="4"><button class="btn" onClick="{{ q.set }}" style="{{ q.style }}">{{ q.label }}</button></sc-for></div></div>
+    <div style="display:grid;gap:10px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Vagas</span><div style="display:flex;gap:8px"><sc-for list="{{ vagas }}" as="q" hint-placeholder-count="4"><button class="btn" onClick="{{ q.set }}" style="{{ q.style }}">{{ q.label }}</button></sc-for></div></div>
+    <div style="display:grid;gap:10px"><div style="display:flex;justify-content:space-between"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Área mínima</span><span style="font:500 14px/1 Inter,sans-serif;color:#2E2118;font-variant-numeric:tabular-nums">{{ areaLabel }}</span></div><input type="range" min="0" max="220" step="10" value="{{ f.areaMin }}" onInput="{{ setArea }}" onChange="{{ setArea }}" style="width:100%"></div>
+    <div style="display:grid;gap:10px"><span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7D6551">Bairros</span><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ bairrosList }}" as="b" hint-placeholder-count="6"><button class="btn" onClick="{{ b.toggle }}" style="{{ b.chipStyle }}">{{ b.nome }}</button></sc-for></div><button class="ul" onClick="{{ toggleMoreBairros }}" style="justify-self:start;background:none;border:0;padding:0;font:500 13px/1 Inter,sans-serif;color:#433224;cursor:pointer">{{ moreBairrosLabel }}</button></div>
+  </div>
+  <div style="display:flex;gap:10px;padding:12px 20px 20px;border-top:1px solid #E8E1D8;background:#FAF8F6">
+    <button class="btn" onClick="{{ clearAll }}" style="flex:1;height:48px;border:1px solid #B89E8A;background:transparent;color:#433224;border-radius:8px;font:600 14px/1 Inter,sans-serif">Limpar</button>
+    <button class="btn" onClick="{{ closeSheet }}" style="flex:1.6;height:48px;background:#433224;color:#FAF8F6;border:0;border-radius:8px;font:600 14px/1 Inter,sans-serif;font-variant-numeric:tabular-nums">Ver {{ count }} imóveis</button>
+  </div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;lista&quot;,&quot;mapa&quot;],&quot;default&quot;:&quot;lista&quot;,&quot;tsType&quot;:&quot;'lista' | 'mapa'&quot;,&quot;section&quot;:&quot;Protótipo&quot;}}">
+const WA = '5583900000000';
+const U = (id, w) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=70`;
+const IMOVEIS = [
+  { cod: 'CG-0482', tipo: 'Apartamento', bairro: 'Catolé', cidade: 'Campina Grande', preco: 480000, q: 3, v: 2, a: 98, badge: 'DESTAQUE', img: 'photo-1502672260266-1c1ef2d93688', alt: 'Sala integrada com luz natural', x: 22, y: 58, rec: 3 },
+  { cod: 'CG-0690', tipo: 'Casa', bairro: 'Mirante', cidade: 'Campina Grande', preco: 690000, q: 3, v: 2, a: 140, badge: 'NOVO', img: 'photo-1600585154340-be6161a56a0c', alt: 'Casa contemporânea com fachada clara', x: 12, y: 36, rec: 9 },
+  { cod: 'CG-0355', tipo: 'Apartamento', bairro: 'Alto Branco', cidade: 'Campina Grande', preco: 355000, q: 2, v: 1, a: 72, badge: 'NOVO', img: 'photo-1560448204-e02f11c3d0e2', alt: 'Apartamento com janelas amplas', x: 30, y: 28, rec: 8 },
+  { cod: 'CG-0410', tipo: 'Apartamento', bairro: 'Catolé', cidade: 'Campina Grande', preco: 410000, q: 3, v: 1, a: 84, badge: '', img: 'photo-1484154218962-a197022b5858', alt: 'Cozinha integrada', x: 27, y: 68, rec: 4 },
+  { cod: 'JP-1150', tipo: 'Casa', bairro: 'Cabo Branco', cidade: 'João Pessoa', preco: 1150000, q: 4, v: 3, a: 210, badge: 'DESTAQUE', img: 'photo-1600596542815-ffad4c1539a9', alt: 'Casa moderna com piscina e vegetação tropical', x: 82, y: 64, rec: 6 },
+  { cod: 'JP-0320', tipo: 'Apartamento', bairro: 'Bessa', cidade: 'João Pessoa', preco: 320000, q: 2, v: 1, a: 64, badge: '', img: 'photo-1567496898669-ee935f5f647a', alt: 'Quarto com madeira aparente', x: 78, y: 22, rec: 2 },
+  { cod: 'JP-0720', tipo: 'Apartamento', bairro: 'Manaíra', cidade: 'João Pessoa', preco: 720000, q: 3, v: 2, a: 110, badge: 'DESTAQUE', img: 'photo-1522708323590-d24dbb6b0267', alt: 'Living amplo com madeira e concreto', x: 84, y: 36, rec: 5 },
+  { cod: 'JP-0540', tipo: 'Apartamento', bairro: 'Tambaú', cidade: 'João Pessoa', preco: 540000, q: 3, v: 1, a: 92, badge: '', img: 'photo-1493809842364-78817add7ffb', alt: 'Sala com luz de fim de tarde', x: 85, y: 50, rec: 1 },
+  { cod: 'JP-0890', tipo: 'Casa', bairro: 'Altiplano', cidade: 'João Pessoa', preco: 890000, q: 4, v: 2, a: 180, badge: 'NOVO', img: 'photo-1600607687939-ce8a6c25118c', alt: 'Casa com pé-direito alto e madeira', x: 66, y: 76, rec: 7 },
+];
+const BAIRROS = [['Catolé', 'Campina Grande', 24], ['Mirante', 'Campina Grande', 11], ['Alto Branco', 'Campina Grande', 17], ['Cabo Branco', 'João Pessoa', 32], ['Manaíra', 'João Pessoa', 41], ['Tambaú', 'João Pessoa', 28], ['Bessa', 'João Pessoa', 37], ['Altiplano', 'João Pessoa', 19], ['Bela Vista', 'Campina Grande', 9], ['Prata', 'Campina Grande', 14], ['Centro', 'Campina Grande', 22], ['Jardim Oceania', 'João Pessoa', 16], ['Miramar', 'João Pessoa', 12], ['Bancários', 'João Pessoa', 21], ['Jardim Tavares', 'Campina Grande', 7], ['Itararé', 'Campina Grande', 6], ['Aeroclube', 'João Pessoa', 8], ['Brisamar', 'João Pessoa', 5]];
+const fmt = n => 'R$ ' + n.toLocaleString('pt-BR');
+const abbr = n => n >= 1000000 ? 'R$ ' + (n / 1000000).toFixed(2).replace(/0$/, '').replace('.', ',') + ' mi' : 'R$ ' + Math.round(n / 1000) + ' mil';
+const wa = im => `https://wa.me/${WA}?text=${encodeURIComponent(`Olá! Tenho interesse no imóvel ${im.cod} (${im.tipo} em ${im.bairro}, ${im.cidade} – ${fmt(im.preco)}). Podemos conversar?`)}`;
+const DEF = { finalidade: 'Comprar', cidade: 'Todas', tipo: 'Todos', precoMax: 1200, quartos: 0, vagas: 0, areaMin: 0, bairros: [] };
+const PAGE = 6;
+
+class Component extends DCLogic {
+  state = { view: this.props.view || 'lista', f: { ...DEF }, sort: 'Relevância', page: 0, hover: null, sel: null, favs: [], sheet: false, moreBairros: false, auto: true, moved: false, zoom: 12 };
+  componentDidMount() { this.iv = setInterval(() => document.querySelectorAll('img.bu:not(.ld)').forEach(img => { if (img.complete && img.naturalWidth) img.classList.add('ld'); else if (!img.dataset.bu) { img.dataset.bu = 1; img.addEventListener('load', () => img.classList.add('ld'), { once: true }); } }), 250); }
+  componentWillUnmount() { clearInterval(this.iv); }
+  setF(patch) { this.setState(s => ({ f: { ...s.f, ...patch }, page: 0, sel: null })); }
+  renderVals() {
+    const { f, view, sort, hover, sel } = this.state;
+    const styleObj = s => Object.fromEntries(s.split(';').filter(Boolean).map(kv => { const i = kv.indexOf(':'); return [kv.slice(0, i).trim().replace(/-([a-z])/g, (_, c) => c.toUpperCase()), kv.slice(i + 1).trim()]; }));
+    const tab = on => styleObj(`background:${on ? '#F5F1EC' : 'transparent'};color:${on ? '#2E2118' : '#F5F1EC'};border:1px solid ${on ? '#F5F1EC' : '#7D6551'};border-radius:6px;padding:7px 12px;font:600 11px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer`);
+    const seg = on => styleObj(`height:36px;padding:0 16px;border:0;border-radius:6px;background:${on ? '#433224' : 'transparent'};color:${on ? '#FAF8F6' : '#433224'};font:600 13px/1 Inter,sans-serif;cursor:pointer`);
+    const opt = on => styleObj(`min-height:40px;padding:0 14px;border:1px solid ${on ? '#433224' : '#D0C5B5'};border-radius:8px;background:${on ? '#433224' : '#FAF8F6'};color:${on ? '#FAF8F6' : '#433224'};font:500 13px/1 Inter,sans-serif;cursor:pointer;font-variant-numeric:tabular-nums`);
+    let list = IMOVEIS.filter(i => (f.cidade === 'Todas' || i.cidade === f.cidade) && (f.tipo === 'Todos' || i.tipo === f.tipo) && i.preco <= f.precoMax * 1000 && i.q >= f.quartos && i.v >= f.vagas && i.a >= f.areaMin && (!f.bairros.length || f.bairros.includes(i.bairro)) && f.finalidade === 'Comprar');
+    const sorters = { 'Menor preço': (a, b) => a.preco - b.preco, 'Maior preço': (a, b) => b.preco - a.preco, 'Maior área': (a, b) => b.a - a.a, 'Mais recentes': (a, b) => b.rec - a.rec, 'Relevância': (a, b) => (b.badge ? 1 : 0) - (a.badge ? 1 : 0) };
+    list = [...list].sort(sorters[sort]);
+    const enrich = im => ({ ...im, precoNum: im.preco, preco: fmt(im.preco), img: U(im.img, 900), wa: wa(im), vagaLabel: im.v === 1 ? 'vaga' : 'vagas', badgeBg: im.badge === 'NOVO' ? '#5A7D4E' : '#C8912C', badgeFg: im.badge === 'NOVO' ? '#FAF8F6' : '#2E2118', hover: () => this.setState({ hover: im.cod }), border: hover === im.cod || sel === im.cod ? '#433224' : '#D0C5B5', bg: hover === im.cod || sel === im.cod ? '#FAF8F6' : '#FFFFFF', fav: e => { e.preventDefault(); e.stopPropagation(); this.setState(s => ({ favs: s.favs.includes(im.cod) ? s.favs.filter(c => c !== im.cod) : [...s.favs, im.cod] })); }, favIcon: this.state.favs.includes(im.cod) ? '♥' : '♡', favColor: this.state.favs.includes(im.cod) ? '#B34237' : '#433224' });
+    const results = list.map(enrich);
+    const pageCount = Math.max(1, Math.ceil(results.length / PAGE));
+    const page = Math.min(this.state.page, pageCount - 1);
+    const chips = [];
+    if (f.cidade !== 'Todas') chips.push({ label: f.cidade, remove: () => this.setF({ cidade: 'Todas' }) });
+    if (f.tipo !== 'Todos') chips.push({ label: f.tipo, remove: () => this.setF({ tipo: 'Todos' }) });
+    if (f.precoMax < 1200) chips.push({ label: 'Até ' + abbr(f.precoMax * 1000), remove: () => this.setF({ precoMax: 1200 }) });
+    if (f.quartos) chips.push({ label: f.quartos + '+ quartos', remove: () => this.setF({ quartos: 0 }) });
+    if (f.vagas) chips.push({ label: f.vagas + '+ vagas', remove: () => this.setF({ vagas: 0 }) });
+    if (f.areaMin) chips.push({ label: 'Mín. ' + f.areaMin + ' m²', remove: () => this.setF({ areaMin: 0 }) });
+    f.bairros.forEach(b => chips.push({ label: b, remove: () => this.setF({ bairros: f.bairros.filter(x => x !== b) }) }));
+    if (f.finalidade !== 'Comprar') chips.push({ label: f.finalidade, remove: () => this.setF({ finalidade: 'Comprar' }) });
+    const visBairros = BAIRROS.filter(([, c]) => f.cidade === 'Todas' || c === f.cidade);
+    const shown = this.state.moreBairros ? visBairros : visBairros.slice(0, 6);
+    const selIm = sel ? results.find(i => i.cod === sel) : null;
+    const n = results.length;
+    return {
+      isLista: view !== 'mapa', isMapa: view === 'mapa',
+      goLista: () => this.setState({ view: 'lista', f: this.state.f.finalidade === 'Alugar' && this.state.view === 'vazio' ? { ...DEF } : this.state.f, sheet: false }),
+      goMapa: () => this.setState({ view: 'mapa', sheet: false }),
+      goVazio: () => this.setState({ view: 'lista', f: { ...DEF, cidade: 'Campina Grande', tipo: 'Casa', quartos: 4, precoMax: 600 }, page: 0 }),
+      tabLista: tab(view === 'lista' && n > 0), tabMapa: tab(view === 'mapa'), tabVazio: tab(view === 'lista' && n === 0),
+      segLista: seg(view !== 'mapa'), segMapa: seg(view === 'mapa'),
+      toggleView: () => this.setState(s => ({ view: s.view === 'mapa' ? 'lista' : 'mapa' })), toggleLabel: view === 'mapa' ? 'Ver lista' : 'Ver mapa',
+      waGeral: `https://wa.me/${WA}?text=${encodeURIComponent('Olá! Vim pelo site da CORRETORA e gostaria de falar com um corretor.')}`,
+      waBusca: `https://wa.me/${WA}?text=${encodeURIComponent(`Olá! Procuro ${f.tipo === 'Todos' ? 'imóvel' : f.tipo.toLowerCase()} em ${f.cidade === 'Todas' ? 'Campina Grande ou João Pessoa' : f.cidade}${f.quartos ? `, ${f.quartos}+ quartos` : ''}${f.precoMax < 1200 ? `, até ${abbr(f.precoMax * 1000)}` : ''}. Podem me ajudar?`)}`,
+      count: n, countLabel: n === 0 ? 'Nenhum imóvel encontrado' : n === 1 ? '1 imóvel encontrado' : `${n} imóveis encontrados`, totalCarteira: 342,
+      sort, setSort: e => this.setState({ sort: e.target.value, page: 0 }),
+      hasChips: chips.length > 0, chips, chipCount: chips.length, clearAll: () => this.setState({ f: { ...DEF }, page: 0, sel: null }),
+      f, setComprar: () => this.setF({ finalidade: 'Comprar' }), setAlugar: () => this.setF({ finalidade: 'Alugar' }), segComprar: seg(f.finalidade === 'Comprar'), segAlugar: seg(f.finalidade === 'Alugar'),
+      setCidade: e => this.setF({ cidade: e.target.value, bairros: [] }),
+      tipos: ['Todos', 'Apartamento', 'Casa'].map(t => ({ label: t, set: () => this.setF({ tipo: t }), style: opt(f.tipo === t) })),
+      quartos: [0, 1, 2, 3, 4].map(q => ({ label: q ? q + '+' : 'Todos', set: () => this.setF({ quartos: q }), style: opt(f.quartos === q) })),
+      vagas: [0, 1, 2, 3].map(q => ({ label: q ? q + '+' : 'Todas', set: () => this.setF({ vagas: q }), style: opt(f.vagas === q) })),
+      setPreco: e => this.setF({ precoMax: +e.target.value }), precoLabel: f.precoMax >= 1200 ? 'Sem limite' : abbr(f.precoMax * 1000),
+      setArea: e => this.setF({ areaMin: +e.target.value }), areaLabel: f.areaMin ? f.areaMin + ' m²' : 'Qualquer',
+      bairrosList: shown.map(([nome, , cnt]) => { const on = f.bairros.includes(nome); return { nome, n: cnt, on, color: on ? '#2E2118' : '#5C4635', toggle: () => this.setF({ bairros: on ? f.bairros.filter(b => b !== nome) : [...f.bairros, nome] }), chipStyle: opt(on) }; }),
+      toggleMoreBairros: () => this.setState(s => ({ moreBairros: !s.moreBairros })), moreBairrosLabel: this.state.moreBairros ? 'Mostrar menos' : `+${visBairros.length - 6} bairros`,
+      hasResults: n > 0, noResults: n === 0, results,
+      pageItems: results.slice(page * PAGE, page * PAGE + PAGE),
+      pages: Array.from({ length: pageCount }, (_, i) => ({ n: i + 1, go: () => this.setState({ page: i }), style: styleObj(`width:44px;height:44px;border:1px solid ${i === page ? '#433224' : '#D0C5B5'};border-radius:8px;background:${i === page ? '#433224' : '#FAF8F6'};color:${i === page ? '#FAF8F6' : '#433224'};font:600 14px/1 Inter,sans-serif;cursor:pointer`) })),
+      prevPage: () => this.setState({ page: Math.max(0, page - 1) }), nextPage: () => this.setState({ page: Math.min(pageCount - 1, page + 1) }),
+      unhover: () => this.setState({ hover: null }),
+      pins: results.map(im => { const on = hover === im.cod || sel === im.cod; return { ...im, label: abbr(im.precoNum), select: () => this.setState({ sel: im.cod }), z: on ? 15 : 10, bg: on ? '#2E2118' : '#FFFFFF', fg: on ? '#FAF8F6' : '#2E2118', borderColor: on ? '#2E2118' : '#B89E8A' }; }),
+      pinCount: n,
+      clusters: [{ label: '+9', x: 20, y: 46, size: '44px', go: () => this.setF({ cidade: 'Campina Grande' }) }, { label: '+4', x: 72, y: 30, size: '38px', go: () => this.setF({ cidade: 'João Pessoa' }) }].filter(c => f.cidade === 'Todas' || (c.label === '+9' ? f.cidade === 'Campina Grande' : f.cidade === 'João Pessoa')),
+      mapLabels: [{ nome: 'Catolé', x: 18, y: 62 }, { nome: 'Mirante', x: 8, y: 30 }, { nome: 'Alto Branco', x: 28, y: 22 }, { nome: 'Cabo Branco', x: 76, y: 68 }, { nome: 'Manaíra', x: 79, y: 40 }, { nome: 'Tambaú', x: 80, y: 54 }, { nome: 'Bessa', x: 73, y: 16 }, { nome: 'Altiplano', x: 60, y: 80 }],
+      hasSel: !!selIm, sel: selIm ? { ...selIm, cardX: selIm.x > 55 ? 'auto' : Math.min(selIm.x + 3, 55) + '%', cardR: selIm.x > 55 ? (100 - selIm.x + 6) + '%' : 'auto', cardY: selIm.y > 50 ? 'auto' : (selIm.y + 2) + '%', cardB: selIm.y > 50 ? (100 - selIm.y + 4) + '%' : 'auto' } : null,
+      closeSel: () => this.setState({ sel: null }),
+      autoSearch: this.state.auto, toggleAuto: e => this.setState({ auto: e.target.checked, moved: false }), showRedo: !this.state.auto && this.state.moved, redo: () => this.setState({ moved: false }),
+      zoom: this.state.zoom, zoomIn: () => this.setState(s => ({ zoom: Math.min(18, s.zoom + 1), moved: true, sel: null })), zoomOut: () => this.setState(s => ({ zoom: Math.max(8, s.zoom - 1), moved: true, sel: null })),
+      sugestoes: [
+        { eyebrow: 'Quartos', titulo: 'Aceitar 3+ quartos', desc: `${IMOVEIS.filter(i => (f.cidade === 'Todas' || i.cidade === f.cidade) && (f.tipo === 'Todos' || i.tipo === f.tipo) && i.preco <= f.precoMax * 1000 && i.q >= 3).length} imóveis disponíveis`, go: () => this.setF({ quartos: 3 }) },
+        { eyebrow: 'Preço', titulo: 'Ampliar até R$ 900 mil', desc: `${IMOVEIS.filter(i => (f.cidade === 'Todas' || i.cidade === f.cidade) && (f.tipo === 'Todos' || i.tipo === f.tipo) && i.preco <= 900000 && i.q >= f.quartos).length} imóveis disponíveis`, go: () => this.setF({ precoMax: 900 }) },
+        { eyebrow: 'Cidade', titulo: 'Ver em João Pessoa', desc: `${IMOVEIS.filter(i => i.cidade === 'João Pessoa' && (f.tipo === 'Todos' || i.tipo === f.tipo) && i.q >= f.quartos).length} casas com 4 quartos`, go: () => this.setF({ cidade: 'João Pessoa', precoMax: 1200 }) },
+      ],
+      sheetOpen: this.state.sheet, openSheet: () => this.setState({ sheet: true }), closeSheet: () => this.setState({ sheet: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

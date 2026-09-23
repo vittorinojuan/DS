@@ -7,8 +7,8 @@ Valores que ainda não existem entram como token grepável. Nada de `#`, `00.000
 | WhatsApp `5511921527692` | número da Ágora (+55 11 92152-7692) | links `wa.me` | resolvido, sem token |
 | Domínio `https://agoratlas.com.br` | domínio final, sem barra final | canonical, og:url, og:image, schema, robots, sitemap | resolvido, sem token |
 | CNPJ `68.862.160/0001-83` | CNPJ do MEI | rodapé e `privacidade.html`, `404.html` | resolvido, sem token |
-| `__GA4_ID__` | measurement ID `G-XXXXXXXXXX` | snippet gtag em `index.html`, `privacidade.html` e `404.html` | **pendente** (usuário) |
-| `__META_PIXEL_ID__` | ID do Meta Pixel (15 a 16 dígitos) | snippet do Pixel e `<noscript>` em `index.html`, `privacidade.html` e `404.html` | **pendente** (usuário). Decidido: a Ágora vai rodar Meta Ads |
+| `__GA4_ID__` | measurement ID `G-XXXXXXXXXX` | snippet gtag em `index.html`, `privacidade.html` e `404.html` | **adiado**: snippets removidos em 2026-09-23 para subir sem medição |
+| `__META_PIXEL_ID__` | ID do Meta Pixel (15 a 16 dígitos) | snippet do Pixel e `<noscript>` em `index.html`, `privacidade.html` e `404.html` | **adiado**: snippets removidos em 2026-09-23. Decidido: a Ágora vai rodar Meta Ads |
 
 ## Passos manuais do usuário
 
@@ -18,7 +18,7 @@ Valores que ainda não existem entram como token grepável. Nada de `#`, `00.000
 - Colocar `agoratlas.com.br` no Cloudflare, trocar os nameservers no Registro.br, ligar os custom domains e criar a Redirect Rule www → apex.
 - Atualizar o `<lastmod>` do `sitemap.xml` no dia do deploy.
 
-**Medir**
+**Medir** (os snippets do GA4 e do Pixel e o texto da privacidade sobre Analytics, Pixel e cookies estão no commit `897d820`. Com os IDs em mãos, reinsira os snippets com os tokens, restaure o texto da privacidade e troque os tokens pelos IDs)
 - Criar a propriedade GA4 e informar o measurement ID (substitui `__GA4_ID__` nos 3 arquivos).
 - Marcar o evento `clique_whatsapp` como **evento-chave** na interface do GA4 e validar no DebugView.
 - Criar o Pixel no Gerenciador de Eventos da Meta e informar o ID (substitui `__META_PIXEL_ID__` nos 3 arquivos). Validar com a extensão Meta Pixel Helper que o `PageView` e o `Contact` (com o parâmetro `cta`) disparam, e escolher `Contact` como evento de conversão nas campanhas.

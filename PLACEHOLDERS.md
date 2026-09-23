@@ -6,7 +6,7 @@ Valores que ainda não existem entram como token grepável. Nada de `#`, `00.000
 |---|---|---|---|
 | WhatsApp `5511921527692` | número da Ágora (+55 11 92152-7692) | links `wa.me` | resolvido, sem token |
 | Domínio `https://agoratlas.com.br` | domínio final, sem barra final | canonical, og:url, og:image, schema, robots, sitemap | resolvido, sem token |
-| `__CNPJ__` | CNPJ do MEI | rodapé e `privacidade.html`, `404.html` | **pendente** (usuário) |
+| CNPJ `68.862.160/0001-83` | CNPJ do MEI | rodapé e `privacidade.html`, `404.html` | resolvido, sem token |
 | `__GA4_ID__` | measurement ID `G-XXXXXXXXXX` | snippet gtag em `index.html`, `privacidade.html` e `404.html` | **pendente** (usuário) |
 | `__META_PIXEL_ID__` | ID do Meta Pixel (15 a 16 dígitos) | snippet do Pixel e `<noscript>` em `index.html`, `privacidade.html` e `404.html` | **pendente** (usuário). Decidido: a Ágora vai rodar Meta Ads |
 
@@ -29,7 +29,6 @@ Valores que ainda não existem entram como token grepável. Nada de `#`, `00.000
 - Ficha de diagnóstico pronta: rascunho em [`docs/ficha-diagnostico.md`](../docs/ficha-diagnostico.md). O site promete essa ficha nos CTAs.
 - Respostas rápidas do WhatsApp Business: rascunho em [`docs/whatsapp-respostas-rapidas.md`](../docs/whatsapp-respostas-rapidas.md).
 - Sócio ciente de que o contrato mínimo saiu do site (gestão mensal sem fidelidade).
-- CNPJ informado.
 
 ## Gate obrigatório antes de qualquer deploy
 

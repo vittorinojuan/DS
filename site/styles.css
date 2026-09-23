@@ -78,10 +78,11 @@ ul{padding:0;list-style:none}
 .nav-overlay .btn-primary{margin-top:auto;text-align:center;padding:16px}
 
 /* ===== Botão flutuante de WhatsApp ===== */
-.wa-float{position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--ink);color:#fff;text-align:center;padding:16px;border-top:1px solid #2A2A2A;font-weight:600;font-size:15px;text-decoration:none}
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:60;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform 200ms}
+.wa-float:hover{transform:scale(1.06)}
 
 /* ===== Footer ===== */
-.site-footer{background:var(--bg);color:var(--muted);padding:56px 24px 96px;display:flex;flex-direction:column;gap:24px;border-top:1px solid var(--line)}
+.site-footer{background:var(--bg);color:var(--muted);padding:56px 24px 88px;display:flex;flex-direction:column;gap:24px;border-top:1px solid var(--line)}
 .site-footer img{height:22px;width:auto;align-self:flex-start}
 .footer-tagline{font-size:14px}
 .footer-nav{display:flex;gap:20px;flex-wrap:wrap}
@@ -97,8 +98,13 @@ ul{padding:0;list-style:none}
   .btn-menu{display:flex}
 }
 @media (min-width: 768px){
-  .wa-float{left:auto;right:24px;bottom:24px;width:auto;border:1px solid #2A2A2A;padding:12px 20px;border-radius:12px;font-size:14px}
-  .wa-float::before{content:"● "}
+  .wa-float{right:24px;bottom:24px}
+  /* Rodapé em colunas: marca à esquerda, navegação no meio, legal à direita */
+  .site-footer{display:grid;grid-template-columns:1fr auto auto;grid-template-rows:auto auto;column-gap:64px;row-gap:12px;align-items:start;padding:40px 48px 96px}
+  .site-footer img{grid-column:1;grid-row:1}
+  .footer-tagline{grid-column:1;grid-row:2}
+  .footer-nav{grid-column:2;grid-row:1 / span 2;align-self:center}
+  .footer-legal{grid-column:3;grid-row:1 / span 2}
 }
 /* Sem JS no celular: o botão de menu não funcionaria, então mostra os links direto */
 html:not(.js) .btn-menu{display:none}
@@ -117,7 +123,7 @@ html:not(.js) .btn-menu{display:none}
 @keyframes hero-rise{from{transform:translateY(110%)}to{transform:none}}
 .hero-sub{max-width:520px;color:var(--muted);font-size:16px;line-height:1.6}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-.hero-grid{display:grid;grid-template-columns:minmax(320px,2fr) minmax(260px,1fr);gap:24px;align-items:start}
+.hero-grid{width:100%;max-width:960px}
 .stage{position:relative;width:100%;background:var(--bg);overflow:hidden}
 /* altura = proporção do print (1440x900 = 62,5% da largura) + a faixa de 44px da etiqueta, para a imagem aparecer inteira */
 .stage::before{content:"";display:block;padding-top:calc(62.5% + 44px)}
@@ -125,11 +131,6 @@ html:not(.js) .btn-menu{display:none}
 .mock{position:absolute;inset:44px 0 0 0;opacity:0;pointer-events:none;transition:opacity 700ms ease}
 .mock.is-active{opacity:1;pointer-events:auto}
 .mock-img{width:100%;height:100%;object-fit:contain;object-position:top left}
-.hero-side{display:flex;flex-direction:column;gap:16px}
-.side-row{border-top:1px solid var(--line);padding:20px 0;display:flex;flex-direction:column;gap:8px}
-.side-title{font-family:var(--display);font-weight:500;font-size:20px}
-.side-price{font-size:15px;font-variant-numeric:tabular-nums;color:var(--muted)}
-.side-text{font-size:14px;color:var(--muted);line-height:1.5}
 
 /* ===== Barra de números ===== */
 .stats{background:var(--bg);padding:32px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
@@ -153,14 +154,6 @@ html:not(.js) .btn-menu{display:none}
 .badge-real{align-self:flex-end;background:var(--ink);color:#fff;padding:2px 8px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 .tile-real img{width:140px;height:auto}
 .tile-real-text{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center}
-
-/* ===== Medição ===== */
-.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-.result{border-top:1px solid var(--line);padding:24px 0 0;display:flex;flex-direction:column;gap:10px}
-.result .tag-ilustrativo{padding:2px 0;align-self:flex-start}
-.result-num{font-family:var(--display);font-weight:600;font-size:clamp(28px,4vw,40px);font-variant-numeric:tabular-nums;margin-top:4px}
-.result-label{font-size:15px}
-.result-sub{font-size:13px;color:var(--muted)}
 
 /* ===== Entregas ===== */
 .frentes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
@@ -206,7 +199,6 @@ html:not(.js) .btn-menu{display:none}
 .price-list{border-top:1px solid var(--line);margin-top:8px;display:flex;flex-direction:column}
 .price-list li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
 .price-list li:last-child{border-bottom:0}
-.ad-budget{border-top:1px solid var(--line);padding:24px 0 0;text-align:center;font-size:14px;line-height:1.5}
 
 /* ===== FAQ (details nativo, funciona sem JS) ===== */
 .faq{display:flex;flex-direction:column;max-width:800px}
@@ -240,7 +232,6 @@ html:not(.js) .btn-menu{display:none}
 /* ===== Responsivo (corpo) ===== */
 @media (max-width: 767px){
   .stage{min-height:320px}
-  .hero-grid{grid-template-columns:1fr}
   .steps-grid{grid-template-columns:1fr}
   .step-panel{position:static}
   .vitrine-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}
